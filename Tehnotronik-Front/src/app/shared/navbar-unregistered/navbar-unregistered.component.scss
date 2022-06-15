@@ -1,0 +1,65 @@
+@use '../../../base-style'as base;
+
+.navbar {
+  overflow: hidden;
+  background-color:transparent;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  z-index: 10;
+  padding: 15px;
+  justify-content: space-between;
+}
+#logo{
+    font-weight:600 ;
+    font-size: 22px;;
+    color:base.$primary-color-dark;
+}
+.navbar a {
+  float: left;
+  display: block;
+  color: base.$dark-grey;
+  font-size: 20px;
+  text-decoration: none;
+}
+.navbar a:hover {
+    color:base.$primary-color-dark
+  }
+.left,.right{
+    display: flex;
+    flex-direction: row;
+    gap:70px;
+    justify-content: center;
+    align-items:center;
+}
+.right{
+  gap:20px;
+  color:white;
+  font-size: 18px;
+}
+
+
+.button-icon,.button-left{
+  display: flex;
+  font-size: 18px;
+  font-weight: 500;
+  color:base.$dark-grey;
+  background-color: transparent;
+  border: 0;
+  gap:10px;
+  margin-right: 40px;
+}
+
+.button-icon:hover,.button-left:hover{
+  color: base.$primary-color-dark;
+  cursor: pointer;
+}
+.button-left{
+    margin:0;
+   padding:0;
+}
+
+button.mat-menu-item {
+  font-size: 18px;
+}
