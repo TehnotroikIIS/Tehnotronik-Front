@@ -2,7 +2,7 @@
 
 .navbar {
   overflow: hidden;
-  background-color:base.$light-grey-letters;
+  background-color:transparent;
   position: fixed;
   top: 0;
   width: 100%;
@@ -24,7 +24,7 @@
   text-decoration: none;
 }
 .navbar a:hover {
-    color:base.$dark-grey
+    color:base.$primary-color-dark
   }
 .left,.right{
     display: flex;
@@ -40,20 +40,24 @@
 }
 
 
-.button-icon{
+.button-icon,.button-left{
   display: flex;
   font-size: 18px;
   font-weight: 500;
-  color: white;
+  color:base.$dark-grey;
   background-color: transparent;
   border: 0;
   gap:10px;
   margin-right: 40px;
 }
 
-.button-icon {
-  color: base.$dark-grey;
+.button-icon:hover,.button-left:hover{
+  color: base.$primary-color-dark;
   cursor: pointer;
+}
+.button-left{
+    margin:0;
+   padding:0;
 }
 
 button.mat-menu-item {

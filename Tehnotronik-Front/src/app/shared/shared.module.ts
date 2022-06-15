@@ -3,10 +3,13 @@ import { CommonModule } from '@angular/common';
 import { NavbarUnregisteredComponent } from './navbar-unregistered/navbar-unregistered.component';
 import { AppRoutingModule } from '../app-routing.module';
 
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -15,12 +18,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     NavbarUnregisteredComponent
   ],
   imports: [
+    BrowserModule,
     CommonModule,
     AppRoutingModule,
+    MatFormFieldModule,
     MatMenuModule,
     MatIconModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
+    MatToolbarModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
   ],
   exports: [
     NavbarUnregisteredComponent
