@@ -1,1 +1,25 @@
-<p>navbar-unregistered works!</p>
+<div class="navbar">
+    <div class="left">
+        <a id="logo" href="#home">Tehnotronik</a>
+        <a [routerLink]="['/search-company']">Akcije</a>
+        <a [routerLink]="['/search-company']">Proizvodi </a>
+        <a [routerLink]="['/search-company']">Blogovi </a>
+        <a [routerLink]="['/search-company']">O nama </a>
+        <a [routerLink]="['/search-company']">Kontakt </a>
+    </div>
+    <div class="right">
+        <button class="button-icon" mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>favorite</mat-icon>Omiljeno
+        </button>
+        <button class="button-icon" mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>shopping_cart</mat-icon>Korpa
+        </button>
+    <button class="button-icon" mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/my-companies']">My Companies</button>
+        <button mat-menu-item [routerLink]="['']">Log Out</button>
+    </mat-menu>
+</div>
+</div>
