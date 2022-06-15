@@ -5,6 +5,14 @@
     min-height: 100vh;
     display: flex;
     flex-direction: row;
+    background-color: base.$background-color;
+    background-image: url(../../../assets/web5.jpg);
+    min-height: 100vh;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .left{
@@ -20,6 +28,7 @@
     margin-bottom: 100px;
 }
 .right-content{
+    background-color: white;
     width: 80%;
     padding:30px;
     border: 3px solid base.$primary-color;
@@ -35,6 +44,7 @@
 }
 
 form {
+
     margin: 20px 0px;
     display: flex;
     flex-direction: column;
@@ -64,4 +74,7 @@ form {
 .primary-button{
     @extend %primary-button;
     width: 150px;
+}
+.primary-button:hover{
+    @extend %primary-button-hover;
 }

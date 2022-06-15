@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { RegisterUser } from '../models/register-user.model';
+import { SignInUser } from '../models/sign-in-user.model';
 import { JwtService } from './jwt.service';
 
 @Injectable({
@@ -16,10 +17,10 @@ export class AuthenticationService {
     private jwtService: JwtService
   ) {  }
 
-  signIn(user: RegisterUser): Observable<any> {
+  signIn(user: SignInUser): Observable<any> {
     return this.http.get(`${environment.api_url}sign-in`, {
       params: {
-        username: user.username,
+        email: user.email,
         password: user.password
       }, headers: this.headers, responseType: 'json'
     });
