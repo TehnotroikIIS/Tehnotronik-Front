@@ -7,12 +7,12 @@
 }
 
 .text{
-    font-size: 22px;
+    font-size: 20px;
     color:base.$dark-grey;
     line-height: 2em;
 }
 
 .primary-button{
-    width:250px;
+    width:200px;
     @extend %primary-button
 }

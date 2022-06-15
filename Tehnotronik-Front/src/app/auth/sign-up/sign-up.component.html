@@ -1,1 +1,93 @@
-<p>sign-up works!</p>
+<app-navbar-unregistered></app-navbar-unregistered>
+<div class="container">
+    <div class="left">
+        <app-home-info></app-home-info>
+    </div>
+    <div class="right">
+        <div class="right-content">
+            <div class="register-title">Registracija</div>
+        <form [formGroup]="registerForm" style="text-align: center;">
+            <div class="row">
+                <div class="label">Ime:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="name" matInput>
+                    <mat-error *ngIf="register.name.errors?.required">Ime obavezno*</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Prezime:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="lastName" matInput>
+                    <mat-error *ngIf="register.lastName.errors?.required">Prezime obavezno*</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Korisničko ime:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="username" matInput>
+                    <mat-error *ngIf="register.username.errors?.required">Korisničko ime obavezno*</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Lozinka:</div>
+                <mat-form-field appearance="outline">
+                    <input type="password" formControlName="password" matInput>
+                    <mat-error *ngIf="register.password.errors?.required">Lozinka obavezna*</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Potvrdi lozinku:</div>
+                <mat-form-field appearance="outline">
+                    <input type="password" formControlName="confirmPassword" matInput>
+                    <mat-error *ngIf="register.confirmPassword.errors?.required">Potvrda lozinke obavezna*</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Email adresa:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="email" matInput>
+                    <mat-error *ngIf="register.email.errors?.required">Email adresa obavezna*</mat-error>
+                    <mat-error *ngIf="register.email.errors?.email">Nije dobar format*</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Adresa:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="address" matInput>
+                    <mat-error *ngIf="register.address.errors?.required">Adresa obavezna*</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Grad:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="city" matInput>
+                    <mat-error *ngIf="register.city.errors?.required">Grad obavezan*</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Država:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="country" matInput>
+                    <mat-error *ngIf="register.country.errors?.required">Država obavezna*</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Broj telefona:</div>
+                <mat-form-field appearance="outline">
+                    <input type="number" formControlName="phoneNumber" matInput>
+                    <mat-error *ngIf="register.phoneNumber.errors?.required">Broj telefona obavezan*</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Datum rođenja:</div>
+            <mat-form-field appearance="outline">
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              </div>
+        </form>
+        <button class="primary-button" (click)="onSubmit()">Registruj se</button>
+    </div>
+    </div>
+</div>

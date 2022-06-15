@@ -1,0 +1,80 @@
+@use '../../../base-style'as base;
+
+.container{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    background-color: base.$background-color;
+    background-image: url(../../../assets/web5.jpg);
+    min-height: 100vh;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.left{
+    width: 55%;
+    padding:150px;
+    margin-top:100px;
+  
+}
+
+.right{
+    margin-top:100px;
+    width: 45%;
+    margin-bottom: 100px;
+}
+.right-content{
+    background-color: white;
+    width: 80%;
+    padding:30px;
+    border: 3px solid base.$primary-color;
+    border-radius: base.$border-radius;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.register-title{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;;
+}
+
+form {
+
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+.mat-form-field{
+    margin:0;
+    width: 70%;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.label{
+    display: flex;
+    width: 30%;
+    margin-bottom: 14px;
+    justify-self: flex-start;
+}
+
+.primary-button{
+    @extend %primary-button;
+    width: 150px;
+}
+.primary-button:hover{
+    @extend %primary-button-hover;
+}

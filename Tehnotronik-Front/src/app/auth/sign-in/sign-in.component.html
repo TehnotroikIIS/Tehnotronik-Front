@@ -1,1 +1,29 @@
-<p>sign-in works!</p>
+<app-navbar-unregistered></app-navbar-unregistered>
+<div class="container">
+    <div class="left">
+        <app-home-info></app-home-info>
+    </div>
+    <div class="right">
+        <div class="right-content">
+            <div class="register-title">Prijava</div>
+        <form [formGroup]="loginForm" style="text-align: center;">
+            <div class="row">
+                <div class="label">Email adresa:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="email" matInput>
+                    <mat-error *ngIf="login.email.errors?.required">Email adresa obavezna*</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Lozinka:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="password" matInput>
+                    <mat-error *ngIf="login.password.errors?.required">Lozinka obavezna*</mat-error>
+                </mat-form-field>
+            </div>
+            
+        </form>
+        <button class="primary-button" (click)="onSubmit()">Prijavi se</button>
+    </div>
+    </div>
+</div>
