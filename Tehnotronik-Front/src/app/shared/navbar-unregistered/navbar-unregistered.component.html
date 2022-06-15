@@ -26,9 +26,12 @@
         <button class="button-icon" mat-button >
             <mat-icon>shopping_cart</mat-icon>Korpa
         </button>
-    <button class="button-icon" mat-button >
+    <button class="button-icon" mat-button [matMenuTriggerFor]="menuPrijava">
         <mat-icon>exit_to_app</mat-icon>
     </button>
-    \
+    <mat-menu #menuPrijava="matMenu">
+        <button mat-menu-item [routerLink]="['/my-companies']">Prijava</button>
+        <button mat-menu-item [routerLink]="['']">Registracija</button>
+    </mat-menu>
 </div>
 </div>
