@@ -17,7 +17,7 @@
 .left{
     width: 55%;
     padding:150px;
-    margin-top:50px;
+    margin-top:10px;
   
 }
 
@@ -27,13 +27,13 @@
 }
 .right-content{
     margin-top:50px;
-    width: 80%;
+    width: 70%;
     padding:30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 18px;
-    line-height: 2em;
+    font-size: 14px;
+    line-height: 1.8em;
     color:base.$medium-grey-letters;
     text-align: justify;
 }
@@ -46,14 +46,14 @@
     text-align: justify;
 }
 .title{
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
 }
 
 .text{
-    font-size: 20px;
+    font-size: 16px;
     color:base.$dark-grey;
-    line-height: 2em;
+    line-height: 1.8em;
 }
 
 .primary-button{
