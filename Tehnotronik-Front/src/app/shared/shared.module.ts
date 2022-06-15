@@ -10,12 +10,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeInfoComponent } from './home-info/home-info.component';
 
 
 
 @NgModule({
   declarations: [
-    NavbarUnregisteredComponent
+    NavbarUnregisteredComponent,
+    HomeInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
   ],
   exports: [
-    NavbarUnregisteredComponent
+    NavbarUnregisteredComponent,
+    HomeInfoComponent
   ]
 })
 export class SharedModule { }
