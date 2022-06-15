@@ -1,0 +1,63 @@
+@use '../../../base-style'as base;
+
+.container{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.left{
+    width: 55%;
+    padding:150px;
+    margin-top:100px;
+  
+}
+
+.right{
+    margin-top:100px;
+    width: 45%;
+    margin-bottom: 100px;
+}
+.right-content{
+    width: 80%;
+    padding:30px;
+    border: 3px solid base.$primary-color;
+    border-radius: base.$border-radius;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+.mat-form-field{
+    margin:0;
+    width: 70%;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.label{
+    display: flex;
+    width: 30%;
+    margin-bottom:14px;
+    align-self: flex-start;
+    justify-self: flex-start;
+}
+
+.primary-button{
+    @extend %primary-button;
+    width: 150px;
+}

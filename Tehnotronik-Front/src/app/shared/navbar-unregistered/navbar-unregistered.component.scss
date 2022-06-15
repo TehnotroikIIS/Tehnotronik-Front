@@ -8,19 +8,19 @@
   width: 100%;
   display: flex;
   z-index: 10;
-  padding: 15px;
+  padding: 10px;
   justify-content: space-between;
 }
 #logo{
     font-weight:600 ;
-    font-size: 22px;;
+    font-size: 18px;;
     color:base.$primary-color-dark;
 }
 .navbar a {
   float: left;
   display: block;
   color: base.$dark-grey;
-  font-size: 20px;
+  font-size: 16px;
   text-decoration: none;
 }
 .navbar a:hover {
@@ -42,8 +42,7 @@
 
 .button-icon,.button-left{
   display: flex;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 16px;
   color:base.$dark-grey;
   background-color: transparent;
   border: 0;
