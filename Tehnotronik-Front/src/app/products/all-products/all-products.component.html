@@ -25,8 +25,8 @@
                         <mat-option *ngFor="let price of priceList" [value]="price">{{price}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <button class="filter-button"><mat-icon>hourglass_empty</mat-icon></button>
-                <button class="restore-button"><mat-icon>close</mat-icon></button>
+                <button class="filter-button" (click)="filter()"><mat-icon>hourglass_empty</mat-icon></button>
+                <button class="restore-button" (click)="resetFilters()"><mat-icon>close</mat-icon></button>
             </div>
             <div class="right">
                 <form [formGroup]="searchForm" class="search">
@@ -39,7 +39,7 @@
 
         </div>
         <div class="products">
-            <mat-card class="rest-card" *ngFor="let item of allProducts">
+            <mat-card class="rest-card" *ngFor="let item of filterProducts">
                 <img mat-card-image  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9oj262QwzNs3bfHzwet9eOiEfyDNUp3XL_w&usqp=CAU" />
                     
                 <mat-card-content class="card-content">  

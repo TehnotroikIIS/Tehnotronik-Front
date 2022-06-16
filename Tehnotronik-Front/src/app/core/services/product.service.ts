@@ -24,6 +24,10 @@ export class ProductService {
     return this.http.get(`${environment.api_url}get-all-products`, { headers: this.headers, responseType: 'json' });
   }
 
+  getAvailableProducts(): Observable<any> {
+    return this.http.get(`${environment.api_url}get-available-products`, { headers: this.headers, responseType: 'json' });
+  }
+
   getProductsByCategory(categoryId:string): Observable<any> {
     return this.http.get(`${environment.api_url}get-by-category-id`, {  params: {
       categoryId: categoryId
@@ -41,4 +45,13 @@ export class ProductService {
       name: name
     },headers: this.headers, responseType: 'json' });
   }
+
+  getBetweenPrices(minprice:number,maxprice:number): Observable<any> {
+    return this.http.get(`${environment.api_url}price-scope`, {  params: {
+      minPrice: minprice,
+      maxPrice:maxprice
+    },headers: this.headers, responseType: 'json' });
+  }
+
+
 }
