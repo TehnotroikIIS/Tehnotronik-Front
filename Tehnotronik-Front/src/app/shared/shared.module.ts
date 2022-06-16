@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeInfoComponent } from './home-info/home-info.component';
 import { CategoriesSidebarComponent } from './categories-sidebar/categories-sidebar.component';
+import { EmployedMenuComponent } from './employed-menu/employed-menu.component';
 
 
 
@@ -19,7 +20,8 @@ import { CategoriesSidebarComponent } from './categories-sidebar/categories-side
   declarations: [
     NavbarUnregisteredComponent,
     HomeInfoComponent,
-    CategoriesSidebarComponent
+    CategoriesSidebarComponent,
+    EmployedMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { CategoriesSidebarComponent } from './categories-sidebar/categories-side
   exports: [
     NavbarUnregisteredComponent,
     HomeInfoComponent,
-    CategoriesSidebarComponent
+    CategoriesSidebarComponent,
+    EmployedMenuComponent
   ]
 })
 export class SharedModule { }
