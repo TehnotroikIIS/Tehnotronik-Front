@@ -11,13 +11,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeInfoComponent } from './home-info/home-info.component';
+import { CategoriesSidebarComponent } from './categories-sidebar/categories-sidebar.component';
 
 
 
 @NgModule({
   declarations: [
     NavbarUnregisteredComponent,
-    HomeInfoComponent
+    HomeInfoComponent,
+    CategoriesSidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { HomeInfoComponent } from './home-info/home-info.component';
   ],
   exports: [
     NavbarUnregisteredComponent,
-    HomeInfoComponent
+    HomeInfoComponent,
+    CategoriesSidebarComponent
   ]
 })
 export class SharedModule { }

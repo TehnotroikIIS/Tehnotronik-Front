@@ -9,6 +9,8 @@ import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductsModule } from './products/products.module';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { HttpClientModule } from '@angular/common/http';
     CoreModule,
     SharedModule,
     HomeModule,
-    HttpClientModule
+    HttpClientModule,
+    ProductsModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

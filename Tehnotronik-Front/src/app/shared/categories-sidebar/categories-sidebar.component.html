@@ -1,0 +1,9 @@
+<div class="sidebar">
+    <div class="menu">
+        <button class="menu-button first"  routerLinkActive="active">{{first?.name}}
+           </button>
+        <button  *ngFor="let category of categories" class="menu-button"  routerLinkActive="active"> {{category.name}}
+           </button>
+        <button class="menu-button last" [routerLink]="['/company-jobs']" routerLinkActive="active">{{last?.name}}</button>
+    </div>
+</div>
