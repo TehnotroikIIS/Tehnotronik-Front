@@ -12,6 +12,9 @@ import { RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -22,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
   imports: [
     CommonModule,
     SharedModule,
+    BrowserModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
@@ -31,7 +35,10 @@ import { MatSelectModule } from '@angular/material/select';
     RouterModule,
     MatSelectModule,
     MatTabsModule,
-    MatGridListModule
+    MatCardModule,
+    MatGridListModule,
+    BrowserModule,
+    BrowserAnimationsModule,
   ]
 })
 export class ProductsModule { }

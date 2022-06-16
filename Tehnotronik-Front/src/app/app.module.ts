@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsModule } from './products/products.module';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ProductsModule } from './products/products.module';
     SharedModule,
     HomeModule,
     HttpClientModule,
-    ProductsModule
+    ProductsModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

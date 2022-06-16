@@ -21,12 +21,12 @@
 .menu-button{
     padding: 15px;
     width: 100%;
-    background-color:rgb(236, 230, 230);
-    background-color:white;
+  
+    background-color:base.$primary-color;
     font-size: 15px;
     color: base.$dark-grey;
-    border: 3px solid base.$primary-color ;
-    border-bottom: 0px solid base.$primary-color ;
+    border: 3px solid white ;
+    border-bottom: 0px solid white ;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -38,7 +38,7 @@
 }
 .menu-button:hover{
     cursor: pointer;
-    background-color: base.$primary-color;
+    background-color: base.$medium-grey-letters;
     color:white;
 }
 .menu-button.active{
@@ -55,5 +55,5 @@
  }
  .last{
      border-radius: 0 0 5px 5px;
-     border-bottom: 3px solid base.$primary-color ;
+     border-bottom: 3px solid white ;
  }
