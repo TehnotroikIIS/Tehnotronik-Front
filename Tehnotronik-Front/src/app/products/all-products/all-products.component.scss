@@ -25,6 +25,7 @@
     gap:40px;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
 }
 .left{
     display: flex;
@@ -35,6 +36,8 @@
 
 .right{
     width: 40%;
+    display: flex;
+  justify-content: flex-end;
 }
 
 
@@ -47,7 +50,7 @@
 }
 
 .search {
-    width: 100%;
+    width: 80%;
 }
 
 .search .mat-form-field {
@@ -137,4 +140,30 @@ cursor: pointer;
 }
 .dialog{
   width: 600px;
+}
+
+.filter-button{
+  @extend %primary-button;
+  background-color: base.$medium-grey-letters;
+  padding:5px 10px;
+  height: 50%;
+  margin-top:10px
+}
+
+.restore-button{
+  @extend %primary-button;
+  background-color: base.$medium-grey-letters;;
+  padding:5px 10px;
+  height: 50%;
+  margin-top:10px;
+  margin-left:-10px
+}
+
+.filter-button:hover{
+  @extend %primary-button-hover;
+}
+
+.restore-button:hover{
+  @extend %primary-button-hover;
+  background-color: base.$danger;
 }

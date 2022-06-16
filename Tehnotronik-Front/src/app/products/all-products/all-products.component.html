@@ -8,41 +8,25 @@
             <div class="left">
                 <mat-form-field appearance="outline">
                     <mat-label>Sortiranje</mat-label>
-                    <mat-select [formControl]="sort">
-                        <mat-select-trigger>
-                            {{sort.value ? sort.value[0] : ''}}
-                            <span *ngIf="sort.value?.length > 1" class="example-additional-selection">
-                                (+{{sort.value.length - 1}} {{sort.value?.length === 2 ? 'other' : 'others'}})
-                            </span>
-                        </mat-select-trigger>
+                    <mat-select [(value)]="sortValue">
                         <mat-option *ngFor="let sort of sortList" [value]="sort">{{sort}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
 
                     <mat-label>Dostupnost</mat-label>
-                    <mat-select [formControl]="industry">
-                        <mat-select-trigger>
-                            {{industry.value ? industry.value[0] : ''}}
-                            <span *ngIf="industry.value?.length > 1" class="example-additional-selection">
-                                (+{{industry.value.length - 1}} {{industry.value?.length === 2 ? 'other' : 'others'}})
-                            </span>
-                        </mat-select-trigger>
-                        <mat-option *ngFor="let industry of industryList" [value]="industry">{{industry}}</mat-option>
+                    <mat-select [(value)]="availableValue">
+                        <mat-option *ngFor="let available of availableList" [value]="available">{{available}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Cena</mat-label>
-                    <mat-select [formControl]="age">
-                        <mat-select-trigger>
-                            {{age.value ? age.value[0] : ''}}
-                            <span *ngIf="age.value?.length > 1" class="example-additional-selection">
-                                (+{{age.value.length - 1}} {{age.value?.length === 2 ? 'other' : 'others'}})
-                            </span>
-                        </mat-select-trigger>
-                        <mat-option *ngFor="let age of ageList" [value]="age">{{age}}</mat-option>
+                    <mat-select [(value)]="priceValue" >
+                        <mat-option *ngFor="let price of priceList" [value]="price">{{price}}</mat-option>
                     </mat-select>
                 </mat-form-field>
+                <button class="filter-button"><mat-icon>hourglass_empty</mat-icon></button>
+                <button class="restore-button"><mat-icon>close</mat-icon></button>
             </div>
             <div class="right">
                 <form [formGroup]="searchForm" class="search">

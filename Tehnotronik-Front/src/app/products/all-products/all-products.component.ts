@@ -12,71 +12,9 @@ export class AllProductsComponent implements OnInit {
   searchForm:any;
   breakpoint: number = 1;
   gutterSize: string = '40px';
-   products:any[]=[{
-    name:'Ferit za kablove',
-    price:256,
-    description:'desciriton',
-    manufacturer:'manufac',
-    techicalDescription:'technical',
-    categoryId:'id',
-    rate:8,
-    numberOfReviews:10,
-    isAvailable:1
-   },{
-    name:'Ferit za kablove',
-    price:256,
-    description:'desciriton',
-    manufacturer:'manufac',
-    techicalDescription:'technical',
-    categoryId:'id',
-    rate:8,
-    numberOfReviews:10,
-    isAvailable:0
-   },{
-    name:'Ferit za kablove',
-    price:256,
-    description:'desciriton',
-    manufacturer:'manufac',
-    techicalDescription:'technical',
-    categoryId:'id',
-    rate:8,
-    numberOfReviews:10,
-    isAvailable:0
-   },
-   {
-    name:'Ferit za kablove',
-    price:256,
-    description:'desciriton',
-    manufacturer:'manufac',
-    techicalDescription:'technical',
-    categoryId:'id',
-    rate:8,
-    numberOfReviews:10,
-    isAvailable:1
-   },
-   {
-    name:'Ferit za kablove',
-    price:256,
-    description:'desciriton',
-    manufacturer:'manufac',
-    techicalDescription:'technical',
-    categoryId:'id',
-    rate:8,
-    numberOfReviews:10,
-    isAvailable:1
-   },
-   {
-    name:'Ferit za kablove',
-    price:256,
-    description:'desciriton',
-    manufacturer:'manufac',
-    techicalDescription:'technical',
-    categoryId:'id',
-    rate:8,
-    numberOfReviews:10,
-    isAvailable:1
-   }];
-
+  priceValue:any;
+  availableValue:any;
+  sortValue:any;
 
   constructor(
     private productService:ProductService,
@@ -101,8 +39,8 @@ export class AllProductsComponent implements OnInit {
   industry = new FormControl();
   age = new FormControl();
   sortList: string[] = ['Od najniže cene','Od najviše cene'];
-  industryList: string[] = ['Svi','Dostupni'];
-  ageList: string[] = ['<500', '500-3000', '3000-10000', '>10000']
+  availableList: string[] = ['Svi','Dostupni'];
+  priceList: string[] = ['<500', '500-3000', '3000-10000', '>10000']
   noExperienceList: any[] = []
 
   getAllProducts(){
