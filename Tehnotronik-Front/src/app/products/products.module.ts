@@ -15,12 +15,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddProductComponent } from './add-product/add-product.component';
 
 
 
 @NgModule({
   declarations: [
-    AllProductsComponent
+    AllProductsComponent,
+    AddProductComponent,
   ],
   imports: [
     CommonModule,

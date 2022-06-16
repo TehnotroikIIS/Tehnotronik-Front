@@ -5,6 +5,7 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { AboutUsComponent } from './home/about-us/about-us.component';
 import { ContactComponent } from './home/contact/contact.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
+import { AddProductComponent } from './products/add-product/add-product.component';
 import { AllProductsComponent } from './products/all-products/all-products.component';
 import { EmployedMenuComponent } from './shared/employed-menu/employed-menu.component';
 
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'all-products',
     component: AllProductsComponent
+  },
+  {
+    path: 'add-product',
+    component: AddProductComponent
   },
   {
     path: 'employed-menu',
