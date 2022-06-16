@@ -13,6 +13,7 @@
     padding:30px;
     border: 3px solid base.$primary-color;
     border-radius: base.$border-radius;
+    background-color: rgb(246, 246, 246);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,4 +54,7 @@ form {
 .primary-button{
     @extend %primary-button;
     width: 150px;
+}
+.primary-button:hover{
+    @extend %primary-button-hover;
 }

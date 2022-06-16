@@ -14,36 +14,33 @@
             <div class="row">
                 <div class="label">Kategorija:</div>
                 <mat-form-field appearance="outline">
-                    <mat-select [formControl]="category">
-                        <mat-select-trigger>
-                            {{category.value ? category.value : ''}}
-                        </mat-select-trigger>
-                        <mat-option *ngFor="let category of categories" [value]="category.name">{{category.name}}</mat-option>
+                    <mat-select [(value)]="selectedCategory">
+                        <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
             <div class="row">
                 <div class="label">Cena:</div>
                 <mat-form-field appearance="outline">
-                    <input formControlName="password" matInput>
+                    <input type="number" min="0" formControlName="price" matInput>
                     </mat-form-field>
                 </div>
             <div class="row">
                 <div class="label">Proizvođač:</div>
                 <mat-form-field appearance="outline">
-                    <input formControlName="password" matInput>
+                    <input formControlName="manufacturer" matInput>
                   </mat-form-field>
             </div>
             <div class="row">
                 <div class="label">Kratak opis:</div>
                 <mat-form-field appearance="outline">
-                    <textarea formControlName="password" matInput></textarea>
+                    <textarea formControlName="description" matInput></textarea>
                    </mat-form-field>
             </div>
             <div class="row">
                 <div class="label">Specifikacija:</div>
                 <mat-form-field appearance="outline">
-                    <textarea formControlName="password" matInput></textarea>
+                    <textarea formControlName="technicalDescription" matInput></textarea>
                   </mat-form-field>
             </div>
 

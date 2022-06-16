@@ -117,13 +117,17 @@ export class AllProductsComponent implements OnInit {
 
   sarchByName() {
     let name=this.searchForm.value.name;
-    this.productService.searchProduct(name).subscribe((data: any) => {
-      this.products = data;
-
-    },
-      error => {
-        console.log(error.error.message);
-      });
+    if(name!=''){
+      this.productService.searchProduct(name).subscribe((data: any) => {
+        this.allProducts = data;
+      },
+        error => {
+          console.log(error.error.message);
+        });
+    }else{
+      this.getAllProducts();
+    }
+   
   }
 
   onResize(event: any) {

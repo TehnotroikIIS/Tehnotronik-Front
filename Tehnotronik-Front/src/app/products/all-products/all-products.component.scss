@@ -72,19 +72,26 @@ cursor: pointer;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     border:3px solid base.$primary-color;
+    opacity: 0.7;
+    cursor: pointer;
+    box-shadow: base.$box-shadow;
   }
-
+  .rest-card  img {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    width: 230px;
+    height: 230px;
+  }
 
   .rest-card  img:hover {
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
-    opacity: 0.5;
   }
   
   .name-div{
-    font-size: 16px;
+    font-size: 18px;
     color:base.$dark-grey;
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .row{
@@ -94,9 +101,9 @@ cursor: pointer;
   }
 .price{
   margin-top: 5px;;
-  font-size: 18px;
+  font-size: 16px;
   color:base.$dark-grey;
-  font-weight: 500;
+  font-weight: 600;
 }
 .icons{
   display: flex;
