@@ -3,7 +3,7 @@ export interface Product {
     price:number;
     description:string;
     manufacturer:string;
-    techicalDescription:string;
+    technicalDescription:string;
     categoryId:string;
     rate:number;
     numberOfReviews:number;

@@ -1,0 +1,76 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+<div class="container">
+    <div class="right-content">
+        <div class="register-title">Dodavanje novog proizvoda</div>
+        <form [formGroup]="addForm" style="text-align: center;">
+            <div class="row">
+                <div class="label">Naziv:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="name" matInput>
+                   
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Kategorija:</div>
+                <mat-form-field class="cat" appearance="outline">
+                    <mat-select [(value)]="selectedCategory" >
+                        <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Dodaj novu kategoriju:</div>
+              <button class="add-button" (click)="opetAddCategoryDialog( $event)">+</button>
+            </div>
+            <div class="row">
+                <div class="label">Cena:</div>
+                <mat-form-field appearance="outline">
+                    <input type="number" min="0" formControlName="price" matInput>
+                    </mat-form-field>
+                </div>
+            <div class="row">
+                <div class="label">Proizvođač:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="manufacturer" matInput>
+                  </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Kratak opis:</div>
+                <mat-form-field appearance="outline">
+                    <textarea formControlName="description" matInput></textarea>
+                   </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Specifikacija:</div>
+                <mat-form-field appearance="outline">
+                    <textarea formControlName="technicalDescription" matInput></textarea>
+                  </mat-form-field>
+            </div>
+
+        </form>
+        <button class="primary-button" (click)="addProduct()">Dodaj</button>
+    </div>
+
+    
+</div>
+
+
+
+<ng-template #addCategory let-mydata class="dialog">
+    
+    <div mat-dialog-content class="dialog-content">
+      <div>Unesi novu kategoriju</div>
+      <form [formGroup]="addCategoryForm" class="dialog-form">
+        <div class="row1">
+            <mat-form-field appearance="outline">
+                <input formControlName="name" matInput>
+              </mat-form-field>
+        </div>
+      </form>
+    </div>
+    <div mat-dialog-actions class="dialog-actions">
+      <button  mat-raised-button color="primary" class="yes-button"  mat-dialog-close (click)="add()">Dodaj</button>
+      <button mat-raised-button mat-dialog-close raised class="cancel-button"> Zatvori</button>
+    </div>
+  </ng-template>
