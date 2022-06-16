@@ -115,3 +115,26 @@ cursor: pointer;
   color:base.$success
 }
   
+
+.dialog-title {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+
+.yes-button {
+  background-color: base.$primary-color-dark;
+  color: white;
+}
+.dialog-actions {
+  padding:20px;
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  text-align: center;
+}
+.dialog{
+  width: 600px;
+}

@@ -35,6 +35,11 @@ form {
     margin:0;
     width: 70%;
 }
+.mat-form-field .cat{
+    margin:0;
+    width: 50%;
+}
+
 
 .row{
     display: flex;
@@ -57,4 +62,27 @@ form {
 }
 .primary-button:hover{
     @extend %primary-button-hover;
+}
+
+.add-button{
+    @extend %primary-button;
+   border-radius: 20%;
+   padding:5px 10px;
+   margin-bottom:10px;
+}
+.add-button:hover{
+    @extend %primary-button-hover;
+}
+.dialog-form .mat-form-field{
+    width: 100%;
+}
+.dialog-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px
+}
+
+.row1{
+    width: 300px
 }

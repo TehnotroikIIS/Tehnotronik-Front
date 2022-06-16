@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { AllProductsComponent } from './all-products/all-products.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,6 +16,8 @@ import { MatCardModule } from '@angular/material/card';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddProductComponent } from './add-product/add-product.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 
@@ -26,21 +28,26 @@ import { AddProductComponent } from './add-product/add-product.component';
   ],
   imports: [
     CommonModule,
-    SharedModule,
-    BrowserModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    MatRadioModule,
-    RouterModule,
-    MatSelectModule,
-    MatTabsModule,
-    MatCardModule,
-    MatGridListModule,
-    BrowserModule,
-    BrowserAnimationsModule,
+        FormsModule,
+        SharedModule,
+        MatIconModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatToolbarModule,
+        CommonModule,
+        SharedModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        MatRadioModule,
+        RouterModule,
+        MatSelectModule,
+        MatTabsModule,
+        MatGridListModule,
+        MatCardModule
   ]
 })
 export class ProductsModule { }

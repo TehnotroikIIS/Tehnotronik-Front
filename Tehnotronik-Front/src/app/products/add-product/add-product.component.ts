@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/core/models/product.model';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { JwtService } from 'src/app/core/services/jwt.service';
+import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
@@ -15,6 +16,8 @@ export class AddProductComponent implements OnInit {
   addForm: FormGroup;
   categories: any[] = []
   selectedCategory:any;
+  addCategoryForm: FormGroup;
+  @ViewChild('addCategory') addDialog!: any;
   newProduct: Product = {
     name: '',
     price: 0,
@@ -30,6 +33,7 @@ export class AddProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private jwtService: JwtService,
+    public dialog: MatDialog,
     private categoryService: CategoryService,
     private productService:ProductService
   ) {
@@ -40,6 +44,9 @@ export class AddProductComponent implements OnInit {
       manufacturer: [''],
       technicalDescription: [''],
     });
+    this.addCategoryForm = this.formBuilder.group({
+      name: [''],
+    });
   }
 
   ngOnInit(): void {
@@ -48,6 +55,7 @@ export class AddProductComponent implements OnInit {
 
 
   get login(): { [key: string]: AbstractControl; } { return this.addForm.controls; }
+  get category(): { [key: string]: AbstractControl; } { return this.addCategoryForm.controls; }
 
   getAllCategories() {
     this.categoryService.getAllCategories().subscribe(data => {
@@ -55,7 +63,10 @@ export class AddProductComponent implements OnInit {
     }, error => {
       alert('Greska!')
     })
+  }
 
+  onCategoryChange(event:any){
+    alert('sdd')
   }
 
   addProduct() {
@@ -73,5 +84,27 @@ export class AddProductComponent implements OnInit {
       alert('Greska!')
     })
   }
+  opetAddCategoryDialog(event: any) {
+    event?.stopPropagation();
+    const myTempDialog = this.dialog.open(this.addDialog);
+    myTempDialog.afterClosed().subscribe((res) => {
+      console.log({ res });
+    });
+  }
+
+  add():any{
+    alert(this.addCategoryForm.value.name)
+    let category={
+      name:this.addCategoryForm.value.name
+    }
+    this.categoryService.createCategory(category).subscribe(data=>{
+      alert('Uspesno dodata')
+      window.location.reload()
+    },error=>{
+      alert('Greska')
+    })
+  }
+
+
 
 }
