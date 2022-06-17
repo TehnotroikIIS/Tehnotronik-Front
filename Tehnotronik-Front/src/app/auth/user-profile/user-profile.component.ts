@@ -31,6 +31,8 @@ export class UserProfileComponent implements OnInit {
 
   loadData(){
     this.user = this.jwtService.getUserDetails();
+    console.log(this.user)
+    this.profileForm.get('name')?.setValue(this.user.name);
   }
 
   changePassword() {}
