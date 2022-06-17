@@ -20,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 
 
@@ -28,6 +29,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     AllProductsComponent,
     AddProductComponent,
     ProductDetailsComponent,
+    EditProductComponent,
   ],
   imports: [
     CommonModule,
