@@ -24,7 +24,28 @@ export class CategoriesSidebarComponent implements OnInit {
     this.getAllCategories();
   }
 
-  sendSelectedcategory(selectedCategory:any) {
+  sendSelectedcategory(selectedCategory:any,index:any) {
+    this.last.isSelected=false;
+    this.first.isSelected=false;
+    this.categories.forEach((element:any) => {
+      element.isSelected=false;
+    });
+    this.categories[index].isSelected=true;
+    this.router.navigate(['/all-products'])
+    this.newItemEvent.emit(selectedCategory);
+  
+  }
+  sendSelectedcategoryFirst(selectedCategory:any,index:any) {
+    this.categories.forEach((element:any) => {
+      element.isSelected=false;
+    });
+  if(index==0){
+    this.first.isSelected=true;
+    this.last.isSelected=false;
+  }else{
+    this.last.isSelected=true;
+    this.first.isSelected=false;
+  }
     this.router.navigate(['/all-products'])
     this.newItemEvent.emit(selectedCategory);
   
@@ -35,7 +56,9 @@ getAllCategories(){
     this.length=data.length
     data.forEach((value: any, i: any) => {
       if(i!=0 && i!=this.length-1){
-        this.categories.push(value)
+        data.isSelected=false;
+        this.categories.push(value);
+
       }
     });
    this.first=data[0];
