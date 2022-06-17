@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NoAuthGuard } from './auth/guards/no-auth.guard';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { AboutUsComponent } from './home/about-us/about-us.component';
@@ -41,11 +42,17 @@ const routes: Routes = [
   },
   {
     path: 'add-product',
-    component: AddProductComponent
+    component: AddProductComponent,
+    canActivate: [NoAuthGuard],
   },
   {
     path: 'employed-menu',
-    component: EmployedMenuComponent
+    component: EmployedMenuComponent,
+    canActivate: [NoAuthGuard],
+  },
+  {
+    path: '**',
+    component: HomePageComponent,
   },
 ];
 

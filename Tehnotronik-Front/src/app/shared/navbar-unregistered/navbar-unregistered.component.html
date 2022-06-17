@@ -6,7 +6,7 @@
             Proizvodi<mat-icon>keyboard_arrow_down</mat-icon>
         </button>
         <mat-menu #menuProizvodi="matMenu">
-            <button mat-menu-item [routerLink]="['/my-companies']">Svi proizvodi</button>
+            <button mat-menu-item (click)="gotoAllProducts()">Svi proizvodi</button>
             <button mat-menu-item [routerLink]="['']">Najprodavaniji proizvodi</button>
         </mat-menu>
         <button class="button-left" mat-button [matMenuTriggerFor]="menuBlogovi">
@@ -26,12 +26,21 @@
         <button class="button-icon" mat-button >
             <mat-icon>shopping_cart</mat-icon>Korpa
         </button>
-    <button class="button-icon" mat-button [matMenuTriggerFor]="menuPrijava">
+        <button  *ngIf="isAuthenticated" class="button-icon" mat-button >
+            <mat-icon>person</mat-icon>
+        </button>
+    <button class="button-icon"  *ngIf="!isAuthenticated" mat-button [matMenuTriggerFor]="menuPrijava">
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
+    <button class="button-icon"  *ngIf="isAuthenticated" mat-button [matMenuTriggerFor]="menuOdjava" >
         <mat-icon>exit_to_app</mat-icon>
     </button>
     <mat-menu #menuPrijava="matMenu">
         <button mat-menu-item [routerLink]="['/sign-in']">Prijava</button>
         <button mat-menu-item [routerLink]="['/register']">Registracija</button>
+    </mat-menu>
+    <mat-menu #menuOdjava="matMenu">
+        <button mat-menu-item (click)="logOut()">Odjava</button>
     </mat-menu>
 </div>
 </div>
