@@ -1,23 +1,23 @@
 <div class="navbar">
     <div class="left">
         <a id="logo" href="#home">Tehnotronik</a>
-        <a [routerLink]="['/search-company']">Akcije</a>
+        <a [routerLink]="['/sales']"  routerLinkActive="active">Akcije</a>
         <button class="button-left" mat-button [matMenuTriggerFor]="menuProizvodi">
             Proizvodi<mat-icon>keyboard_arrow_down</mat-icon>
         </button>
         <mat-menu #menuProizvodi="matMenu">
-            <button mat-menu-item (click)="gotoAllProducts()">Svi proizvodi</button>
-            <button mat-menu-item [routerLink]="['']">Najprodavaniji proizvodi</button>
+            <button mat-menu-item (click)="gotoAllProducts()"   routerLinkActive="active">Svi proizvodi</button>
+            <button mat-menu-item [routerLink]="['']"   routerLinkActive="active">Najprodavaniji proizvodi</button>
         </mat-menu>
         <button class="button-left" mat-button [matMenuTriggerFor]="menuBlogovi">
             Blogovi<mat-icon>keyboard_arrow_down</mat-icon>
         </button>
-        <mat-menu #menuBlogovi="matMenu">
+        <mat-menu #menuBlogovi="matMenu" >
             <button mat-menu-item [routerLink]="['/my-companies']">Svi blogovi</button>
             <button mat-menu-item [routerLink]="['']">Najpopularniji blogovi</button>
         </mat-menu>
-        <a [routerLink]="['/about-us']">O nama </a>
-        <a [routerLink]="['/contact']">Kontakt </a>
+        <a [routerLink]="['/about-us']"   routerLinkActive="active">O nama </a>
+        <a [routerLink]="['/contact']"   routerLinkActive="active">Kontakt </a>
     </div>
     <div class="right">
         <button class="button-icon" mat-button >
@@ -26,7 +26,7 @@
         <button [routerLink]="['/shopping-cart']" class="button-icon" mat-button >
             <mat-icon>shopping_cart</mat-icon>Korpa
         </button>
-        <button [routerLink]="['/user-profile']" *ngIf="isAuthenticated" class="button-icon" mat-button >
+        <button [routerLink]="['/user-profile']"   routerLinkActive="active" *ngIf="isAuthenticated" class="button-icon" mat-button >
             <mat-icon>person</mat-icon>
         </button>
     <button class="button-icon"  *ngIf="!isAuthenticated" mat-button [matMenuTriggerFor]="menuPrijava">
@@ -36,8 +36,8 @@
         <mat-icon>exit_to_app</mat-icon>
     </button>
     <mat-menu #menuPrijava="matMenu">
-        <button mat-menu-item [routerLink]="['/sign-in']">Prijava</button>
-        <button mat-menu-item [routerLink]="['/register']">Registracija</button>
+        <button mat-menu-item [routerLink]="['/sign-in']"   routerLinkActive="active">Prijava</button>
+        <button mat-menu-item [routerLink]="['/register']"   routerLinkActive="active">Registracija</button>
     </mat-menu>
     <mat-menu #menuOdjava="matMenu">
         <button mat-menu-item (click)="logOut()">Odjava</button>

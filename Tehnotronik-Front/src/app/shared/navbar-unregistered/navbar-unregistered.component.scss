@@ -23,6 +23,13 @@
   font-size: 16px;
   text-decoration: none;
 }
+
+.navbar a.active,
+a[aria-expanded="true"] {
+  font-weight: 500;
+  color:base.$primary-color-dark
+}
+
 .navbar a:hover {
     color:base.$primary-color-dark
   }

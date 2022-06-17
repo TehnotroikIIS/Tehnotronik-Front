@@ -37,8 +37,9 @@ export class ProductDetailsComponent implements OnInit {
     productId:''
   
   }
+  nowDate:Date=new Date()
   reviews: any[] = []
-
+sales:any[]=[]
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
@@ -76,6 +77,21 @@ export class ProductDetailsComponent implements OnInit {
     for (let i = 0; i < grade; i++) {
       this.rates.push(i)
     }
+  }
+
+  getSales(){
+    this.productService.getAllSales().subscribe(data=>{
+      this.sales=data;
+        this.sales.forEach(element1=> {
+          if(this.selectedProduct.id==element1.productId && this.nowDate>new Date(element1.startTime) && this.nowDate<new Date(element1.endTime)){
+            let newPrice=this.selectedProduct.price*(1-element1.discount/100);
+            newPrice= Math.round((newPrice + Number.EPSILON) * 100) / 100
+            this.selectedProduct.newPrice=newPrice;
+            this.selectedProduct.discount=element1.discount;
+          }
+        });
+    
+    })
   }
 
   opetAddReviewDialog(event: any) {

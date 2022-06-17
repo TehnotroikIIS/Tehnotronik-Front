@@ -21,6 +21,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { SalesComponent } from './sales/sales.component';
 
 
 
@@ -30,6 +31,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     AddProductComponent,
     ProductDetailsComponent,
     EditProductComponent,
+    SalesComponent,
   ],
   imports: [
     CommonModule,
