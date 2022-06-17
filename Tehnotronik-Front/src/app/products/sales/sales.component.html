@@ -4,7 +4,7 @@
 <div class="container">
     <app-categories-sidebar (newItemEvent)="getProductsByCategory($event)"></app-categories-sidebar>
     <div class="content">
-        <div class="filters">
+       <!--<div class="filters">
             <div class="left">
                 <mat-form-field appearance="outline">
                     <mat-label>Sortiranje</mat-label>
@@ -37,7 +37,7 @@
                 </form>
             </div>
 
-        </div>
+        </div>--> 
         <div class="products">
             <mat-card class="rest-card" *ngFor="let item of actionProducts" (click)="goToProductDetails(item)">
                 <img mat-card-image  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9oj262QwzNs3bfHzwet9eOiEfyDNUp3XL_w&usqp=CAU" />

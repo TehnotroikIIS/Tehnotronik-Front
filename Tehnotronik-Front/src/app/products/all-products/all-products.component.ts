@@ -22,6 +22,7 @@ export class AllProductsComponent implements OnInit {
   filterProducts1: any[] = [];
   selectedProduct: any;
   showProductForm: FormGroup;
+  sales:any[]=[];
   isAuthenticated: boolean = false;
   @ViewChild('showProduct') addDialog!: any;
   constructor(
@@ -61,18 +62,37 @@ export class AllProductsComponent implements OnInit {
   priceList: string[] = ['<500', '500-3000', '3000-10000', '>10000']
   noExperienceList: any[] = []
 
-  getAllProducts() {
+  async getAllProducts() {
     this.productService.getAllproducts().subscribe(data => {
       this.filterProducts1= data;
       console.log(this.allProducts)
     }, error => {
       alert('Greska!')
     })
+    await this.delay(500);
+    this.getSales();
+  }
+
+  getSales(){
+    this.productService.getAllSales().subscribe(data=>{
+      this.sales=data;
+      this.filterProducts1.forEach(element => {
+        this.sales.forEach(element1=> {
+          if(element.id==element1.productId){
+            let newPrice=element.price*(1-element1.discount/100);
+            newPrice= Math.round((newPrice + Number.EPSILON) * 100) / 100
+            element.newPrice=newPrice;
+            element.discount=element1.discount;
+           
+          }
+        });
+      });
+    })
   }
 
   getProductsByCategory(category: any) {
     this.productService.getProductsByCategory(category.id).subscribe(data => {
-      this.filterProducts = data
+      this.filterProducts1 = data
     }, error => {
       alert('Greska')
     })
@@ -82,6 +102,17 @@ export class AllProductsComponent implements OnInit {
     if (this.availableValue == 'Dostupni') {
       this.productService.getAvailableProducts().subscribe(data => {
         this.filterProducts = data;
+        this.filterProducts.forEach(element => {
+          this.sales.forEach(element1=> {
+            if(element.id==element1.productId){
+              let newPrice=element.price*(1-element1.discount/100);
+              newPrice= Math.round((newPrice + Number.EPSILON) * 100) / 100
+              element.newPrice=newPrice;
+              element.discount=element1.discount;
+             
+            }
+          });
+        });
         console.log(this.filterProducts);
       
       }, error => {
@@ -96,10 +127,20 @@ export class AllProductsComponent implements OnInit {
     if (this.priceValue != '') {
       let scope = this.getPriceScope();
       this.productService.getBetweenPrices(scope.min, scope.max).subscribe(data => {
-        this.filterProducts1.splice(0, this.filterProducts1.length)
+        this.filterProducts1.splice(0, this.filterProducts1.length);
+        data.forEach((element: any) => {
+          this.sales.forEach(element1=> {
+            if(element.id==element1.productId){
+              let newPrice=element.price*(1-element1.discount/100);
+              newPrice= Math.round((newPrice + Number.EPSILON) * 100) / 100
+              element.newPrice=newPrice;
+              element.discount=element1.discount;
+             
+            }
+          });
+        });
         data.forEach((element: any, index: any) => {
          this.filterProducts.forEach((element1: any, index1: any) => {
-        
            if (element1.name==element.name) {
              this.filterProducts1.push(element);
            }
@@ -135,14 +176,15 @@ export class AllProductsComponent implements OnInit {
 
 
   async filter() {
-    this.productService.getAllproducts().subscribe(data => {
-      this.filterProducts= data;
-      console.log(this.allProducts)
-    })
+   this.getAllProducts();
+   this.filterProducts=this.filterProducts1;
     await this.delay(500);
     this.avabilityFilter();
 
   }
+
+
+
   getPriceScope(): any {
     if (this.priceValue == '<500') {
       return { min: 0, max: 500 }
@@ -159,12 +201,7 @@ export class AllProductsComponent implements OnInit {
   }
 
   resetFilters() {
-    this.productService.getAllproducts().subscribe(data => {
-      this.filterProducts1 = data;
-      console.log(this.filterProducts)
-    }, error => {
-      alert('Greska!')
-    })
+    this.getAllProducts()
     this.sortValue = '';
     this.priceValue = '';
     this.availableValue = '';
@@ -174,7 +211,7 @@ export class AllProductsComponent implements OnInit {
     let name = this.searchForm.value.name;
     if (name != '') {
       this.productService.searchProduct(name).subscribe((data: any) => {
-        this.filterProducts = data;
+        this.filterProducts1 = data;
       },
         error => {
           console.log(error.error.message);

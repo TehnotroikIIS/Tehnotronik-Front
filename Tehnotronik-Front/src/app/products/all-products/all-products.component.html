@@ -39,13 +39,20 @@
 
         </div>
         <div class="products">
+
             <mat-card class="rest-card" *ngFor="let item of filterProducts1" (click)="goToProductDetails(item)">
+                <div  class="editqr" *ngIf="item.newPrice!=undefined">
+                    -{{item.discount}}%
+                  </div> 
                 <img mat-card-image  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9oj262QwzNs3bfHzwet9eOiEfyDNUp3XL_w&usqp=CAU" />
                     
-                <mat-card-content class="card-content">  
+                <mat-card-content class="card-content"> 
+                   
                     <div class="name-div">{{item.name | uppercase}}</div>
                     <div class="row">
-                        <div class="price">{{item.price}} din</div>
+                        <div class="price"  *ngIf="item.newPrice==undefined">{{item.price}} din</div>
+                        <div class="price-cross"  *ngIf="item.newPrice!=undefined">{{item.price}} din</div>
+                        <div class="action"  *ngIf="item.newPrice!=undefined">{{item.newPrice}} din</div>
                         <div class="icons">
                             <mat-icon class="available" *ngIf="item.isAvailable">lens</mat-icon>
                             <mat-icon class="not-available"  *ngIf="!item.isAvailable">lens</mat-icon>

@@ -41,13 +41,12 @@ export class SalesComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.breakpoint = window.innerWidth <= 768 ? 1 : 3;
     this.gutterSize = window.innerWidth <= 768 ? '20px' : '40px';
     this.isAuthenticated = this.authenticationService.isAuthenticated();
    this.getAllProducts();
-   this.getSales()
-    this.getSelectedProduct();
+
   }
   get searchF(): { [key: string]: AbstractControl } {
     return this.searchForm.controls;
@@ -79,7 +78,6 @@ getSales(){
     this.filterProducts1.forEach(element => {
       this.sales.forEach(element1=> {
         if(element.id==element1.productId){
-          //alert(element.price.toString())
           let newPrice=element.price*(1-element1.discount/100);
           newPrice= Math.round((newPrice + Number.EPSILON) * 100) / 100
           element.newPrice=newPrice;
@@ -90,13 +88,15 @@ getSales(){
   })
 }
 
-  getAllProducts() {
+  async getAllProducts() {
     this.productService.getAllproducts().subscribe(data => {
       this.filterProducts1= data;
       console.log(this.allProducts)
     }, error => {
       alert('Greska!')
     })
+    await this.delay(1000);
+    this.getSales();
   }
 
   getProductsByCategory(category: any) {
@@ -164,10 +164,7 @@ getSales(){
 
 
   async filter() {
-    this.productService.getAllproducts().subscribe(data => {
-      this.filterProducts= data;
-      console.log(this.allProducts)
-    })
+   this.getAllProducts();
     await this.delay(500);
     this.avabilityFilter();
 
