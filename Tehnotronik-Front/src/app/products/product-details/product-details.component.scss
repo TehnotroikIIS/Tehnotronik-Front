@@ -60,6 +60,15 @@
     padding-left: 50px;
 
 }
+.row .action {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 50px;
+    color:base.$danger;
+    font-weight: 500;
+}
 
 .specification {
     width: 100%;

@@ -23,7 +23,8 @@
 
                 <div class="row">
                     <div class="left bold">Cena</div>
-                    <div class="right">{{selectedProduct.price}}</div>
+                    <div class="right"  *ngIf="this.selectedProduct.newPrice==undefined">{{selectedProduct.price}} din</div>
+                    <div class="action" *ngIf="this.selectedProduct.newPrice!=undefined">{{selectedProduct.newPrice}} din</div>
                 </div>
                 <div class="row">
                     <div class="left bold">Stanje</div>
