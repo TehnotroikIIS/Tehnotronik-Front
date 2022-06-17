@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class AllProductsComponent implements OnInit {
   constructor(
     private productService:ProductService,
     private formBuilder: FormBuilder,
+    private router:Router
   ) {
     this.searchForm = this.formBuilder.group({
       name: [''],
@@ -54,8 +56,6 @@ export class AllProductsComponent implements OnInit {
   }
 
   getProductsByCategory(category: any) {
-    if(category==undefined){
-    }
     this.productService.getProductsByCategory(category.id).subscribe(data=>{
       this.filterProducts=data
     },error=>{
@@ -157,7 +157,8 @@ export class AllProductsComponent implements OnInit {
   }
 
   goToProductDetails(product:any){
-
+    localStorage.setItem('selectedProduct', JSON.stringify(product));
+    this.router.navigate(['/product-details'])
   }
 
   

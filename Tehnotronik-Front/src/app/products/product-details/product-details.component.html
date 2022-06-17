@@ -6,14 +6,24 @@
     <div class="content">
         <div class="main-info">
             <div class="left">
-                <div class="title">Ferti za kabloce</div>
+                <div class="title">{{selectedProduct.name}}</div>
                 <div class="row">
-                    <div class="left">Kataloski broj></div>
-                    <div  class="right">4542</div>
+                    <div class="left">Proizvođač</div>
+                    <div  class="right">{{selectedProduct.manufacturer}}</div>
+                </div>
+              
+                <div class="row">
+                    <div class="left">Opis</div>
+                    <div  class="right">{{selectedProduct.description}}</div>
                 </div>
                 <div class="row">
-                    <div class="left">Kataloskisssss broj></div>
-                    <div class="right">454ssssssssssdsdf2</div>
+                    <div class="left">Cena</div>
+                    <div  class="right">{{selectedProduct.price}}</div>
+                </div>
+                <div class="row">
+                    <div class="left">Stanje</div>
+                    <mat-icon class="available" *ngIf="selectedProduct.isAvailable">lens</mat-icon>
+                    <mat-icon class="not-available"  *ngIf="!selectedProduct.isAvailable">lens</mat-icon>
                 </div>
             </div>
             <div class="right">
@@ -30,7 +40,7 @@
                 Specifikacija:
             </div>
             <div class="right">
-                dfdsssssssssssssssssssssssssssssssssdf sssssssssssssssssd  ssssssssssss sssssssssss sssssssssssss sssssssss s dfs
+                {{selectedProduct.technicalDescription}}
             </div>
         </div>
     </div>
