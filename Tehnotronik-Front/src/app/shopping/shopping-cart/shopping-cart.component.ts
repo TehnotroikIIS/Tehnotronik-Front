@@ -34,7 +34,7 @@ export class ShoppingCartComponent implements OnInit {
     });
   }
   remove(event: any){}
-  confirm(){
+  confirm(): any{
     alert(this.showProductForm.value.quantity)
     let category={
       quantity:this.showProductForm.value.quantity
