@@ -10,6 +10,7 @@ import { JwtService } from 'src/app/core/services/jwt.service';
 })
 export class NavbarUnregisteredComponent implements OnInit {
  isAuthenticated:boolean=false;
+ isEmployed:boolean=false;
   constructor(
     private authenticationService:AuthenticationService,
     private jwtService:JwtService,
@@ -18,6 +19,9 @@ export class NavbarUnregisteredComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthenticated=this.authenticationService.isAuthenticated();
+    if(this.isAuthenticated){
+      this.isEmployed=this.authenticationService.isEmployed();
+    }
   }
 logOut(){
   this.jwtService.destroyUserDetails();

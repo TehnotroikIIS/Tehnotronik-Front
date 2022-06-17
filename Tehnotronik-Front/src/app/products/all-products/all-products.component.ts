@@ -90,12 +90,14 @@ export class AllProductsComponent implements OnInit {
     })
   }
 
-  getProductsByCategory(category: any) {
+  async getProductsByCategory(category: any) {
     this.productService.getProductsByCategory(category.id).subscribe(data => {
       this.filterProducts1 = data
     }, error => {
       alert('Greska')
     })
+    await this.delay(500);
+    this.getSales();
   }
 
   async avabilityFilter() {
