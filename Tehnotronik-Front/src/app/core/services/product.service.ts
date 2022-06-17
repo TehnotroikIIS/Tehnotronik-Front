@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { NewReview } from '../models/new-review.model';
 import { Product } from '../models/product.model';
+import { Sale } from '../models/sale.model';
 import { JwtService } from './jwt.service';
 
 @Injectable({
@@ -74,6 +75,11 @@ export class ProductService {
     });
   }
 
+  //sales
+
+ addSale(sale: Sale): Observable<any> {
+    return this.http.post(`${environment.api_url}create-sale`, sale, { headers: this.headers, responseType: 'json' });
+  }
 
 
 

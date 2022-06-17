@@ -36,7 +36,6 @@ export class AuthenticationService {
     return true;
   }
   isEmployed(): boolean {
-    alert(this.jwtService.getUserDetails().role)
     if (this.jwtService.getUserDetails().role==1 || this.jwtService.getUserDetails().role==2) {
       return true;
     }

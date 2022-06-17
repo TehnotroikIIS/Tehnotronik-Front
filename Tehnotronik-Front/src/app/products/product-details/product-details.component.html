@@ -11,7 +11,7 @@
             <div class="left">
                 <div class="buttons" *ngIf="isEmployed">
                     <button class="edit-button"><mat-icon>edit</mat-icon>Izmeni</button>
-                    <button class="edit-button"><mat-icon> show_chart</mat-icon>Dodaj akciju</button>
+                    <button class="edit-button" (click)="openAddActionDialog($event)"><mat-icon> show_chart</mat-icon>Dodaj akciju</button>
                     <button class="edit-button"><mat-icon> delete</mat-icon>Izbriši</button>
                 </div>
                 <div class="title">{{selectedProduct.name}}</div>
@@ -74,10 +74,9 @@
     </div>
 </div>
 
-
+<!--Modalni dijalozii -->
 
 <ng-template #addReview let-mydata class="dialog">
-
     <div mat-dialog-content class="dialog-content">
         <form [formGroup]="addReviewForm" class="dialog-form">
             <div class="row1">
@@ -96,6 +95,39 @@
     </div>
     <div mat-dialog-actions class="dialog-actions">
         <button mat-raised-button color="primary" class="yes-button" (click)="add()">Dodaj</button>
+        <button mat-raised-button mat-dialog-close raised class="cancel-button"> Zatvori</button>
+    </div>
+</ng-template>
+
+<ng-template #addAction let-mydata class="dialog">
+    <div mat-dialog-content class="dialog-content">
+        <form [formGroup]="addActionForm" class="dialog-form">
+            <div class="row1">
+                <div>Datum početka akcije</div>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="startTime" [matDatepicker]="picker"  [(ngModel)]="startTime">
+                    <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="row1">
+                <div>Datum isteka akcije</div>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="endTime" [matDatepicker]="picker1" [(ngModel)]="endTime">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+            </div>
+            <div class="row1">
+                <div>Popust u procentima</div>
+                <mat-form-field appearance="outline">
+                    <input type="number" min="1" max="100" formControlName="discount" matInput>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="dialog-actions">
+        <button mat-raised-button color="primary" class="yes-button" (click)="addSale()" >Dodaj</button>
         <button mat-raised-button mat-dialog-close raised class="cancel-button"> Zatvori</button>
     </div>
 </ng-template>
