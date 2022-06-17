@@ -9,30 +9,31 @@
                 <div class="title">{{selectedProduct.name}}</div>
                 <div class="row">
                     <div class="left bold">Proizvođač</div>
-                    <div  class="right">{{selectedProduct.manufacturer}}</div>
+                    <div class="right">{{selectedProduct.manufacturer}}</div>
                 </div>
-              
-                
+
+
                 <div class="row">
                     <div class="left bold">Cena</div>
-                    <div  class="right">{{selectedProduct.price}}</div>
+                    <div class="right">{{selectedProduct.price}}</div>
                 </div>
                 <div class="row">
                     <div class="left bold">Stanje</div>
                     <mat-icon class="available" *ngIf="selectedProduct.isAvailable">lens</mat-icon>
-                    <mat-icon class="not-available"  *ngIf="!selectedProduct.isAvailable">lens</mat-icon>
+                    <mat-icon class="not-available" *ngIf="!selectedProduct.isAvailable">lens</mat-icon>
                 </div>
                 <div class="row">
                     <div class="left bold">Opis</div>
-                    <div  class="right">{{selectedProduct.description}}</div>
+                    <div class="right">{{selectedProduct.description}}</div>
                 </div>
             </div>
             <div class="right">
-                <div class="stars" >
+                <div class="stars">
                     <mat-icon *ngFor="let number of rates">star</mat-icon>
                 </div>
                 <div class="image">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtSnY2xRuruZ2p4GSQonTUQzaOF7hkFJAVlg&usqp=CAU">
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtSnY2xRuruZ2p4GSQonTUQzaOF7hkFJAVlg&usqp=CAU">
                 </div>
             </div>
         </div>
@@ -46,17 +47,17 @@
         </div>
         <div class="comments">
             <div class="bold">Recenzije:</div>
+            <button class="review-button" (click)="opetAddReviewDialog( $event)">Dodaj recenziju</button>
             <br>
             <div class="comment">
                 <div class="comment-row">
                     <div class="bold">Sara Savanovic</div>
-                    <div class="stars" >
+                    <div class="stars">
                         <mat-icon *ngFor="let number of rates">star</mat-icon>
                     </div>
                 </div>
                 <div class="comment-row">
-                    <div>Sarwerwerw sefdrf  fdfd  dfdf  dfdfd dsdf sdfsdfs</div>
-                   
+                    <div>Sarwerwerw sefdrf fdfd dfdf dfdfd dsdf sdfsdfs</div>
                 </div>
 
             </div>
@@ -64,3 +65,29 @@
         </div>
     </div>
 </div>
+
+
+
+<ng-template #addReview let-mydata class="dialog">
+
+    <div mat-dialog-content class="dialog-content">
+        <form [formGroup]="addReviewForm" class="dialog-form">
+            <div class="row1">
+                <div>Komentar</div>
+                <mat-form-field appearance="outline">
+                    <textarea formControlName="comment" matInput></textarea>
+                </mat-form-field>
+            </div>
+            <div class="row1">
+                <div>Ocjena</div>
+                <mat-form-field appearance="outline">
+                    <input type="number" min="1" max="5" formControlName="rate" matInput>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="dialog-actions">
+        <button mat-raised-button color="primary" class="yes-button" (click)="add()">Dodaj</button>
+        <button mat-raised-button mat-dialog-close raised class="cancel-button"> Zatvori</button>
+    </div>
+</ng-template>

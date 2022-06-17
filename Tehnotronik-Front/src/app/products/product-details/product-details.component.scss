@@ -144,3 +144,33 @@ img {
     flex-direction: row;
     gap: 10px;
 }
+
+.review-button{
+    @extend %primary-button;
+    padding:10px 15px;
+    margin:5px 0 15px 0; 
+}
+
+.review-button:hover{
+    @extend %primary-button-hover;
+    padding:10px 15px;
+    margin:5px 0 15px 0; 
+}
+
+.mat-dialog-content{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.row1{
+    width:100%;
+}
+
+.dialog-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
