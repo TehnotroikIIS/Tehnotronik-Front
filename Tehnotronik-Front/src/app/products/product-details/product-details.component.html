@@ -12,10 +12,7 @@
                     <div  class="right">{{selectedProduct.manufacturer}}</div>
                 </div>
               
-                <div class="row">
-                    <div class="left">Opis</div>
-                    <div  class="right">{{selectedProduct.description}}</div>
-                </div>
+                
                 <div class="row">
                     <div class="left">Cena</div>
                     <div  class="right">{{selectedProduct.price}}</div>
@@ -25,10 +22,14 @@
                     <mat-icon class="available" *ngIf="selectedProduct.isAvailable">lens</mat-icon>
                     <mat-icon class="not-available"  *ngIf="!selectedProduct.isAvailable">lens</mat-icon>
                 </div>
+                <div class="row">
+                    <div class="left">Opis</div>
+                    <div  class="right">{{selectedProduct.description}}</div>
+                </div>
             </div>
             <div class="right">
                 <div class="stars" >
-                    <mat-icon *ngFor="let number of [0,1,2,3,4]">star</mat-icon>
+                    <mat-icon *ngFor="let number of rates">star</mat-icon>
                 </div>
                 <div class="image">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtSnY2xRuruZ2p4GSQonTUQzaOF7hkFJAVlg&usqp=CAU">

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductDetailsComponent implements OnInit {
 
+  rates:any[]=[]
   selectedProduct:any;
   constructor() { }
 
@@ -16,7 +17,10 @@ export class ProductDetailsComponent implements OnInit {
 
 getSelectedProduct(){
   this.selectedProduct = JSON.parse(localStorage.getItem('selectedProduct')|| '');
-  console.log(this.selectedProduct)
+  console.log(this.selectedProduct);
+  for (let i = 0; i < this.selectedProduct.rate; i++) {
+    this.rates.push(i)
+  }
 }
 
 }
