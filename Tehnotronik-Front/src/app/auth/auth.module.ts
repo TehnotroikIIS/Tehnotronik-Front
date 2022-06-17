@@ -16,13 +16,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
   declarations: [
     SignInComponent,
     SignUpComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

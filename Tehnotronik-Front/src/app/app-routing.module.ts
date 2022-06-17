@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 import { NoAuthGuard } from './auth/guards/no-auth.guard';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
@@ -54,6 +55,10 @@ const routes: Routes = [
   {
     path: 'user-profile',
     component: UserProfileComponent
+  },
+  {
+    path: 'change-password',
+    component: ChangePasswordComponent
   },
   {
     path: '**',
