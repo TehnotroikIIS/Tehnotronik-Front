@@ -8,5 +8,6 @@ export interface RegisterUser {
     city: string;
     country: string;
     phoneNumber: string;
-    dateOfBirth:Date
+    dateOfBirth:Date;
+    role:string
 }

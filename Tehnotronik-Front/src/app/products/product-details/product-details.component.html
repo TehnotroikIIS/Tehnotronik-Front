@@ -3,9 +3,17 @@
 
 <div class="container">
     <app-categories-sidebar></app-categories-sidebar>
+    
     <div class="content">
         <div class="main-info">
+           
+           
             <div class="left">
+                <div class="buttons" *ngIf="isEmployed">
+                    <button class="edit-button"><mat-icon>edit</mat-icon>Izmeni</button>
+                    <button class="edit-button"><mat-icon> show_chart</mat-icon>Dodaj akciju</button>
+                    <button class="edit-button"><mat-icon> delete</mat-icon>Izbriši</button>
+                </div>
                 <div class="title">{{selectedProduct.name}}</div>
                 <div class="row">
                     <div class="left bold">Proizvođač</div>

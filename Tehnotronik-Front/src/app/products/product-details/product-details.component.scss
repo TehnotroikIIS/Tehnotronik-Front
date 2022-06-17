@@ -120,6 +120,10 @@ img {
     color: base.$danger;
     margin-left: 20px
 }
+.buttons{
+    display: flex;
+    gap:10px;
+}
 
 .commnets {
     display: flex;
@@ -155,6 +159,21 @@ img {
     @extend %primary-button-hover;
     padding:10px 15px;
     margin:5px 0 15px 0; 
+}
+
+.edit-button{
+    @extend %primary-button;
+    padding:10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:5px;
+    background-color: base.$medium-grey-letters;
+}
+.edit-button:hover{
+    @extend %primary-button-hover;
+    padding:10px 15px;
+    background-color: base.$medium-grey-letters;
 }
 
 .mat-dialog-content{
