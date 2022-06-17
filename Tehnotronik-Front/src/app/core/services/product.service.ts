@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { EditProduct } from '../models/edit-product.model';
 import { NewReview } from '../models/new-review.model';
 import { Product } from '../models/product.model';
 import { Sale } from '../models/sale.model';
@@ -17,9 +18,20 @@ export class ProductService {
     private http: HttpClient,
     private jwtService: JwtService
   ) { }
+  
 
   createProduct(product: Product): Observable<any> {
     return this.http.post(`${environment.api_url}create-product`, product, { headers: this.headers, responseType: 'json' });
+  }
+  editProduct(product: EditProduct): Observable<any> {
+    return this.http.post(`${environment.api_url}update-product`, product, { headers: this.headers, responseType: 'json' });
+  }
+  deleteProduct(productId: string): Observable<any> {
+    return this.http.delete(`${environment.api_url}delete-product`, {
+      params: {
+        id: productId
+      }, headers: this.headers, responseType: 'json'
+    });
   }
 
   getAllproducts(): Observable<any> {
@@ -28,6 +40,13 @@ export class ProductService {
 
   getAvailableProducts(): Observable<any> {
     return this.http.get(`${environment.api_url}get-available-products`, { headers: this.headers, responseType: 'json' });
+  }
+  updateAvaiability(categoryId: string): Observable<any> {
+    return this.http.get(`${environment.api_url}get-by-category-id`, {
+      params: {
+        categoryId: categoryId
+      }, headers: this.headers, responseType: 'json'
+    });
   }
 
   getProductsByCategory(categoryId: string): Observable<any> {

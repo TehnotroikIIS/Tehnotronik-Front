@@ -1,0 +1,48 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+<div class="container">
+    <div class="right-content">
+        <div class="register-title">Dodavanje novog proizvoda</div>
+        <form [formGroup]="editForm" style="text-align: center;">
+            <div class="row">
+                <div class="label">Naziv:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="name" matInput>
+                   
+                </mat-form-field>
+            </div>
+         
+          
+            <div class="row">
+                <div class="label">Cena:</div>
+                <mat-form-field appearance="outline">
+                    <input type="number" min="0" formControlName="price" matInput>
+                    </mat-form-field>
+                </div>
+            <div class="row">
+                <div class="label">Proizvođač:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="manufacturer" matInput>
+                  </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Kratak opis:</div>
+                <mat-form-field appearance="outline">
+                    <textarea formControlName="description" matInput></textarea>
+                   </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Specifikacija:</div>
+                <mat-form-field appearance="outline">
+                    <textarea formControlName="technicalDescription" matInput></textarea>
+                  </mat-form-field>
+            </div>
+
+        </form>
+        <button class="primary-button" (click)="editProduct()">Sačuvaj</button>
+    </div>
+
+    
+</div>
+
+
