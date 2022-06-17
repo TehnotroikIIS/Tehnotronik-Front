@@ -95,6 +95,10 @@ export class ProductService {
   }
 
   //sales
+  getAllSales(): Observable<any> {
+    return this.http.get(`${environment.api_url}get-all-sales`, { headers: this.headers, responseType: 'json' });
+  }
+
 
  addSale(sale: Sale): Observable<any> {
     return this.http.post(`${environment.api_url}create-sale`, sale, { headers: this.headers, responseType: 'json' });

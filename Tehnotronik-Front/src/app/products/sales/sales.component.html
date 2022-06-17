@@ -1,0 +1,82 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+
+<div class="container">
+    <app-categories-sidebar (newItemEvent)="getProductsByCategory($event)"></app-categories-sidebar>
+    <div class="content">
+        <div class="filters">
+            <div class="left">
+                <mat-form-field appearance="outline">
+                    <mat-label>Sortiranje</mat-label>
+                    <mat-select [(value)]="sortValue">
+                        <mat-option *ngFor="let sort of sortList" [value]="sort">{{sort}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+
+                    <mat-label>Dostupnost</mat-label>
+                    <mat-select [(value)]="availableValue">
+                        <mat-option *ngFor="let available of availableList" [value]="available">{{available}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Cena</mat-label>
+                    <mat-select [(value)]="priceValue" >
+                        <mat-option *ngFor="let price of priceList" [value]="price">{{price}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button class="filter-button" (click)="filter()"><mat-icon>hourglass_empty</mat-icon></button>
+                <button class="restore-button" (click)="resetFilters()"><mat-icon>close</mat-icon></button>
+            </div>
+            <div class="right">
+                <form [formGroup]="searchForm" class="search">
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Search" formControlName="name">
+                        <mat-icon matSuffix (click)="sarchByName()">search</mat-icon>
+                    </mat-form-field>
+                </form>
+            </div>
+
+        </div>
+        <div class="products">
+            <mat-card class="rest-card" *ngFor="let item of actionProducts" (click)="goToProductDetails(item)">
+                <img mat-card-image  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9oj262QwzNs3bfHzwet9eOiEfyDNUp3XL_w&usqp=CAU" />
+                    
+                <mat-card-content class="card-content">  
+                    <div class="name-div">{{item.name | uppercase}}</div>
+                    <div class="row">
+                        <div class="price">{{item.price}} din</div>
+                        <div class="action">{{item.newPrice}} din</div>
+                        <div class="icons">
+                            <mat-icon class="available" *ngIf="item.isAvailable">lens</mat-icon>
+                            <mat-icon class="not-available"  *ngIf="!item.isAvailable">lens</mat-icon>
+                        </div>
+                    </div>
+                    <div class="cart">
+                        <button *ngIf="isAuthenticated" class="primary-button" (click)="addToCart($event)">Dodaj u korpu</button>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+          
+        </div>
+    </div>
+</div>
+
+<ng-template #showProduct let-mydata class="dialog">
+    
+    <div mat-dialog-content class="dialog-content">
+        <div class="title">{{selectedProduct.name}}</div>
+        <form [formGroup]="showProductForm" class="dialog-form">
+            <div class="row1">
+                <mat-label>Komada:</mat-label>
+                <mat-form-field appearance="outline">
+                    <input formControlName="quantity" matInput>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-raised-button color="primary" class="yes-button"  mat-dialog-close (click)="add()">Dodaj u korpu</button>
+      <button mat-raised-button mat-dialog-close raised class="cancel-button"> Zatvori</button>
+    </div>
+  </ng-template>
