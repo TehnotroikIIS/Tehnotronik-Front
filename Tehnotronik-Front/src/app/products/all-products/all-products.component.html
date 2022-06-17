@@ -2,7 +2,7 @@
 
 
 <div class="container">
-    <app-categories-sidebar></app-categories-sidebar>
+    <app-categories-sidebar (newItemEvent)="getProductsByCategory($event)"></app-categories-sidebar>
     <div class="content">
         <div class="filters">
             <div class="left">

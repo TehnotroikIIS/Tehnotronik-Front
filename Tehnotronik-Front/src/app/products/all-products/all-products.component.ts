@@ -45,6 +45,7 @@ export class AllProductsComponent implements OnInit {
   noExperienceList: any[] = []
 
   getAllProducts(){
+    
     this.productService.getAllproducts().subscribe(data=>{
       this.filterProducts=data;
       console.log(this.allProducts)
@@ -52,9 +53,16 @@ export class AllProductsComponent implements OnInit {
       alert('Greska!')
     })
   }
+  getProductsByCategory(category: any) {
+    this.productService.getProductsByCategory(category.id).subscribe(data=>{
+      this.filterProducts=data
+    },error=>{
+      alert('Greska')
+    })
+  }
+
 
   filter(){
-    
     if(this.availableValue=='Dostupni'){
      this.productService.getAvailableProducts().subscribe(data=>{
         this.filterProducts=data;
@@ -122,7 +130,7 @@ export class AllProductsComponent implements OnInit {
     let name=this.searchForm.value.name;
     if(name!=''){
       this.productService.searchProduct(name).subscribe((data: any) => {
-        this.allProducts = data;
+        this.filterProducts = data;
       },
         error => {
           console.log(error.error.message);
@@ -149,6 +157,8 @@ export class AllProductsComponent implements OnInit {
   goToProductDetails(product:any){
 
   }
+
+  
 
 
 }
