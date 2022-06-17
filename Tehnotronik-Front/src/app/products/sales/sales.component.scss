@@ -120,6 +120,26 @@ cursor: pointer;
     font-weight: 600;
     color:base.$danger;
 }
+.editqr:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+      0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .editqr {
+    padding: 8px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: base.$danger;
+    color: white;
+    margin: auto;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+  }
 .icons{
   display: flex;
   gap:5px;

@@ -62,7 +62,7 @@ export class SalesComponent implements OnInit {
   availableList: string[] = ['Svi', 'Dostupni'];
   priceList: string[] = ['<500', '500-3000', '3000-10000', '>10000']
   noExperienceList: any[] = []
-
+nowDate:Date=new Date();
 getSales(){
   this.productService.getAllSales().subscribe(data=>{
     this.sales=data;
@@ -77,10 +77,11 @@ getSales(){
 
     this.filterProducts1.forEach(element => {
       this.sales.forEach(element1=> {
-        if(element.id==element1.productId){
+        if(element.id==element1.productId && this.nowDate>new Date(element1.startTime) && this.nowDate<new Date(element1.endTime)){
           let newPrice=element.price*(1-element1.discount/100);
           newPrice= Math.round((newPrice + Number.EPSILON) * 100) / 100
           element.newPrice=newPrice;
+          element.discount=element1.discount;
           this.actionProducts.push(element);
         }
       });
