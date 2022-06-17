@@ -51,8 +51,8 @@
                             <mat-icon class="not-available"  *ngIf="!item.isAvailable">lens</mat-icon>
                         </div>
                     </div>
-                    <div>
-                        <button class="primary-button" (click)="addToCart($event)">Dodaj u korpu</button>
+                    <div class="cart">
+                        <button *ngIf="isAuthenticated" class="primary-button" (click)="addToCart($event)">Dodaj u korpu</button>
                     </div>
                 </mat-card-content>
             </mat-card>

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
@@ -21,12 +22,14 @@ export class AllProductsComponent implements OnInit {
   filterProducts1:any[]=[];
   selectedProduct: any;
   showProductForm: FormGroup;
+  isAuthenticated:boolean=false;
   @ViewChild('showProduct') addDialog!: any;
   constructor(
     private productService:ProductService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private router:Router
+    private router:Router,
+    private authenticationService:AuthenticationService
   ) {
     this.searchForm = this.formBuilder.group({
       name: [''],
@@ -39,6 +42,7 @@ export class AllProductsComponent implements OnInit {
   ngOnInit(): void {
     this.breakpoint = window.innerWidth <= 768 ? 1 : 3;
     this.gutterSize = window.innerWidth <= 768 ? '20px' : '40px';
+    this.isAuthenticated = this.authenticationService.isAuthenticated();
     this.getAllProducts();
     this.getSelectedProduct();
   }

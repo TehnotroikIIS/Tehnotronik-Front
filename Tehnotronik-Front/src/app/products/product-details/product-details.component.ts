@@ -61,7 +61,10 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getSelectedProduct();
     this.isAuthenticated = this.authenticationService.isAuthenticated();
-    this.isEmployed=this.authenticationService.isEmployed();
+    if(this.isAuthenticated){
+      this.isEmployed=this.authenticationService.isEmployed();
+    }
+   
 
   }
   get review(): { [key: string]: AbstractControl; } { return this.addReviewForm.controls; }
