@@ -10,7 +10,7 @@
            
             <div class="left">
                 <div class="buttons" *ngIf="isEmployed">
-                    <button class="edit-button"><mat-icon>edit</mat-icon>Izmeni</button>
+                    <button class="edit-button"  [routerLink]="['/edit-product']"><mat-icon>edit</mat-icon>Izmeni</button>
                     <button class="edit-button" (click)="openAddActionDialog($event)"><mat-icon> show_chart</mat-icon>Dodaj akciju</button>
                     <button class="edit-button"><mat-icon> delete</mat-icon>Izbriši</button>
                 </div>

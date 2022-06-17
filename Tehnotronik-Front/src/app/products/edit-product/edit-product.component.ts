@@ -6,6 +6,7 @@ import { CategoryService } from 'src/app/core/services/category.service';
 import { JwtService } from 'src/app/core/services/jwt.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from 'src/app/core/services/product.service';
+import { EditProduct } from 'src/app/core/models/edit-product.model';
 
 @Component({
   selector: 'app-edit-product',
@@ -17,16 +18,13 @@ export class EditProductComponent implements OnInit {
   categories: any[] = []
   selectedCategory:any;
   selectedProduct:any;
-  editedProduct: Product = {
+  editedProduct: EditProduct = {
     name: '',
     price: 0,
     description: '',
     manufacturer: '',
     technicalDescription: '',
-    categoryId: '',
-    rate: 0,
-    numberOfReviews: 0,
-    isAvailable: true
+    id: ''
   }
   constructor(
     private formBuilder: FormBuilder,
@@ -66,15 +64,18 @@ export class EditProductComponent implements OnInit {
  }
 
   editProduct() {
+    this.editedProduct.id=this.selectedProduct.id;
     this.editedProduct.name=this.editForm.value.name;
     this.editedProduct.description=this.editForm.value.description;
     this.editedProduct.manufacturer=this.editForm.value.manufacturer;
     this.editedProduct.price=this.editForm.value.price;
     this.editedProduct.technicalDescription=this.editForm.value.technicalDescription;
     console.log(this.editedProduct)
-    this.productService.createProduct(this.editedProduct).subscribe(data=>{
-      alert('Uspješno ste dodali novi proizvod');
-      this.router.navigate(['/employed-menu'])
+    this.productService.editProduct(this.editedProduct).subscribe(data=>{
+      alert('Uspješno ste izmenili proizvod');
+      this.router.navigate(['/all-products']).then(() => {
+        window.location.reload();
+      });
     },error=>{
       alert('Greska!')
     })

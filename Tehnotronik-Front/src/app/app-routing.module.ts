@@ -10,6 +10,7 @@ import { ContactComponent } from './home/contact/contact.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { AllProductsComponent } from './products/all-products/all-products.component';
+import { EditProductComponent } from './products/edit-product/edit-product.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { EmployedMenuComponent } from './shared/employed-menu/employed-menu.component';
 
@@ -45,6 +46,11 @@ const routes: Routes = [
   {
     path: 'add-product',
     component: AddProductComponent,
+    canActivate: [NoAuthGuard],
+  },
+  {
+    path: 'edit-product',
+    component: EditProductComponent,
     canActivate: [NoAuthGuard],
   },
   {
