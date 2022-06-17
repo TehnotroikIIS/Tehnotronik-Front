@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, Form, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { NewReview } from 'src/app/core/models/new-review.model';
 import { Sale } from 'src/app/core/models/sale.model';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
@@ -43,7 +44,8 @@ export class ProductDetailsComponent implements OnInit {
     public dialog: MatDialog,
     private jwtService: JwtService,
     private productService: ProductService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router:Router
   ) {
     this.addReviewForm = this.formBuilder.group({
       comment: [''],
@@ -129,6 +131,15 @@ export class ProductDetailsComponent implements OnInit {
     },error=>{
         alert('Greska!')
       })
+  }
+
+  deleteProduct(){
+    this.productService.deleteProduct(this.selectedProduct.id).subscribe(data=>{
+      alert('Proizvod je uspešno obrisan');
+      this.router.navigate(['/all-products'])
+    },error=>{
+      alert('Greska!')
+    })
   }
 
  

@@ -26,6 +26,13 @@ export class ProductService {
   editProduct(product: EditProduct): Observable<any> {
     return this.http.post(`${environment.api_url}update-product`, product, { headers: this.headers, responseType: 'json' });
   }
+  deleteProduct(productId: string): Observable<any> {
+    return this.http.delete(`${environment.api_url}delete-product`, {
+      params: {
+        id: productId
+      }, headers: this.headers, responseType: 'json'
+    });
+  }
 
   getAllproducts(): Observable<any> {
     return this.http.get(`${environment.api_url}get-all-products`, { headers: this.headers, responseType: 'json' });
@@ -33,6 +40,13 @@ export class ProductService {
 
   getAvailableProducts(): Observable<any> {
     return this.http.get(`${environment.api_url}get-available-products`, { headers: this.headers, responseType: 'json' });
+  }
+  updateAvaiability(categoryId: string): Observable<any> {
+    return this.http.get(`${environment.api_url}get-by-category-id`, {
+      params: {
+        categoryId: categoryId
+      }, headers: this.headers, responseType: 'json'
+    });
   }
 
   getProductsByCategory(categoryId: string): Observable<any> {
