@@ -1,0 +1,61 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+<div class="container">
+    <div class="right-content">
+        <div class="register-title">Podaci korisnika</div>
+        <form [formGroup]="profileForm" style="text-align: center;">
+            <div class="row">
+                <div class="label">Ime:</div>
+                <mat-form-field appearance="outline" >
+                    <input matInput formControlName="name">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Prezime:</div>
+                <mat-form-field appearance="outline" >
+                    <input matInput formControlName="lastname">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">E-mail:</div>
+                <mat-form-field appearance="outline">
+                    <input matInput  formControlName="email">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Broj telefona:</div>
+                <mat-form-field appearance="outline" >
+                    <input matInput formControlName="phoneNumber">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Adresa:</div>
+                <mat-form-field appearance="outline">
+                    <input matInput  formControlName="address">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Grad:</div>
+                <mat-form-field appearance="outline">
+                    <input matInput  formControlName="city">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Država:</div>
+                <mat-form-field appearance="outline"  >
+                    <input matInput formControlName="state">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="label">Način plaćanja:</div>
+                <mat-form-field class="cat" appearance="outline">
+                    <mat-select [(value)]="selectedCategory">
+                        <div>Plaćanje pouzećem</div>
+                        <div>Plaćanje karticom</div>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </form>
+        <button class="primary-button" (click)="confirm()">Potvrdite kupovinu</button>
+    </div>
+</div>

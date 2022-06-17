@@ -11,6 +11,7 @@ import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsModule } from './products/products.module';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { ShoppingModule } from './shopping/shopping.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     HomeModule,
     HttpClientModule,
     ProductsModule,
+    ShoppingModule,
     MatGridListModule,
   ],
   providers: [],

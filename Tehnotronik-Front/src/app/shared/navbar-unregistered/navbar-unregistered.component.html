@@ -23,7 +23,7 @@
         <button class="button-icon" mat-button >
             <mat-icon>favorite</mat-icon>Omiljeno
         </button>
-        <button class="button-icon" mat-button >
+        <button [routerLink]="['/shopping-cart']" class="button-icon" mat-button >
             <mat-icon>shopping_cart</mat-icon>Korpa
         </button>
         <button [routerLink]="['/user-profile']" *ngIf="isAuthenticated" class="button-icon" mat-button >
