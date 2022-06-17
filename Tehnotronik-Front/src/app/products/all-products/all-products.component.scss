@@ -167,3 +167,24 @@ cursor: pointer;
   @extend %primary-button-hover;
   background-color: base.$danger;
 }
+.primary-button{
+  @extend %primary-button;
+  width: 150px;
+}
+.primary-button:hover{
+  @extend %primary-button-hover;
+}
+.dialog-form .mat-form-field{
+  width: 100%;
+}
+.dialog-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px
+}
+.title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
