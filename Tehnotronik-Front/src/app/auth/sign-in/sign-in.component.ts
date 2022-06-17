@@ -42,7 +42,7 @@ export class SignInComponent implements OnInit {
        }
        else{
          this.jwtService.saveUserDetails(data);
-         this.router.navigate(['']);  
+         this.router.navigate(['all-products']);  
          /*if(data.role==0){
            this.router.navigate([''])
          }else{

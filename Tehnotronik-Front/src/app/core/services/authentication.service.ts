@@ -29,5 +29,11 @@ export class AuthenticationService {
   register(user: RegisterUser): Observable<any> {
     return this.http.post(`${environment.api_url}register`,user, {headers:this.headers, responseType: 'json' });
   }
+  isAuthenticated(): boolean {
+    if (!this.jwtService.getUserDetails()) {
+      return false;
+    }
+    return true;
+  }
 
 }
