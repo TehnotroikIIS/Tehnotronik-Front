@@ -35,5 +35,11 @@ export class AuthenticationService {
     }
     return true;
   }
+  isEmployed(): boolean {
+    if (this.jwtService.getUserDetails().role==1 || this.jwtService.getUserDetails().role==2) {
+      return true;
+    }
+    return false;
+  }
 
 }

@@ -21,7 +21,8 @@ export class SignUpComponent implements OnInit {
     address:'',
     city:'',
     country:'',
-    phoneNumber:''
+    phoneNumber:'',
+    role:''
   }
 
   constructor(
@@ -68,6 +69,7 @@ export class SignUpComponent implements OnInit {
     this.newUser.country = this.registerForm.value.country;
     this.newUser.dateOfBirth = this.registerForm.value.date;
     this.newUser.phoneNumber = this.registerForm.value.phoneNumber;
+    this.newUser.role='Customer';
     console.log(this.newUser);
     this.authenticationService.register(this.newUser).subscribe((res: any) => {
       
