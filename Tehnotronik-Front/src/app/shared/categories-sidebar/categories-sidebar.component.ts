@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories-sidebar',
@@ -15,7 +16,8 @@ export class CategoriesSidebarComponent implements OnInit {
   first:any;
   @Output() newItemEvent = new EventEmitter<string>();
   constructor(
-    private categoryService:CategoryService
+    private categoryService:CategoryService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -23,7 +25,9 @@ export class CategoriesSidebarComponent implements OnInit {
   }
 
   sendSelectedcategory(selectedCategory:any) {
+    this.router.navigate(['/all-products'])
     this.newItemEvent.emit(selectedCategory);
+  
   }
 
 getAllCategories(){

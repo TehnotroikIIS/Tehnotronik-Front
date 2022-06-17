@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddProductComponent } from './add-product/add-product.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 
 
@@ -25,6 +26,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   declarations: [
     AllProductsComponent,
     AddProductComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     CommonModule,

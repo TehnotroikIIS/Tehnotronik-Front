@@ -7,6 +7,7 @@ import { ContactComponent } from './home/contact/contact.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { AllProductsComponent } from './products/all-products/all-products.component';
+import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { EmployedMenuComponent } from './shared/employed-menu/employed-menu.component';
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'all-products',
     component: AllProductsComponent
+  },
+  {
+    path: 'product-details',
+    component: ProductDetailsComponent
   },
   {
     path: 'add-product',

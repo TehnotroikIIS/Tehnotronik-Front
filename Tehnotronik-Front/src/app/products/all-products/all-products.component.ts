@@ -45,7 +45,6 @@ export class AllProductsComponent implements OnInit {
   noExperienceList: any[] = []
 
   getAllProducts(){
-    
     this.productService.getAllproducts().subscribe(data=>{
       this.filterProducts=data;
       console.log(this.allProducts)
@@ -53,7 +52,10 @@ export class AllProductsComponent implements OnInit {
       alert('Greska!')
     })
   }
+
   getProductsByCategory(category: any) {
+    if(category==undefined){
+    }
     this.productService.getProductsByCategory(category.id).subscribe(data=>{
       this.filterProducts=data
     },error=>{
