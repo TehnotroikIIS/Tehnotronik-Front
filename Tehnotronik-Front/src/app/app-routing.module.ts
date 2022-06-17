@@ -52,12 +52,12 @@ const routes: Routes = [
     canActivate: [NoAuthGuard],
   },
   {
-    path: '**',
-    component: HomePageComponent,
-  },
-  {
     path: 'user-profile',
     component: UserProfileComponent
+  },
+  {
+    path: '**',
+    component: HomePageComponent,
   },
 ];
 
