@@ -13,6 +13,8 @@ import { AllProductsComponent } from './products/all-products/all-products.compo
 import { EditProductComponent } from './products/edit-product/edit-product.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { EmployedMenuComponent } from './shared/employed-menu/employed-menu.component';
+import { ShoppingCartComponent } from './shopping/shopping-cart/shopping-cart.component';
+import { UserDetailsComponent } from './shopping/user-details/user-details.component';
 
 const routes: Routes = [
   {
@@ -65,6 +67,14 @@ const routes: Routes = [
   {
     path: 'change-password',
     component: ChangePasswordComponent
+  },
+  {
+    path: 'shopping-cart',
+    component: ShoppingCartComponent
+  },
+  {
+    path: 'user-details',
+    component: UserDetailsComponent
   },
   {
     path: '**',

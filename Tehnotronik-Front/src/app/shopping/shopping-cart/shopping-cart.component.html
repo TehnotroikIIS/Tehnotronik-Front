@@ -1,0 +1,40 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+<div class="container">
+    <div class="right-content">
+        <div class="register-title">Sadržaj korpe</div>
+        <div class="products">
+            <mat-card class="rest-card">                    
+                <mat-card-content class="card-content">  
+                    <div class="name-div"></div>
+                    <div class="price"> din</div>
+                    <div class="price"> kom</div>
+                    <div class="center">
+                        <button class="filter-button" (click)="editQuantity($event)"><mat-icon>edit</mat-icon></button>
+                        <div class="space"></div>
+                        <button class="filter-button" (click)="remove($event)"><mat-icon>delete</mat-icon></button>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <button class="primary-button" (click)="next()">Nastavite sa kupovinom</button>
+    </div>
+</div>
+
+<ng-template #showProduct let-mydata class="dialog">
+    <div mat-dialog-content class="dialog-content">
+        <div class="title">{{selectedProduct.name}}</div>
+        <form [formGroup]="showProductForm" class="dialog-form">
+            <div class="row1">
+                <mat-label>Komada:</mat-label>
+                <mat-form-field appearance="outline">
+                    <input formControlName="quantity" matInput>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-raised-button color="primary" class="yes-button"  mat-dialog-close (click)="confirm()">Potvrdi izmenu</button>
+      <button mat-raised-button mat-dialog-close raised class="cancel-button"> Zatvori</button>
+    </div>
+</ng-template>
