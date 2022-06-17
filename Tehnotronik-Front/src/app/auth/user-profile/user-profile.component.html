@@ -3,59 +3,62 @@
 <div class="container">
     <div class="right-content">
         <div class="register-title">Profil korisnika</div>
-        <!--<form [formGroup]="addForm" style="text-align: center;">-->
+        <form [formGroup]="profileForm" style="text-align: center;">
             <div class="row">
                 <div class="label">Ime:</div>
-                <mat-form-field appearance="outline">
-                    {{user.name}}
+                <mat-form-field appearance="outline" >
+                    <input formControlName="name" matInput formControlName="name">
                 </mat-form-field>
             </div>
             <div class="row">
                 <div class="label">Prezime:</div>
-                <mat-form-field appearance="outline">
-                    {{user.lastname}}
+                <mat-form-field appearance="outline" >
+                    <input formControlName="name" matInput formControlName="lastname">
                 </mat-form-field>
             </div>
             <div class="row">
                 <div class="label">Korisničko ime:</div>
                 <mat-form-field appearance="outline">
-                    {{user.username}}
+                    <input formControlName="name" matInput  formControlName="username">
                 </mat-form-field>
             </div>
             <div class="row">
                 <div class="label">E-mail:</div>
                 <mat-form-field appearance="outline">
-                    {{user.email}}
+                    <input formControlName="name" matInput  formControlName="email">
                 </mat-form-field>
             </div>
             <div class="row">
                 <div class="label">Broj telefona:</div>
-                <mat-form-field appearance="outline">
-                    {{user.phoneNumber}}
+                <mat-form-field appearance="outline" >
+                    <input formControlName="name" matInput formControlName="phoneNumber">
                 </mat-form-field>
             </div>
             <div class="row">
                 <div class="label">Adresa:</div>
                 <mat-form-field appearance="outline">
-                    {{user.address}}
+                    <input formControlName="name" matInput  formControlName="address">
                 </mat-form-field>
             </div>
             <div class="row">
                 <div class="label">Grad:</div>
                 <mat-form-field appearance="outline">
-                    {{user.city}}
+                    <input formControlName="name" matInput  formControlName="city">
                 </mat-form-field>
             </div>
             <div class="row">
                 <div class="label">Država:</div>
-                <mat-form-field appearance="outline">
-                    {{user.state}}
+                <mat-form-field appearance="outline"  >
+                    <input formControlName="name" matInput formControlName="state">
                 </mat-form-field>
             </div>
 
-        <!--</form>-->
-        <button class="primary-button" (click)="changePassword()">Promeni lozinku</button>
-        <button class="primary-button" (click)="viewOrders()">Pregled porudžbina</button>
+        </form>
+        <div class="inline">
+            <button class="primary-button" (click)="viewOrders()">Pregled porudžbina</button>
+            <div class="space"></div>
+            <button class="primary-button" (click)="changePassword()">Promeni lozinku</button>
+        </div>
     </div>
 
     
