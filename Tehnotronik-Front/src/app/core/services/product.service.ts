@@ -66,6 +66,13 @@ export class ProductService {
   addReview(review: NewReview): Observable<any> {
     return this.http.post(`${environment.api_url}add-review`, review, { headers: this.headers, responseType: 'json' });
   }
+  getProducReviews(productId: string): Observable<any> {
+    return this.http.get(`${environment.api_url}get-reviews`, {
+      params: {
+        productId: productId
+      }, headers: this.headers, responseType: 'json'
+    });
+  }
 
 
 
