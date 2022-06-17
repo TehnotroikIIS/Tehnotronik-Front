@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class AllProductsComponent implements OnInit {
   constructor(
     private productService:ProductService,
     private formBuilder: FormBuilder,
+    private router:Router
   ) {
     this.searchForm = this.formBuilder.group({
       name: [''],
@@ -45,7 +47,6 @@ export class AllProductsComponent implements OnInit {
   noExperienceList: any[] = []
 
   getAllProducts(){
-    
     this.productService.getAllproducts().subscribe(data=>{
       this.filterProducts=data;
       console.log(this.allProducts)
@@ -53,6 +54,7 @@ export class AllProductsComponent implements OnInit {
       alert('Greska!')
     })
   }
+
   getProductsByCategory(category: any) {
     this.productService.getProductsByCategory(category.id).subscribe(data=>{
       this.filterProducts=data
@@ -155,7 +157,8 @@ export class AllProductsComponent implements OnInit {
   }
 
   goToProductDetails(product:any){
-
+    localStorage.setItem('selectedProduct', JSON.stringify(product));
+    this.router.navigate(['/product-details'])
   }
 
   

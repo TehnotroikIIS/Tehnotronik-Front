@@ -1,9 +1,9 @@
 <div class="sidebar">
     <div class="menu">
-        <button class="menu-button first"  routerLinkActive="active" (click)="sendSelectedcategory(first)">{{first?.name}}
+        <button class="menu-button first"  (click)="sendSelectedcategory(first)">{{first?.name}}
            </button>
-        <button  *ngFor="let category of categories" class="menu-button"  routerLinkActive="active" (click)="sendSelectedcategory(category)"> {{category.name}}
+        <button  *ngFor="let category of categories" class="menu-button"  (click)="sendSelectedcategory(category)"> {{category.name}}
            </button>
-        <button class="menu-button last"  routerLinkActive="active"  (click)="sendSelectedcategory(last)">{{last?.name}}</button>
+        <button class="menu-button last"   (click)="sendSelectedcategory(last)">{{last?.name}}</button>
     </div>
 </div>
