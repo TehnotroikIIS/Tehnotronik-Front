@@ -7,6 +7,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { UserProfileComponent } from '../auth/user-profile/user-profile.component';
 
 
 
@@ -14,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     HomePageComponent,
     AboutUsComponent,
-    ContactComponent
+    ContactComponent,
   ],
   imports: [
     CommonModule,
