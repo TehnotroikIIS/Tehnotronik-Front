@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
@@ -10,23 +11,25 @@ import { ProductService } from 'src/app/core/services/product.service';
   styleUrls: ['./all-products.component.scss']
 })
 export class AllProductsComponent implements OnInit {
-  allProducts:any[]=[];
-  searchForm:any;
+  allProducts: any[] = [];
+  searchForm: any;
   breakpoint: number = 1;
   gutterSize: string = '40px';
-  priceValue:any='';
-  availableValue:any='';
-  sortValue:any='';
-  filterProducts:any[]=[];
-  filterProducts1:any[]=[];
+  priceValue: any = '';
+  availableValue: any = '';
+  sortValue: any = '';
+  filterProducts: any[] = [];
+  filterProducts1: any[] = [];
   selectedProduct: any;
   showProductForm: FormGroup;
+  isAuthenticated: boolean = false;
   @ViewChild('showProduct') addDialog!: any;
   constructor(
-    private productService:ProductService,
+    private productService: ProductService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private router:Router
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) {
     this.searchForm = this.formBuilder.group({
       name: [''],
@@ -34,11 +37,12 @@ export class AllProductsComponent implements OnInit {
     this.showProductForm = this.formBuilder.group({
       quantity: [''],
     });
-   }
+  }
 
   ngOnInit(): void {
     this.breakpoint = window.innerWidth <= 768 ? 1 : 3;
     this.gutterSize = window.innerWidth <= 768 ? '20px' : '40px';
+    this.isAuthenticated = this.authenticationService.isAuthenticated();
     this.getAllProducts();
     this.getSelectedProduct();
   }
@@ -46,126 +50,155 @@ export class AllProductsComponent implements OnInit {
     return this.searchForm.controls;
   }
 
- 
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
   sort = new FormControl();
   industry = new FormControl();
   age = new FormControl();
-  sortList: string[] = ['Od najniže cene','Od najviše cene'];
-  availableList: string[] = ['Svi','Dostupni'];
+  sortList: string[] = ['Od najniže cene', 'Od najviše cene'];
+  availableList: string[] = ['Svi', 'Dostupni'];
   priceList: string[] = ['<500', '500-3000', '3000-10000', '>10000']
   noExperienceList: any[] = []
 
-  getAllProducts(){
-    this.productService.getAllproducts().subscribe(data=>{
-      this.filterProducts=data;
+  getAllProducts() {
+    this.productService.getAllproducts().subscribe(data => {
+      this.filterProducts1= data;
       console.log(this.allProducts)
-    },error=>{
+    }, error => {
       alert('Greska!')
     })
   }
 
   getProductsByCategory(category: any) {
-    this.productService.getProductsByCategory(category.id).subscribe(data=>{
-      this.filterProducts=data
-    },error=>{
+    this.productService.getProductsByCategory(category.id).subscribe(data => {
+      this.filterProducts = data
+    }, error => {
       alert('Greska')
     })
   }
 
-
-  filter(){
-    if(this.availableValue=='Dostupni'){
-     this.productService.getAvailableProducts().subscribe(data=>{
-        this.filterProducts=data;
-        console.log(this.filterProducts)
-      },error=>{
+  async avabilityFilter() {
+    if (this.availableValue == 'Dostupni') {
+      this.productService.getAvailableProducts().subscribe(data => {
+        this.filterProducts = data;
+        console.log(this.filterProducts);
+      
+      }, error => {
         alert('Greska')
       })
     }
-    if(this.priceValue != ''){
-      let scope=this.getPriceScope();
-      this.productService.getBetweenPrices(scope.min,scope.max).subscribe(data=>{
+    await this.delay(500);
+    this.priceFilter();
+  }
+
+  async priceFilter() {
+    if (this.priceValue != '') {
+      let scope = this.getPriceScope();
+      this.productService.getBetweenPrices(scope.min, scope.max).subscribe(data => {
         this.filterProducts1.splice(0, this.filterProducts1.length)
-        data.forEach((element: any,index:any) => {
-          if(this.filterProducts.indexOf(element) ==-1) {
-            this.filterProducts1.push(element);
-          }
+        data.forEach((element: any, index: any) => {
+         this.filterProducts.forEach((element1: any, index1: any) => {
+        
+           if (element1.name==element.name) {
+             this.filterProducts1.push(element);
+           }
+         });
         });
       })
-      this.filterProducts=this.filterProducts1
+     
+    }else{
+      this.filterProducts1=this.filterProducts;
     }
-    if(this.sortValue!=''){
-      let newProducts=[];
-      if(this.sortValue=='Od najniže cene'){
-         newProducts = this.filterProducts.sort(
+    await this.delay(500);
+    this.sortFilter();
+  }
+
+  sortFilter() {
+    if (this.sortValue != '') {
+      let newProducts = [];
+      if (this.sortValue == 'Od najniže cene') {
+        newProducts = this.filterProducts1.sort(
           (objA, objB) => objA.price - objB.price,
         );
+        this.filterProducts = newProducts;
       }
-      else{
-        newProducts = this.filterProducts.sort(
+      else {
+        newProducts = this.filterProducts1.sort(
           (objA, objB) => objB.price - objA.price,
         );
+        this.filterProducts1 = newProducts;
       }
-      this.filterProducts=newProducts;
-    }
-    
-  }
-  getPriceScope():any{
-    if(this.priceValue=='<500'){
-      return {min:0,max:500}
-    }
-    else if(this.priceValue=='500-3000'){
-      return {min:500,max:3000}
-    }
-    else if(this.priceValue=='3000-10000'){
-      return {min:3000,max:10000}
-    }
-    else{
-      return {min:10000,max:1000000}
+
     }
   }
 
-  resetFilters(){
-    this.productService.getAllproducts().subscribe(data=>{
-      this.filterProducts=data;
+
+  async filter() {
+    this.productService.getAllproducts().subscribe(data => {
+      this.filterProducts= data;
+      console.log(this.allProducts)
+    })
+    await this.delay(500);
+    this.avabilityFilter();
+
+  }
+  getPriceScope(): any {
+    if (this.priceValue == '<500') {
+      return { min: 0, max: 500 }
+    }
+    else if (this.priceValue == '500-3000') {
+      return { min: 500, max: 3000 }
+    }
+    else if (this.priceValue == '3000-10000') {
+      return { min: 3000, max: 10000 }
+    }
+    else {
+      return { min: 10000, max: 1000000 }
+    }
+  }
+
+  resetFilters() {
+    this.productService.getAllproducts().subscribe(data => {
+      this.filterProducts1 = data;
       console.log(this.filterProducts)
-    },error=>{
+    }, error => {
       alert('Greska!')
     })
-    this.sortValue='';
-    this.priceValue='';
-    this.availableValue='';
+    this.sortValue = '';
+    this.priceValue = '';
+    this.availableValue = '';
   }
 
   sarchByName() {
-    let name=this.searchForm.value.name;
-    if(name!=''){
+    let name = this.searchForm.value.name;
+    if (name != '') {
       this.productService.searchProduct(name).subscribe((data: any) => {
         this.filterProducts = data;
       },
         error => {
           console.log(error.error.message);
         });
-    }else{
+    } else {
       this.getAllProducts();
     }
-   
+
   }
 
   onResize(event: any) {
-    if(event.target.innerWidth<=786){
-      this.breakpoint=1;
+    if (event.target.innerWidth <= 786) {
+      this.breakpoint = 1;
     }
-    else if(event.target.innerWidth>786 && event.target.innerWidth<1200){
-      this.breakpoint=2;
+    else if (event.target.innerWidth > 786 && event.target.innerWidth < 1200) {
+      this.breakpoint = 2;
     }
-    else{
-      this.breakpoint=3;
+    else {
+      this.breakpoint = 3;
     }
     this.gutterSize = window.innerWidth <= 768 ? '20px' : '40px';
   }
 
-  goToProductDetails(product:any){
+  goToProductDetails(product: any) {
     localStorage.setItem('selectedProduct', JSON.stringify(product));
     this.router.navigate(['/product-details'])
   }
@@ -179,7 +212,7 @@ export class AllProductsComponent implements OnInit {
     }*/
   }
 
-  addToCart(event: any){
+  addToCart(event: any) {
     event?.stopPropagation();
     const myTempDialog = this.dialog.open(this.addDialog);
     myTempDialog.afterClosed().subscribe((res) => {
@@ -187,10 +220,10 @@ export class AllProductsComponent implements OnInit {
     });
   }
 
-  add():any{
+  add(): any {
     alert(this.showProductForm.value.quantity)
-    let category={
-      quantity:this.showProductForm.value.quantity
+    let category = {
+      quantity: this.showProductForm.value.quantity
     }
     /*this.categoryService.createCategory(category).subscribe(data=>{
       alert('Proizvod je dodat u korpu za kupovinu')

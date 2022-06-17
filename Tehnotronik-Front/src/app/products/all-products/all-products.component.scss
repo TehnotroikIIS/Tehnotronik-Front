@@ -68,6 +68,9 @@ cursor: pointer;
    border:3px solid base.$primary-color;
    border-radius: base.$border-radius;
    box-shadow: none;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
   }
   
   
@@ -118,6 +121,13 @@ cursor: pointer;
   color:base.$success
 }
   
+.cart{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:10px;
+  align-self: flex-end;
+}
 
 .dialog-title {
   display: flex;
