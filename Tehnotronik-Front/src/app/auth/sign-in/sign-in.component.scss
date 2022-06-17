@@ -74,3 +74,6 @@ form {
     @extend %primary-button;
     width: 150px;
 }
+.primary-button:hover{
+    @extend %primary-button-hover;
+}

@@ -1,0 +1,66 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+
+<div class="container">
+    <app-categories-sidebar></app-categories-sidebar>
+    <div class="content">
+        <div class="main-info">
+            <div class="left">
+                <div class="title">{{selectedProduct.name}}</div>
+                <div class="row">
+                    <div class="left bold">Proizvođač</div>
+                    <div  class="right">{{selectedProduct.manufacturer}}</div>
+                </div>
+              
+                
+                <div class="row">
+                    <div class="left bold">Cena</div>
+                    <div  class="right">{{selectedProduct.price}}</div>
+                </div>
+                <div class="row">
+                    <div class="left bold">Stanje</div>
+                    <mat-icon class="available" *ngIf="selectedProduct.isAvailable">lens</mat-icon>
+                    <mat-icon class="not-available"  *ngIf="!selectedProduct.isAvailable">lens</mat-icon>
+                </div>
+                <div class="row">
+                    <div class="left bold">Opis</div>
+                    <div  class="right">{{selectedProduct.description}}</div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="stars" >
+                    <mat-icon *ngFor="let number of rates">star</mat-icon>
+                </div>
+                <div class="image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtSnY2xRuruZ2p4GSQonTUQzaOF7hkFJAVlg&usqp=CAU">
+                </div>
+            </div>
+        </div>
+        <div class="specification">
+            <div class="left bold">
+                Specifikacija:
+            </div>
+            <div class="right">
+                {{selectedProduct.technicalDescription}}
+            </div>
+        </div>
+        <div class="comments">
+            <div class="bold">Recenzije:</div>
+            <br>
+            <div class="comment">
+                <div class="comment-row">
+                    <div class="bold">Sara Savanovic</div>
+                    <div class="stars" >
+                        <mat-icon *ngFor="let number of rates">star</mat-icon>
+                    </div>
+                </div>
+                <div class="comment-row">
+                    <div>Sarwerwerw sefdrf  fdfd  dfdf  dfdfd dsdf sdfsdfs</div>
+                   
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
