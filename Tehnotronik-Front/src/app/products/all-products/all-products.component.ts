@@ -12,72 +12,11 @@ export class AllProductsComponent implements OnInit {
   searchForm:any;
   breakpoint: number = 1;
   gutterSize: string = '40px';
-   products:any[]=[{
-    name:'Ferit za kablove',
-    price:256,
-    description:'desciriton',
-    manufacturer:'manufac',
-    techicalDescription:'technical',
-    categoryId:'id',
-    rate:8,
-    numberOfReviews:10,
-    isAvailable:1
-   },{
-    name:'Ferit za kablove',
-    price:256,
-    description:'desciriton',
-    manufacturer:'manufac',
-    techicalDescription:'technical',
-    categoryId:'id',
-    rate:8,
-    numberOfReviews:10,
-    isAvailable:0
-   },{
-    name:'Ferit za kablove',
-    price:256,
-    description:'desciriton',
-    manufacturer:'manufac',
-    techicalDescription:'technical',
-    categoryId:'id',
-    rate:8,
-    numberOfReviews:10,
-    isAvailable:0
-   },
-   {
-    name:'Ferit za kablove',
-    price:256,
-    description:'desciriton',
-    manufacturer:'manufac',
-    techicalDescription:'technical',
-    categoryId:'id',
-    rate:8,
-    numberOfReviews:10,
-    isAvailable:1
-   },
-   {
-    name:'Ferit za kablove',
-    price:256,
-    description:'desciriton',
-    manufacturer:'manufac',
-    techicalDescription:'technical',
-    categoryId:'id',
-    rate:8,
-    numberOfReviews:10,
-    isAvailable:1
-   },
-   {
-    name:'Ferit za kablove',
-    price:256,
-    description:'desciriton',
-    manufacturer:'manufac',
-    techicalDescription:'technical',
-    categoryId:'id',
-    rate:8,
-    numberOfReviews:10,
-    isAvailable:1
-   }];
-
-
+  priceValue:any='';
+  availableValue:any='';
+  sortValue:any='';
+  filterProducts:any[]=[];
+  filterProducts1:any[]=[];
   constructor(
     private productService:ProductService,
     private formBuilder: FormBuilder,
@@ -101,25 +40,97 @@ export class AllProductsComponent implements OnInit {
   industry = new FormControl();
   age = new FormControl();
   sortList: string[] = ['Od najniže cene','Od najviše cene'];
-  industryList: string[] = ['Svi','Dostupni'];
-  ageList: string[] = ['<500', '500-3000', '3000-10000', '>10000']
+  availableList: string[] = ['Svi','Dostupni'];
+  priceList: string[] = ['<500', '500-3000', '3000-10000', '>10000']
   noExperienceList: any[] = []
 
   getAllProducts(){
+    
     this.productService.getAllproducts().subscribe(data=>{
-      this.allProducts=data;
+      this.filterProducts=data;
       console.log(this.allProducts)
     },error=>{
       alert('Greska!')
     })
   }
+  getProductsByCategory(category: any) {
+    this.productService.getProductsByCategory(category.id).subscribe(data=>{
+      this.filterProducts=data
+    },error=>{
+      alert('Greska')
+    })
+  }
 
+
+  filter(){
+    if(this.availableValue=='Dostupni'){
+     this.productService.getAvailableProducts().subscribe(data=>{
+        this.filterProducts=data;
+        console.log(this.filterProducts)
+      },error=>{
+        alert('Greska')
+      })
+    }
+    if(this.priceValue != ''){
+      let scope=this.getPriceScope();
+      this.productService.getBetweenPrices(scope.min,scope.max).subscribe(data=>{
+        this.filterProducts1.splice(0, this.filterProducts1.length)
+        data.forEach((element: any,index:any) => {
+          if(this.filterProducts.indexOf(element) ==-1) {
+            this.filterProducts1.push(element);
+          }
+        });
+      })
+      this.filterProducts=this.filterProducts1
+    }
+    if(this.sortValue!=''){
+      let newProducts=[];
+      if(this.sortValue=='Od najniže cene'){
+         newProducts = this.filterProducts.sort(
+          (objA, objB) => objA.price - objB.price,
+        );
+      }
+      else{
+        newProducts = this.filterProducts.sort(
+          (objA, objB) => objB.price - objA.price,
+        );
+      }
+      this.filterProducts=newProducts;
+    }
+    
+  }
+  getPriceScope():any{
+    if(this.priceValue=='<500'){
+      return {min:0,max:500}
+    }
+    else if(this.priceValue=='500-3000'){
+      return {min:500,max:3000}
+    }
+    else if(this.priceValue=='3000-10000'){
+      return {min:3000,max:10000}
+    }
+    else{
+      return {min:10000,max:1000000}
+    }
+  }
+
+  resetFilters(){
+    this.productService.getAllproducts().subscribe(data=>{
+      this.filterProducts=data;
+      console.log(this.filterProducts)
+    },error=>{
+      alert('Greska!')
+    })
+    this.sortValue='';
+    this.priceValue='';
+    this.availableValue='';
+  }
 
   sarchByName() {
     let name=this.searchForm.value.name;
     if(name!=''){
       this.productService.searchProduct(name).subscribe((data: any) => {
-        this.allProducts = data;
+        this.filterProducts = data;
       },
         error => {
           console.log(error.error.message);
@@ -146,6 +157,8 @@ export class AllProductsComponent implements OnInit {
   goToProductDetails(product:any){
 
   }
+
+  
 
 
 }

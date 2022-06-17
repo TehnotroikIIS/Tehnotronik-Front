@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/core/services/category.service';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-categories-sidebar',
@@ -12,13 +13,17 @@ export class CategoriesSidebarComponent implements OnInit {
   length:any=0;
   last:any;
   first:any;
-
+  @Output() newItemEvent = new EventEmitter<string>();
   constructor(
     private categoryService:CategoryService
   ) { }
 
   ngOnInit(): void {
     this.getAllCategories();
+  }
+
+  sendSelectedcategory(selectedCategory:any) {
+    this.newItemEvent.emit(selectedCategory);
   }
 
 getAllCategories(){
@@ -35,6 +40,10 @@ getAllCategories(){
   },error=>{
     alert('Greska!')
   })
+}
+
+try(){
+  alert('ojha')
 }
 
 }
