@@ -18,7 +18,8 @@ export class ProductDetailsComponent implements OnInit {
 getSelectedProduct(){
   this.selectedProduct = JSON.parse(localStorage.getItem('selectedProduct')|| '');
   console.log(this.selectedProduct);
-  for (let i = 0; i < this.selectedProduct.rate; i++) {
+  let grade= Math.round( this.selectedProduct.rate)
+  for (let i = 0; i <grade; i++) {
     this.rates.push(i)
   }
 }
