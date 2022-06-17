@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { RegisterUser } from 'src/app/core/models/register-user.model';
 import { JwtService } from 'src/app/core/services/jwt.service';
 
@@ -9,13 +9,27 @@ import { JwtService } from 'src/app/core/services/jwt.service';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+  profileForm: FormGroup;
   user: any;
-  constructor(private jwtService: JwtService) { 
-     
+  constructor(private jwtService: JwtService, private formBuilder: FormBuilder) { 
+    this.profileForm = this.formBuilder.group({
+      name: [''],
+      lastname: [''],
+      username: [''],
+      email: [''],
+      phoneNumber: [''],
+      address: [''],
+      city: [''],
+      state: ['']
+    });
   }
   
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData(){
     this.user = this.jwtService.getUserDetails();
   }
 
