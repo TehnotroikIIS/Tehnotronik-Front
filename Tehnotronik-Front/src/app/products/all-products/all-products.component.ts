@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
 
@@ -18,13 +19,20 @@ export class AllProductsComponent implements OnInit {
   sortValue:any='';
   filterProducts:any[]=[];
   filterProducts1:any[]=[];
+  selectedProduct: any;
+  showProductForm: FormGroup;
+  @ViewChild('showProduct') addDialog!: any;
   constructor(
     private productService:ProductService,
     private formBuilder: FormBuilder,
+    public dialog: MatDialog,
     private router:Router
   ) {
     this.searchForm = this.formBuilder.group({
       name: [''],
+    });
+    this.showProductForm = this.formBuilder.group({
+      quantity: [''],
     });
    }
 
@@ -32,6 +40,7 @@ export class AllProductsComponent implements OnInit {
     this.breakpoint = window.innerWidth <= 768 ? 1 : 3;
     this.gutterSize = window.innerWidth <= 768 ? '20px' : '40px';
     this.getAllProducts();
+    this.getSelectedProduct();
   }
   get searchF(): { [key: string]: AbstractControl } {
     return this.searchForm.controls;
@@ -161,7 +170,33 @@ export class AllProductsComponent implements OnInit {
     this.router.navigate(['/product-details'])
   }
 
-  
+  getSelectedProduct() {
+    this.selectedProduct = JSON.parse(localStorage.getItem('selectedProduct') || '');
+    console.log(this.selectedProduct);
+    /*let grade = Math.round(this.selectedProduct.rate)
+    for (let i = 0; i < grade; i++) {
+      this.rates.push(i)
+    }*/
+  }
 
+  addToCart(event: any){
+    event?.stopPropagation();
+    const myTempDialog = this.dialog.open(this.addDialog);
+    myTempDialog.afterClosed().subscribe((res) => {
+      console.log({ res });
+    });
+  }
 
+  add():any{
+    alert(this.showProductForm.value.quantity)
+    let category={
+      quantity:this.showProductForm.value.quantity
+    }
+    /*this.categoryService.createCategory(category).subscribe(data=>{
+      alert('Proizvod je dodat u korpu za kupovinu')
+      window.location.reload()
+    },error=>{
+      alert('Greška! Nema na stanju!')
+    })*/
+  }
 }

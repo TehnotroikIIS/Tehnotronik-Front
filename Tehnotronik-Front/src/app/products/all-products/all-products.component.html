@@ -49,13 +49,33 @@
                         <div class="icons">
                             <mat-icon class="available" *ngIf="item.isAvailable">lens</mat-icon>
                             <mat-icon class="not-available"  *ngIf="!item.isAvailable">lens</mat-icon>
-                            
                         </div>
                     </div>
-                    
+                    <div>
+                        <button class="primary-button" (click)="addToCart($event)">Dodaj u korpu</button>
+                    </div>
                 </mat-card-content>
             </mat-card>
           
         </div>
     </div>
 </div>
+
+<ng-template #showProduct let-mydata class="dialog">
+    
+    <div mat-dialog-content class="dialog-content">
+        <div class="title">{{selectedProduct.name}}</div>
+        <form [formGroup]="showProductForm" class="dialog-form">
+            <div class="row1">
+                <mat-label>Komada:</mat-label>
+                <mat-form-field appearance="outline">
+                    <input formControlName="quantity" matInput>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-raised-button color="primary" class="yes-button"  mat-dialog-close (click)="add()">Dodaj u korpu</button>
+      <button mat-raised-button mat-dialog-close raised class="cancel-button"> Zatvori</button>
+    </div>
+  </ng-template>
