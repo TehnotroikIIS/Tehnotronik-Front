@@ -9,28 +9,25 @@ import * as jspdf from 'jspdf';
   styleUrls: ['./facture.component.scss']
 })
 export class FactureComponent implements OnInit {
-  //@ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
+  element: any;
+  renderer: any;
+  @ViewChild('pdfTable', {static: true}) pdfTable!: ElementRef;
   constructor() { }
 
   ngOnInit(): void {
   }
-  public printFacture(){
-    const doc = new jsPDF();
-
-    const specialElementHandlers = {
-      //'#editor': function (element, renderer) {
-        //return true;
-      //}
-    };
-
-    //const pdfTable = this.pdfTable.nativeElement;
-
-    /*doc.fromHTML(pdfTable.innerHTML, 15, 15, {
-      width: 190,
-      'elementHandlers': specialElementHandlers
+  
+  printFacture(){
+    /*html2canvas(document.body).then(function(canvas) {
+      document.body.appendChild(canvas);
+    });*/
+    const pdfTable = this.pdfTable.nativeElement;
+    const doc: jsPDF = new jsPDF("p", "mm", "a4");
+    doc.html(pdfTable, {
+       callback: (doc) => {
+         doc.output("dataurlnewwindow");
+       }
     });
-
-    doc.save('tableToPdf.pdf');*/
   }
 
 }
