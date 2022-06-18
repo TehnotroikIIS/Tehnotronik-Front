@@ -134,7 +134,7 @@ img {
 }
 
 .stars {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: rgb(240, 215, 53)
 }
 
@@ -180,6 +180,18 @@ img {
     @extend %primary-button;
     padding:10px 15px;
     margin:5px 0 15px 0; 
+}
+.star-button{
+    @extend %primary-button;
+    padding:2px 7px 0px 7px;
+    margin-left: 10px;
+
+}
+.star-button:hover{
+    @extend %primary-button-hover;
+    padding:2px 7px 0px 7px;
+    margin-left: 10px;
+
 }
 
 .review-button:hover{

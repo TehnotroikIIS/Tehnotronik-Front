@@ -8,7 +8,7 @@
         <div class="main-info">
             <div class="left">
                 <div class="buttons" *ngIf="isEmployed">
-                    <button class="edit-button" [routerLink]="['/edit-product']">
+                    <button class="edit-button" [routerLink]="['/edit-blog']">
                         <mat-icon>edit</mat-icon>Izmeni
                     </button>
                     <button class="edit-button" (click)="deleteProduct()">
@@ -24,7 +24,9 @@
             </div>
             <div class="right">
                 <div class="stars">
+                 
                     <mat-icon *ngFor="let number of rates">star</mat-icon>
+                    <button class="star-button"><mat-icon>add</mat-icon></button>
                 </div>
                 <div class="reactions">
                     <button class="reaction-button" >
@@ -45,16 +47,13 @@
             </div>
         </div>
         <div class="comments">
-            <div class="bold">Recenzije:</div>
+            <div class="bold">Komentari:</div>
             <button class="review-button" *ngIf="isAuthenticated" (click)="opetAddReviewDialog( $event)">Dodaj
-                recenziju</button>
+                komentar</button>
             <br>
             <div class="comment">
                 <div class="comment-row">
                     <div class="bold">Sara Savanovic</div>
-                    <div class="stars">
-                        <mat-icon *ngFor="let number of rates">star</mat-icon>
-                    </div>
                 </div>
                 <div class="comment-row">
                     <div>Sarwerwerw sefdrf fdfd dfdf dfdfd dsdf sdfsdfs</div>
