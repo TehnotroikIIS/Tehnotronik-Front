@@ -4,8 +4,10 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/f
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FavoriteBlog } from 'src/app/core/models/favorite-blog.model';
+import { FavoriteCategory } from 'src/app/core/models/favorite-category.model';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { BlogService } from 'src/app/core/services/blog.service';
+import { CategoryService } from 'src/app/core/services/category.service';
 import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
@@ -32,9 +34,13 @@ export class AllBlogsComponent implements OnInit {
   user:any;
   selectedCategory:any=null;
   isAuthenticated: boolean = false;
+  subscribeCategory:FavoriteCategory={
+    userId:'',
+    categoryId:''
+  }
   @ViewChild('showProduct') addDialog!: any;
   constructor(
-    private productService: ProductService,
+    private categoryService: CategoryService,
     private formBuilder: FormBuilder,
     private blogService: BlogService,
     public dialog: MatDialog,
@@ -338,6 +344,16 @@ favoriteBlogs:any[]=[];
       }
     }, error => {
       alert('Error! Try again!')
+    })
+  }
+
+  subsribe(){
+    this.subscribeCategory.userId=this.user.id;
+    this.subscribeCategory.categoryId=this.selectedCategory.id;
+    this.categoryService.addToFavorites(this.subscribeCategory).subscribe(data=>{
+      alert('Uspesno ste pretplaceni na kategoriju '+this.selectedCategory.name)
+    },error=>{
+      alert('Greska')
     })
   }
 
