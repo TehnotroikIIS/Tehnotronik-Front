@@ -24,4 +24,12 @@ export class CategoryService {
   createCategory(category: Category): Observable<any> {
     return this.http.post(`${environment.api_url}create-category`,category, {headers:this.headers, responseType: 'json' });
   }
+
+  getAllBlogCategories(): Observable<any> {
+    return this.http.get(`${environment.api_url}all-blog-categories`, { headers: this.headers, responseType: 'json' });
+  }
+
+  createBlogCategory(category: Category): Observable<any> {
+    return this.http.post(`${environment.api_url}create-blog-category`,category, {headers:this.headers, responseType: 'json' });
+  }
 }
