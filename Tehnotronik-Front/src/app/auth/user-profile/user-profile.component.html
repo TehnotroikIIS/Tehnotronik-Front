@@ -55,7 +55,7 @@
 
         </form>
         <div class="inline">
-            <button class="primary-button" (click)="viewOrders()">Pregled porudžbina</button>
+            <button [routerLink]="['/user-orders']" class="primary-button" (click)="viewOrders()">Pregled porudžbina</button>
             <div class="space"></div>
             <button [routerLink]="['/change-password']" class="primary-button" (click)="changePassword()">Promeni lozinku</button>
         </div>

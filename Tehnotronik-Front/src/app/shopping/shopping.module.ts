@@ -20,13 +20,15 @@ import { RouterModule } from '@angular/router';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { UserOrdersComponent } from './user-orders/user-orders.component';
 
 
 
 @NgModule({
   declarations: [
     ShoppingCartComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    UserOrdersComponent
   ],
   imports: [
     CommonModule,
