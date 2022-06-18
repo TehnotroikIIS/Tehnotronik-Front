@@ -35,8 +35,9 @@ export class StorageViewComponent implements OnInit {
   allCategories: any[] = [];
   selectedView='';
   showProducts:any[]=[];
+  productsByCategory:any[]=[];
   allProducts: any[] = [];
-  dataSource = this.showProducts;
+  dataSource :any=[];
   selectedCategory:any;
   views=['Po kategorijama','Po prostorijama']
   constructor(
@@ -47,7 +48,7 @@ export class StorageViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllcategories();
-    this.getAllProducts();
+    this.getAllStorageProducts();
   }
 
   getAllcategories() {
@@ -56,21 +57,24 @@ export class StorageViewComponent implements OnInit {
     })
   }
 
-  getAllProducts() {
-    this.productService.getAllproducts().subscribe(data => {
+  getAllStorageProducts() {
+    this.productService.getAllStorageProducts().subscribe(data => {
       this.allProducts = data;
-      this.allProducts.forEach(element => {
-        this.productService.getProducLocation(element.id).subscribe(data1 => {
-          element.location = data1;
-
-        })
-      });
+     
     })
   }
 
   getProductsByCategory(){
     this.productService.getProductsByCategory(this.selectedCategory.id).subscribe(data=>{
-      this.showProducts=data;
+      this.productsByCategory=data;
+      this.productsByCategory.forEach(element => {
+        this.allProducts.forEach(element1 => {
+          if(element.id==element1.productId){
+            element1.name=element.name
+            this.showProducts.push(element1)
+          }
+        });
+      });
       this.dataSource = this.showProducts;
     })
   }

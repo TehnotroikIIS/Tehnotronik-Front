@@ -113,6 +113,11 @@ export class ProductService {
     });
   }
 
+  getAllStorageProducts(): Observable<any> {
+    return this.http.get(`${environment.api_url}get-all-storage-products`, { headers: this.headers, responseType: 'json' });
+  }
+
+
 
 
 
