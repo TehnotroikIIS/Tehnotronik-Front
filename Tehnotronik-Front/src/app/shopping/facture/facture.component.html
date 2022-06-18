@@ -1,0 +1,69 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+<div class="container">
+    <div class="right-content">
+        <div class="register-title">FAKTURA</div>
+        <div id="pdfTable" #pdfTable>        
+            <table>
+            <tr>
+                <th>Oznaka artikla</th>
+                <th>Naziv artikla</th>
+                <th>Količina</th>
+                <th>Cena (din)</th>
+                <th>Ukupna cena (din)</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>AUTO MONITOR 7" LCD LC-728</td>
+                <td>2</td>
+                <td>120</td>
+                <td>240</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>AUTO MONITOR 12" LCD LC-873</td>
+                <td>1</td>
+                <td>150</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>KLUPICA ZA NOGU</td>
+                <td>3</td>
+                <td>200</td>
+                <td>600</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Monitor TX</td>
+                <td>5</td>
+                <td>100</td>
+                <td>500</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Monitor TXL 123</td>
+                <td>10</td>
+                <td>10</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>AUTO MONITOR 15"</td>
+                <td>1</td>
+                <td>1500</td>
+                <td>1500</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>= 3090</td>
+            </tr>
+            </table>
+        </div>
+        <br><br>
+        <button class="primary-button" (click)="printFacture()">Štampaj</button>
+    </div>
+</div>
