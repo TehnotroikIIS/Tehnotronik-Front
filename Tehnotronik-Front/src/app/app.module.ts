@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductsModule } from './products/products.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ShoppingModule } from './shopping/shopping.module';
+import { BlogsModule } from './blogs/blogs.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ShoppingModule } from './shopping/shopping.module';
     ProductsModule,
     ShoppingModule,
     MatGridListModule,
+    BlogsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
