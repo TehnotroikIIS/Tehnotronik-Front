@@ -48,10 +48,11 @@
             </div>
             <div class="row">
                 <div class="label">Način plaćanja:</div>
+
                 <mat-form-field class="cat" appearance="outline">
-                    <mat-select [(value)]="selectedCategory">
-                        <mat-option>Plaćanje pouzećem</mat-option>
-                        <mat-option>Plaćanje karticom</mat-option>
+                    <mat-label>Odaberite način plaćanja</mat-label>
+                    <mat-select [(value)]="selectedValue" >
+                        <mat-option *ngFor="let item of selectedCategory" [value]="item">{{item}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

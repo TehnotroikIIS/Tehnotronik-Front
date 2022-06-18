@@ -10,7 +10,7 @@ import { JwtService } from 'src/app/core/services/jwt.service';
 export class UserDetailsComponent implements OnInit {
   profileForm: FormGroup;
   user: any;
-  selectedCategory:any;
+  selectedValue: any='';
   constructor(private jwtService: JwtService, private formBuilder: FormBuilder) { 
     this.profileForm = this.formBuilder.group({
       name: [''],
@@ -23,11 +23,12 @@ export class UserDetailsComponent implements OnInit {
       state: ['']
     });
   }
-  
 
   ngOnInit(): void {
     this.loadData();
   }
+
+  selectedCategory: string[] = ['Plaćanje pouzećem', 'Plaćanje karticom']
 
   loadData(){
     this.user = this.jwtService.getUserDetails();
