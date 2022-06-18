@@ -15,6 +15,7 @@
         <mat-menu #menuBlogovi="matMenu" >
             <button mat-menu-item [routerLink]="['/all-blogs']">Svi blogovi</button>
             <button mat-menu-item [routerLink]="['/popular-blogs']">Najpopularniji blogovi</button>
+            <button *ngIf="isAuthenticated" mat-menu-item [routerLink]="['/favorite-blogs']">Moji omiljeni blogovi</button>
         </mat-menu>
         <a [routerLink]="['/about-us']"   routerLinkActive="active">O nama </a>
         <a [routerLink]="['/contact']"   routerLinkActive="active">Kontakt </a>
