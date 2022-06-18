@@ -20,6 +20,7 @@ import { SalesComponent } from './products/sales/sales.component';
 import { EmployedMenuComponent } from './shared/employed-menu/employed-menu.component';
 import { ShoppingCartComponent } from './shopping/shopping-cart/shopping-cart.component';
 import { UserDetailsComponent } from './shopping/user-details/user-details.component';
+import { UserOrdersComponent } from './shopping/user-orders/user-orders.component';
 
 const routes: Routes = [
   {
@@ -102,6 +103,10 @@ const routes: Routes = [
     path: 'add-blog',
     component: AddBlogComponent,
     canActivate: [NoAuthGuard],
+  },
+  {
+    path: 'user-orders',
+    component: UserOrdersComponent
   },
   {
     path: '**',
