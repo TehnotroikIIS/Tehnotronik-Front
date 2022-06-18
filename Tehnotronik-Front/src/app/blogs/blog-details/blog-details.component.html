@@ -26,7 +26,7 @@
                 <div class="stars">
                  
                     <mat-icon *ngFor="let number of rates">star</mat-icon>
-                    <button class="star-button"><mat-icon>add</mat-icon></button>
+                    <button class="star-button" (click)="openAddRateDialog( $event)"><mat-icon>add</mat-icon></button>
                 </div>
                 <div class="reactions">
                     <button class="reaction-button" >
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="comments">
-            <div class="bold">Komentari:  <button class="star-button" *ngIf="isAuthenticated" (click)="opetAddReviewDialog( $event)"><mat-icon>add</mat-icon></button>
+            <div class="bold">Komentari:  <button class="star-button" *ngIf="isAuthenticated" (click)="openAddCommentDialog( $event)"><mat-icon>add</mat-icon></button>
             </div>
             <br>
             <div class="comment">
@@ -66,17 +66,30 @@
 
 <!--Modalni dijalozii -->
 
-<ng-template #addReview let-mydata class="dialog">
+<ng-template #addComment let-mydata class="dialog">
     <div mat-dialog-content class="dialog-content">
-        <form [formGroup]="addReviewForm" class="dialog-form">
+        <h2>Dodavanje komentara</h2>
+        <form [formGroup]="addCommentForm" class="dialog-form">
             <div class="row1">
                 <div>Komentar</div>
                 <mat-form-field appearance="outline">
-                    <textarea formControlName="comment" matInput></textarea>
+                    <textarea formControlName="text" matInput></textarea>
                 </mat-form-field>
             </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="dialog-actions">
+        <button mat-raised-button color="primary" class="yes-button" (click)="addc()">Dodaj</button>
+        <button mat-raised-button mat-dialog-close raised class="cancel-button"> Zatvori</button>
+    </div>
+</ng-template>
+
+<ng-template #addRate let-mydata class="dialog">
+    <div mat-dialog-content class="dialog-content">
+        <h2>Dodavanje ocene</h2>
+        <form [formGroup]="addRateForm" class="dialog-form">
             <div class="row1">
-                <div>Ocjena</div>
+                <div>Ocena</div>
                 <mat-form-field appearance="outline">
                     <input type="number" min="1" max="5" formControlName="rate" matInput>
                 </mat-form-field>
@@ -84,7 +97,7 @@
         </form>
     </div>
     <div mat-dialog-actions class="dialog-actions">
-        <button mat-raised-button color="primary" class="yes-button" (click)="add()">Dodaj</button>
+        <button mat-raised-button color="primary" class="yes-button" (click)="addr()">Dodaj</button>
         <button mat-raised-button mat-dialog-close raised class="cancel-button"> Zatvori</button>
     </div>
 </ng-template>

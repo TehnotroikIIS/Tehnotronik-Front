@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { BlogComment } from '../models/blog-comment.model';
+import { BlogRate } from '../models/blog-rate.model';
 import { EditBlog } from '../models/edit-blog.model';
 import { EditProduct } from '../models/edit-product.model';
 import { NewBlog } from '../models/new-blog.model';
@@ -75,8 +77,11 @@ export class BlogService {
   }
 
   //reviews
-  addReview(review: NewReview): Observable<any> {
-    return this.http.post(`${environment.api_url}add-review`, review, { headers: this.headers, responseType: 'json' });
+  addRate(rate: BlogRate): Observable<any> {
+    return this.http.post(`${environment.api_url}rate-blog`, rate, { headers: this.headers, responseType: 'json' });
+  }
+  addComment(comment: BlogComment): Observable<any> {
+    return this.http.post(`${environment.api_url}add-comment`, comment, { headers: this.headers, responseType: 'json' });
   }
   getBlogReviews(productId: string): Observable<any> {
     return this.http.get(`${environment.api_url}get-reviews`, {
