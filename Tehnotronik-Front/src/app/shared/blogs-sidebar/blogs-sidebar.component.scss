@@ -1,0 +1,75 @@
+@use '../../../base-style'as base;
+
+.sidebar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
+    min-height: 100vh;
+    margin-top:135px;
+    margin-left: 50px;;
+}
+
+.menu{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: base.$border-radius;
+    border: 0px solid base.$primary-color;
+}
+.menu-button{
+    padding: 15px;
+    width: 100%;
+  
+    background-color:base.$primary-color;
+    font-size: 15px;
+    color: base.$dark-grey;
+    border: 3px solid white ;
+    border-bottom: 0px solid white ;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+}
+.menu-button .mat-icon{
+    visibility: hidden;
+}
+.menu-button:hover{
+    cursor: pointer;
+    background-color: base.$primary-color-dark;
+    color:white;
+}
+.menu-button-selected{
+    padding: 15px;
+    width: 100%;
+    background-color:base.$primary-color;
+    font-size: 15px;
+    color: base.$dark-grey;
+    border: 3px solid white ;
+    border-bottom: 0px solid white ;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+    background-color: base.$primary-color-dark;
+    color:white;
+}
+.menu-button.active{
+  font-weight: 600;
+}
+.menu-button.active .mat-icon{
+    visibility: visible;
+}
+.menu-button:hover .mat-icon{
+    visibility: visible;
+}
+.first{
+    border-radius: 5px 5px 0 0;
+ }
+ .last{
+     border-radius: 0 0 5px 5px;
+     border-bottom: 3px solid white ;
+ }

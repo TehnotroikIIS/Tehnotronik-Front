@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeInfoComponent } from './home-info/home-info.component';
 import { CategoriesSidebarComponent } from './categories-sidebar/categories-sidebar.component';
 import { EmployedMenuComponent } from './employed-menu/employed-menu.component';
+import { BlogsSidebarComponent } from './blogs-sidebar/blogs-sidebar.component';
 
 
 
@@ -22,6 +23,7 @@ import { EmployedMenuComponent } from './employed-menu/employed-menu.component';
     HomeInfoComponent,
     CategoriesSidebarComponent,
     EmployedMenuComponent,
+    BlogsSidebarComponent,
   ],
   imports: [
     BrowserModule,
