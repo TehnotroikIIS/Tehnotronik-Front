@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ShoppingCartItem } from 'src/app/core/models/shopping-cart-item';
 import { JwtService } from 'src/app/core/services/jwt.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import { ShoppingService } from 'src/app/core/services/shopping.service';
@@ -18,8 +19,12 @@ export class ShoppingCartComponent implements OnInit {
   productsInCart: any[] = [];
   showProductForm: FormGroup;
   sales:any[]=[];
-  //@Input() id: string;
-  id: any;
+  shoppingCartItem: ShoppingCartItem = {
+    userId: '',
+    productId: '',
+    price: 0,
+    quantity: 0
+  }
   @ViewChild('showProduct') addDialog!: any;
   constructor(
     private shoppingService: ShoppingService,
@@ -51,25 +56,7 @@ export class ShoppingCartComponent implements OnInit {
       alert('Ni jedan proizvod nije dodat u korpu!')
     })
     await this.delay(500);
-    //this.getSales();
   }
-
-  /*getSales(){
-    this.productService.getAllSales().subscribe(data=>{
-      this.sales=data;
-      this.productsInCart.forEach(element => {
-        this.sales.forEach(element1=> {
-          if(element.id==element1.productId){
-            let newPrice=element.price*(1-element1.discount/100);
-            newPrice= Math.round((newPrice + Number.EPSILON) * 100) / 100
-            element.newPrice=newPrice;
-            element.discount=element1.discount;
-           
-          }
-        });
-      });
-    })
-  }*/
 
   editQuantity(event: any){
     event?.stopPropagation();
@@ -82,6 +69,7 @@ export class ShoppingCartComponent implements OnInit {
   remove(event: any){}
 
   confirm(): any{
+    this.shoppingCartItem.quantity=this.showProductForm.value.quantity;
     alert(this.showProductForm.value.quantity)
     let category={
       quantity:this.showProductForm.value.quantity

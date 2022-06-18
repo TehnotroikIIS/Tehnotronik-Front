@@ -9,17 +9,16 @@
                     -{{item.discount}}%
                   </div> 
                 <img mat-card-image  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9oj262QwzNs3bfHzwet9eOiEfyDNUp3XL_w&usqp=CAU"/>
-                <mat-card-content class="card-content">  
-                    <div class="name-div">{{item.id}}</div>
-                    <div class="price"  *ngIf="item.newPrice==undefined">{{item.price}} din</div>
-                        <div class="price-cross"  *ngIf="item.newPrice!=undefined">{{item.price}} din</div>
-                        <div class="action"  *ngIf="item.newPrice!=undefined">{{item.newPrice}} din</div>
-                    <div class="price">{{item.quantity}} kom</div>
+                <mat-card-content class="card-content">
                     <div class="center">
-                        <button class="filter-button" (click)="editQuantity($event)"><mat-icon>edit</mat-icon></button>
-                        <div class="space"></div>
-                        <button class="filter-button" (click)="remove($event)"><mat-icon>delete</mat-icon></button>
+                        <div class="price">{{item.price}} din</div>
+                        <div class="price">{{item.quantity}} kom</div>
                     </div>
+                        <div class="center">
+                            <button class="filter-button" (click)="editQuantity($event)"><mat-icon>edit</mat-icon></button>
+                            <div class="space"></div>
+                            <button class="filter-button" (click)="remove($event)"><mat-icon>delete</mat-icon></button>
+                        </div>
                 </mat-card-content>
             </mat-card>
         </div>
