@@ -18,10 +18,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AddBlogComponent } from './add-blog/add-blog.component';
+import { AllBlogsComponent } from './all-blogs/all-blogs.component';
 
 @NgModule({
   declarations: [
-    AddBlogComponent
+    AddBlogComponent,
+    AllBlogsComponent
   ],
   imports: [
     CommonModule,

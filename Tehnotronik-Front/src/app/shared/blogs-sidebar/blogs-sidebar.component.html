@@ -1,0 +1,9 @@
+<div class="sidebar">
+    <div class="menu">
+        <button  [ngClass]="!first?.isSelected! ? 'menu-button first' : 'menu-button-selected'" (click)="sendSelectedcategoryFirst(first,0)">{{first?.name}}
+           </button>
+        <button  *ngFor="let category of categories;let i=index"  [ngClass]="!category.isSelected! ? 'menu-button' : 'menu-button-selected'" (click)="sendSelectedcategory(category,i)"> {{category.name}}
+           </button>
+        <button  [ngClass]="!last.isSelected! ? 'menu-button last' : 'menu-button-selected'"   (click)="sendSelectedcategoryFirst(last,1)">{{last?.name}}</button>
+    </div>
+</div>
