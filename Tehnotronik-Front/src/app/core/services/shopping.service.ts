@@ -33,4 +33,11 @@ export class ShoppingService {
       }, headers: this.headers, responseType: 'json'
     });
   }
+  getCartByUserId(id: string): Observable<any> {
+    return this.http.get(`${environment.api_url}get-cart-by-userId`, {
+      params: {
+        userId: id
+      }, headers: this.headers, responseType: 'json'
+    });
+  }
 }

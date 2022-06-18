@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="cart">
-                        <button *ngIf="isAuthenticated" class="primary-button" (click)="addToCart($event)">Dodaj u korpu</button>
+                        <button *ngIf="isAuthenticated" class="primary-button" (click)="addToCart($event, item)">Dodaj u korpu</button>
                     </div>
                 </mat-card-content>
             </mat-card>
