@@ -31,6 +31,12 @@
                         <mat-option  (click)="getProductsByCategory()" *ngFor="let category of allCategories" [value]="category">{{category.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
+                <div class="label"  *ngIf="selectedView=='Po prostorijama'">Izaberi prostoriju:</div>
+                <mat-form-field class="cat" appearance="outline" *ngIf="selectedView=='Po prostorijama'">
+                    <mat-select [(value)]="selectedLocation" >
+                        <mat-option  (click)="getProductsByLocation()" *ngFor="let category of locations" [value]="category">{{category}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
             </div>
             <div class="right">
@@ -42,14 +48,15 @@
             
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-                <!--- Note that these columns can be defined in any order.
-                      The actual rendered columns are set as a property on the row definition" -->
-              
-                <!-- Position Column -->
+               
                 <ng-container matColumnDef="name">
                   <th mat-header-cell *matHeaderCellDef>Ima proizvoda</th>
                   <td mat-cell *matCellDef="let element"> {{element.name}} </td>
                 </ng-container>
+                <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef> Kategorija</th>
+                    <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                  </ng-container>
                 <ng-container matColumnDef="location">
                     <th mat-header-cell *matHeaderCellDef> Lokacija </th>
                     <td mat-cell *matCellDef="let element"> {{element.location}} </td>

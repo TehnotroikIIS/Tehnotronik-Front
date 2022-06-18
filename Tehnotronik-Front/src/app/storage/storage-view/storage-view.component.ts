@@ -30,14 +30,16 @@ const ELEMENT_DATA: any[] = [
   styleUrls: ['./storage-view.component.scss']
 })
 export class StorageViewComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'location', 'quantity'];
- 
+  displayedColumns: string[] = ['name', 'category','location', 'quantity'];
+ locations=['A1','A2','A3','B1','B2','B3']
   allCategories: any[] = [];
   selectedView='';
   showProducts:any[]=[];
   productsByCategory:any[]=[];
   allProducts: any[] = [];
   dataSource :any=[];
+  products:any[]=[];
+  selectedLocation:any;
   selectedCategory:any;
   views=['Po kategorijama','Po prostorijama']
   constructor(
@@ -47,6 +49,7 @@ export class StorageViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getAllProducts();
     this.getAllcategories();
     this.getAllStorageProducts();
   }
@@ -57,26 +60,68 @@ export class StorageViewComponent implements OnInit {
     })
   }
 
+  getAllProducts(){
+    this.productService.getAllproducts().subscribe(data=>{
+      this.products=data;
+    })
+  }
+
   getAllStorageProducts() {
     this.productService.getAllStorageProducts().subscribe(data => {
       this.allProducts = data;
+      this.allProducts.forEach(element => {
+        if(element.location==0){
+          element.location='A1'
+        }
+        else if(element.location==1){
+          element.location='A2'
+        }
+        else if(element.location==2){
+          element.location='A3'
+        }
+        else if(element.location==3){
+          element.location='B1'
+        }
+        else if(element.location==4){
+          element.location='B2'
+        }
+        else if(element.location==5){
+          element.location='B3'
+        }
+      });
      
     })
   }
 
   getProductsByCategory(){
+    this.showProducts=[];
     this.productService.getProductsByCategory(this.selectedCategory.id).subscribe(data=>{
       this.productsByCategory=data;
       this.productsByCategory.forEach(element => {
         this.allProducts.forEach(element1 => {
           if(element.id==element1.productId){
             element1.name=element.name
+            element1.category=this.selectedCategory.name
             this.showProducts.push(element1)
           }
         });
       });
       this.dataSource = this.showProducts;
     })
+  }
+
+  getProductsByLocation(){
+    this.showProducts=[];
+    this.products.forEach(element => {
+      this.allProducts.forEach(element1 => {
+        if(element.id==element1.productId && element1.location==this.selectedLocation){
+          element1.name=element.name
+          element1.category=element.categoryId
+          this.showProducts.push(element1)
+        }
+      });
+    });
+    this.dataSource = this.showProducts;
   }
 
 }
