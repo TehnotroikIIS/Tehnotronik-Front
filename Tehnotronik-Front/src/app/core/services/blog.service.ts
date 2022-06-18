@@ -36,7 +36,7 @@ export class BlogService {
   }
 
   getAllBlogs(): Observable<any> {
-    return this.http.get(`${environment.api_url}get-all-products`, { headers: this.headers, responseType: 'json' });
+    return this.http.get(`${environment.api_url}get-all-blogs`, { headers: this.headers, responseType: 'json' });
   }
 
 
@@ -83,6 +83,36 @@ export class BlogService {
         productId: productId
       }, headers: this.headers, responseType: 'json'
     });
+  }
+
+  //likes
+  addLikeBlog(userid:string,blogId: string): Observable<any> {
+   let reaction= {
+    blogId:blogId,
+      userId:userid
+    }
+    return this.http.post(`${environment.api_url}like-blog`, reaction,{headers: this.headers, responseType: 'json' });
+  }
+  addDislikeBlog(userid:string,blogId: string): Observable<any> {
+    let reaction= {
+      blogId:blogId,
+      userId:userid
+    }
+    return this.http.post(`${environment.api_url}dislike-blog`, reaction,{headers: this.headers, responseType: 'json' });
+  }
+  removeLikeBlog(userid:string,blogId: string): Observable<any> {
+    let reaction= {
+      blogId:blogId,
+      userId:userid
+    }
+    return this.http.post(`${environment.api_url}remove-like`, reaction,{headers: this.headers, responseType: 'json' });
+  }
+  removeDislikeBlog(userid:string,blogId: string): Observable<any> {
+    let reaction= {
+      blogId:blogId,
+      userId:userid
+    }
+    return this.http.post(`${environment.api_url}remove-dislike`, reaction,{headers: this.headers, responseType: 'json' });
   }
 
 

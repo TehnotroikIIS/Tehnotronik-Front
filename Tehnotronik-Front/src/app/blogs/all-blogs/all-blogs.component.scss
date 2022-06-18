@@ -84,12 +84,13 @@
   transition-duration: 0.4s;
 }
 
-.action{
-  margin-top: 5px;;
+.action {
+  margin-top: 5px;
+  ;
   font-size: 16px;
-  color:base.$dark-grey;
+  color: base.$dark-grey;
   font-weight: 600;
-  color:base.$danger;
+  color: base.$danger;
 }
 
 .rest-card {
@@ -255,6 +256,7 @@
 
 .tab-content {
   height: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -262,9 +264,13 @@
 
 .post {
   border-radius: base.$border-radius;
-  border:3px solid base.$primary-color;
+  border: 3px solid base.$primary-color;
   background-color: white;
   padding: 10px;
+}
+.post:hover{
+  cursor:pointer;
+  box-shadow: base.$box-shadow;
 }
 
 .head {
@@ -288,28 +294,87 @@
   height: 50px;
   border-radius: 50%;
 }
+
 .comment-image img {
   width: 30px;
   height: 30px;
   border-radius: 50%;
 }
-.new-comment-image{
+
+.new-comment-image {
   display: flex;
   align-items: center;
 }
+
 .new-comment-image img {
   width: 30px;
   height: 30px;
   border-radius: 50%;
 }
+
+.reactions {
+  padding-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.reaction-button,.like-button,.dislike-button,.comment-button {
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border:2px solid base.$primary-color;
+  display: flex;
+  color: base.$primary-color-dark;
+  align-items: center;
+  gap: 5px;
+}
+
+.reaction-button:hover,.like-button:hover,.dislike-button:hover,.comment-button:hover{
+  box-shadow: base.$box-shadow;
+  cursor: pointer;
+}
+.like-button {
+  background-color: base.$success;
+  border: 2px solid base.$success;
+  color: white;
+}
+
+.dislike-button {
+  background-color: base.$danger;
+  border: 2px solid base.$danger;
+  color: white;
+}
+
+.comment-button {
+  background-color: base.$medium-grey-letters;
+  border: 2px solid base.$medium-grey-letters;
+  color: white;
+}
+
+.comments {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 .mat-h2 {
   font-weight: 500;
   color: base.$dark-grey;
-  margin-bottom:0
+  margin-bottom: 0
 }
-.mat-body-1{
-  margin-top: 5px;;
+
+.mat-body-1 {
+  margin-top: 5px;
+  ;
 }
+
 .stars {
   color: rgb(240, 215, 53)
 }

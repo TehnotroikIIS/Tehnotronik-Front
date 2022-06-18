@@ -18,7 +18,8 @@ export class BlogsSidebarComponent implements OnInit {
   constructor(
     private categoryService:CategoryService,
     private router:Router
-  ) { }
+  ) { 
+  }
 
   ngOnInit(): void {
     this.getAllCategories();
@@ -54,6 +55,7 @@ export class BlogsSidebarComponent implements OnInit {
 getAllCategories(){
   this.categoryService.getAllBlogCategories().subscribe(data=>{
     this.length=data.length
+   
     data.forEach((value: any, i: any) => {
       if(i!=0 && i!=this.length-1){
         data.isSelected=false;

@@ -27,6 +27,7 @@ export class AllBlogsComponent implements OnInit {
   selectedBlog: any;
   showProductForm: FormGroup;
   sales: any[] = [];
+  user:any;
   isAuthenticated: boolean = false;
   @ViewChild('showProduct') addDialog!: any;
   constructor(
@@ -46,11 +47,13 @@ export class AllBlogsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('userDetails') || '');
+    console.log(this.user)
     this.breakpoint = window.innerWidth <= 768 ? 1 : 3;
     this.gutterSize = window.innerWidth <= 768 ? '20px' : '40px';
     this.isAuthenticated = this.authenticationService.isAuthenticated();
     this.getAllBlogs();
-    this.getSelectedBlog();
+   // this.getSelectedBlog();
   }
   get searchF(): { [key: string]: AbstractControl } {
     return this.searchForm.controls;
@@ -107,6 +110,75 @@ export class AllBlogsComponent implements OnInit {
     }
     await this.delay(500);
     this.priceFilter();
+  }
+
+  isLiked(index: any): boolean {
+    if(this.allBlogs[index].likes==null)
+      return false;
+    if (this.allBlogs[index].likes.indexOf(this.user.id) !== -1) {
+      return true
+    }
+    return false
+  }
+  addLike(post: any, index: any) {
+    if (this.allBlogs[index].dislikes.indexOf(this.user.id) !== -1) {
+      this.removeDislike(post, index);
+    }
+    this.allBlogs[index].likes.push(this.user.id);
+    this.blogService.addLikeBlog(this.user.id, post.id).subscribe((data: any) => {
+      console.log(post.id)
+
+    },
+      error => {
+        console.log(error.error.message);
+      });
+
+  }
+
+  removeLike(post: any, index: any) {
+    this.allBlogs[index].likes.forEach((value: { id: any; }, i: any) => {
+      if (value == this.user.id) {
+        this.allBlogs[index].likes.splice(i, 1);
+      }
+    });
+    this.blogService.removeLikeBlog(this.user.id, post.id).subscribe((data: any) => {
+      console.log(post.id)
+    },
+      error => {
+        console.log(error.error.message);
+      });
+  }
+  addDislike(post: any, index: any) {
+    if (this.allBlogs[index].likes.indexOf(this.user.id) !== -1) {
+      this.removeLike(post, index);
+    }
+    this.allBlogs[index].dislikes.push(this.user.id);
+    this.blogService.addDislikeBlog(this.user.id, post.id).subscribe((data: any) => {
+      console.log(post.id)
+    },
+      error => {
+        console.log(error.error.message);
+      });
+
+  }
+  isDisliked(index: any): boolean {
+    if (this.allBlogs[index].dislikes.indexOf(this.user.id) !== -1) {
+      return true
+    }
+    return false
+  }
+  removeDislike(post: any, index: any) {
+    this.allBlogs[index].dislikes.forEach((value: { id: any; }, i: any) => {
+      if (value == this.user.id) {
+        this.allBlogs[index].dislikes.splice(i, 1);
+      }
+    });
+    this.blogService.removeDislikeBlog(this.user.id, post.id).subscribe((data: any) => {
+      console.log(post.id)
+    },
+      error => {
+        console.log(error.error.message);
+      });
   }
 
   async priceFilter() {
