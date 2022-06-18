@@ -28,10 +28,10 @@ export class BlogService {
   editBlog(blog: EditBlog): Observable<any> {
     return this.http.post(`${environment.api_url}update-blog`, blog, { headers: this.headers, responseType: 'json' });
   }
-  deleteBlog(productId: string): Observable<any> {
-    return this.http.delete(`${environment.api_url}delete-product`, {
+  deleteBlog(blogId: string): Observable<any> {
+    return this.http.delete(`${environment.api_url}delete-blog`, {
       params: {
-        id: productId
+        id: blogId
       }, headers: this.headers, responseType: 'json'
     });
   }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NewReview } from 'src/app/core/models/new-review.model';
 import { Sale } from 'src/app/core/models/sale.model';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { BlogService } from 'src/app/core/services/blog.service';
 import { JwtService } from 'src/app/core/services/jwt.service';
 import { ProductService } from 'src/app/core/services/product.service';
 
@@ -43,7 +44,7 @@ sales:any[]=[]
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private jwtService: JwtService,
-    private productService: ProductService,
+    private blogService: BlogService,
     private authenticationService: AuthenticationService,
     private router:Router
   ) {
@@ -100,28 +101,28 @@ sales:any[]=[]
       this.newReview.text = this.addReviewForm.value.comment;
       this.newReview.rate = this.addReviewForm.value.rate;
       console.log(this.newReview);
-      this.productService.addReview(this.newReview).subscribe(data => {
+     /* this.productService.addReview(this.newReview).subscribe(data => {
         alert('Uspesno dodata recenzija')
       }, error => {
         alert('Greska! Probajte ponovo')
-      })
+      })*/
 
     }
     this.dialog.closeAll();
   }
 
-  getReviews() {
+ /* getReviews() {
     this.productService.getProducReviews(this.selectedBlog.id).subscribe(data => {
       this.reviews = data;
     }, error => {
       alert('Greska')
     })
-  }
+  }*/
 
-  deleteProduct(){
-    this.productService.deleteProduct(this.selectedBlog.id).subscribe(data=>{
-      alert('Proizvod je uspešno obrisan');
-      this.router.navigate(['/all-products'])
+  deleteBlog(){
+    this.blogService.deleteBlog(this.selectedBlog.id).subscribe(data=>{
+      alert('Blog je uspešno obrisan');
+      this.router.navigate(['/all-blogs'])
     },error=>{
       alert('Greska!')
     })
