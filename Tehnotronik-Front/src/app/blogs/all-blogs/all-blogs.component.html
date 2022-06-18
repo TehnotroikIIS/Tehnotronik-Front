@@ -1,0 +1,61 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+
+<div class="container">
+    <app-blogs-sidebar (newItemEvent)="getBlogsByCategory($event)"></app-blogs-sidebar>
+    <div class="content">
+        <div class="filters">
+            <div class="left">
+                <mat-form-field appearance="outline">
+                    <mat-label>Sortiranje</mat-label>
+                    <mat-select [(value)]="sortValue">
+                        <mat-option *ngFor="let sort of sortList" [value]="sort">{{sort}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+
+                    <mat-label>Dostupnost</mat-label>
+                    <mat-select [(value)]="availableValue">
+                        <mat-option *ngFor="let available of availableList" [value]="available">{{available}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button class="filter-button" (click)="filter()"><mat-icon>hourglass_empty</mat-icon></button>
+                <button class="restore-button" (click)="resetFilters()"><mat-icon>close</mat-icon></button>
+            </div>
+            <div class="right">
+                <form [formGroup]="searchForm" class="search">
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Search" formControlName="name">
+                        <mat-icon matSuffix (click)="sarchByName()">search</mat-icon>
+                    </mat-form-field>
+                </form>
+            </div>
+
+        </div>
+        <div class="products">
+
+            <div class="tab-content">
+                <div class="post" *ngFor="let post of allBlogs; let i=index">
+                  <div class="head">
+                    <div class="info">
+                      <div class="mat-h2">Maja nikolic</div>
+                      <div class="stars">
+                        <mat-icon *ngFor="let number of rates">star</mat-icon>
+                    </div>
+                    </div>
+                    <div class="mat-h4">
+22 Jan, 2015
+                    </div>
+                  </div>
+                  <div class="mat-body-1">
+                  sdfsdfsdfdsfdf
+                  </div>
+                 
+                  
+                </div>
+               
+              </div>
+          
+        </div>
+    </div>
+</div>

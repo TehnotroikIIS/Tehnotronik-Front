@@ -40,7 +40,8 @@ import { BlogsSidebarComponent } from './blogs-sidebar/blogs-sidebar.component';
     NavbarUnregisteredComponent,
     HomeInfoComponent,
     CategoriesSidebarComponent,
-    EmployedMenuComponent
+    EmployedMenuComponent,
+    BlogsSidebarComponent
   ]
 })
 export class SharedModule { }
