@@ -107,9 +107,10 @@ export class AllBlogsComponent implements OnInit {
     }
     return false
   }
-  addLike(post: any, index: any) {
+  addLike(post: any, index: any,event:any) {
+    event?.stopPropagation();
     if (this.allBlogs[index].dislikes.indexOf(this.user.id) !== -1) {
-      this.removeDislike(post, index);
+      this.removeDislike(post, index,event);
     }
     this.allBlogs[index].likes.push(this.user.id);
     this.blogService.addLikeBlog(this.user.id, post.id).subscribe((data: any) => {
@@ -122,7 +123,8 @@ export class AllBlogsComponent implements OnInit {
 
   }
 
-  removeLike(post: any, index: any) {
+  removeLike(post: any, index: any,event:any) {
+    event?.stopPropagation();
     this.allBlogs[index].likes.forEach((value: { id: any; }, i: any) => {
       if (value == this.user.id) {
         this.allBlogs[index].likes.splice(i, 1);
@@ -135,9 +137,10 @@ export class AllBlogsComponent implements OnInit {
         console.log(error.error.message);
       });
   }
-  addDislike(post: any, index: any) {
+  addDislike(post: any, index: any,event:any) {
+    event?.stopPropagation();
     if (this.allBlogs[index].likes.indexOf(this.user.id) !== -1) {
-      this.removeLike(post, index);
+      this.removeLike(post, index,event);
     }
     this.allBlogs[index].dislikes.push(this.user.id);
     this.blogService.addDislikeBlog(this.user.id, post.id).subscribe((data: any) => {
@@ -154,7 +157,8 @@ export class AllBlogsComponent implements OnInit {
     }
     return false
   }
-  removeDislike(post: any, index: any) {
+  removeDislike(post: any, index: any,event:any) {
+    event?.stopPropagation();
     this.allBlogs[index].dislikes.forEach((value: { id: any; }, i: any) => {
       if (value == this.user.id) {
         this.allBlogs[index].dislikes.splice(i, 1);
@@ -275,20 +279,7 @@ export class AllBlogsComponent implements OnInit {
     this.dateValue = '';
   }
 
-  sarchByName() {
-    let name = this.searchForm.value.name;
-    if (name != '') {
-      this.productService.searchProduct(name).subscribe((data: any) => {
-        this.filterProducts1 = data;
-      },
-        error => {
-          console.log(error.error.message);
-        });
-    } else {
-      this.getAllBlogs();
-    }
-
-  }
+ 
 
   onResize(event: any) {
     if (event.target.innerWidth <= 786) {
@@ -303,18 +294,9 @@ export class AllBlogsComponent implements OnInit {
     this.gutterSize = window.innerWidth <= 768 ? '20px' : '40px';
   }
 
-  goToProductDetails(product: any) {
-    localStorage.setItem('selectedProduct', JSON.stringify(product));
-    this.router.navigate(['/product-details'])
-  }
-
-  getSelectedBlog() {
-    this.selectedBlog = JSON.parse(localStorage.getItem('selectedBlog') || '');
-    console.log(this.selectedBlog);
-    /*let grade = Math.round(this.selectedProduct.rate)
-    for (let i = 0; i < grade; i++) {
-      this.rates.push(i)
-    }*/
+  goToBlogDetails(product: any) {
+    localStorage.setItem('selectedBlog', JSON.stringify(product));
+    this.router.navigate(['/blog-details'])
   }
 
 
@@ -323,34 +305,13 @@ export class AllBlogsComponent implements OnInit {
       this.blogs = data;
       if (this.blogs != null) {
         this.blogs.forEach((value: any, i: any) => {
-          value.showComments = false;
-          value.newCommentText = '';
-          /* this.profileService.getAboutInfo(id).subscribe(data => {
-             value.userFirstName = data.firstName;
-             value.userLastName = data.lastName;
-             value.gender = data.gender;
-           });*/
-          this.getCommentUser(value);
-
         });
       }
-
-
-      /*this.sortedPosts = this.posts.sort(
-        (objA, objB) => new Date(objB.dateTimeOfPublishing).getTime() - new Date(objA.dateTimeOfPublishing).getTime(),
-      );*/
     }, error => {
       alert('Error! Try again!')
     })
   }
-  getCommentUser(post: any) {
-   /* post.comments.forEach((value: any, i: any) => {
-      this.profileService.getAboutInfo(value.userId).subscribe(data => {
-        value.userFirstName = data.firstName;
-        value.userLastName = data.lastName;
-        value.gender = data.gender;
-      })
-    });*/
-    this.allBlogs.push(post)
-  }
+
+  
+ 
 }
