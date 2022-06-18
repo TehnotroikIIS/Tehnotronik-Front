@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/core/models/category.model';
+import { FavoriteCategory } from 'src/app/core/models/favorite-category.model';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { JwtService } from 'src/app/core/services/jwt.service';
 
@@ -13,6 +14,10 @@ export class SubsribeComponent implements OnInit {
   favoriteCategories: any[] = [];
   categories: any[] = [];
   allcategories:any=[];
+  favorite:FavoriteCategory={
+    userId:'',
+    categoryId:''
+  }
   constructor(
     private categoryService: CategoryService,
     private jwtService: JwtService
@@ -44,5 +49,18 @@ export class SubsribeComponent implements OnInit {
 this.allcategories=data;
 this.getFavoriteCategories();
     })
+  }
+
+  remove(list:any){
+    this.favorite.userId=this.userId;
+    list.forEach((element: { value: any; }) => {
+      this.favorite.categoryId=element.value.id;
+      this.categoryService.removeFromFavorites(this.favorite).subscribe(data=>{
+      },error=>{
+        return;
+      }
+      )
+    });
+    window.location.reload();
   }
 }

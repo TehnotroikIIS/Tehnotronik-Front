@@ -8,11 +8,13 @@
    
         <h2>Pretplaćene kategorije</h2>
         <mat-selection-list #shoes>
-            <mat-list-option *ngFor="let item of categories">
+            <mat-list-option *ngFor="let item of categories" [value]="item">
               {{item.name}}
             </mat-list-option>
           </mat-selection-list>
+          <button class="primary-button" (click)="remove(shoes.selectedOptions.selected)">Ukloni iz pretplacenih</button>
     </div>
+  
     
 
 
