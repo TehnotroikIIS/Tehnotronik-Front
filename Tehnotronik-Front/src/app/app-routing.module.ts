@@ -18,6 +18,7 @@ import { EditProductComponent } from './products/edit-product/edit-product.compo
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { SalesComponent } from './products/sales/sales.component';
 import { EmployedMenuComponent } from './shared/employed-menu/employed-menu.component';
+import { OrderComponent } from './shopping/order/order.component';
 import { ShoppingCartComponent } from './shopping/shopping-cart/shopping-cart.component';
 import { UserDetailsComponent } from './shopping/user-details/user-details.component';
 import { UserOrdersComponent } from './shopping/user-orders/user-orders.component';
@@ -107,6 +108,10 @@ const routes: Routes = [
   {
     path: 'user-orders',
     component: UserOrdersComponent
+  },
+  {
+    path: 'order',
+    component: OrderComponent
   },
   {
     path: '**',

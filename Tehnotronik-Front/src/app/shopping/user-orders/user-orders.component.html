@@ -4,14 +4,15 @@
     <div class="right-content">
         <div class="register-title">Pregled svih porudžbina</div>
         <div class="products">
-            <mat-card class="rest-card" *ngFor="let order of orders">
+            <mat-card class="rest-card" > <!--*ngFor="let order of orders" DODATI PORED-->
                 <mat-card-content class="card-content">
                     <div class="center">
-                        <!--<div class="price">{{item.price}} din</div>
-                        <div class="price">{{item.quantity}} kom</div>-->
+                        <div class="price">Dostava je u toku</div>
+                        <div class="price">Ukupno: <!--{{order.totalPrice}}--> din</div>
                     </div>
                         <div class="center">
                             <button class="primary-button" (click)="viewOrder()">Pregled porudžbine</button>
+                            <!--order DODATI U VIEWORDER()-->
                         </div>
                 </mat-card-content>
             </mat-card>
