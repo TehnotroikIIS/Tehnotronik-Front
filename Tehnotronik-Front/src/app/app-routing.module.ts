@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Subscriber } from 'rxjs';
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 import { NoAuthGuard } from './auth/guards/no-auth.guard';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
@@ -11,6 +12,7 @@ import { BlogDetailsComponent } from './blogs/blog-details/blog-details.componen
 import { EditBlogComponent } from './blogs/edit-blog/edit-blog.component';
 import { FavoriteBlogsComponent } from './blogs/favorite-blogs/favorite-blogs.component';
 import { PopularBlogsComponent } from './blogs/popular-blogs/popular-blogs.component';
+import { SubsribeComponent } from './blogs/subsribe/subsribe.component';
 import { AboutUsComponent } from './home/about-us/about-us.component';
 import { ContactComponent } from './home/contact/contact.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
@@ -100,6 +102,11 @@ const routes: Routes = [
   {
     path: 'favorite-blogs',
     component: FavoriteBlogsComponent,
+    canActivate: [NoAuthGuard],
+  },
+  {
+    path: 'subscribe-blogs',
+    component: SubsribeComponent,
     canActivate: [NoAuthGuard],
   },
   {
