@@ -23,6 +23,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { OrderComponent } from './order/order.component';
 import { FinishShoppingComponent } from './finish-shopping/finish-shopping.component';
+import { FactureComponent } from './facture/facture.component';
 
 
 
@@ -32,7 +33,8 @@ import { FinishShoppingComponent } from './finish-shopping/finish-shopping.compo
     UserDetailsComponent,
     UserOrdersComponent,
     OrderComponent,
-    FinishShoppingComponent
+    FinishShoppingComponent,
+    FactureComponent
   ],
   imports: [
     CommonModule,

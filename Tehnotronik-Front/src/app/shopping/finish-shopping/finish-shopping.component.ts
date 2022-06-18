@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-finish-shopping',
@@ -7,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinishShoppingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  printFacture(){}
+  printFacture(){
+    this.router.navigate(['/facture'])
+  }
   viewOrder(){}
   addComment(){}
 }

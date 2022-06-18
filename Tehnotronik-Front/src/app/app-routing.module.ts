@@ -22,6 +22,7 @@ import { EditProductComponent } from './products/edit-product/edit-product.compo
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { SalesComponent } from './products/sales/sales.component';
 import { EmployedMenuComponent } from './shared/employed-menu/employed-menu.component';
+import { FactureComponent } from './shopping/facture/facture.component';
 import { FinishShoppingComponent } from './shopping/finish-shopping/finish-shopping.component';
 import { OrderComponent } from './shopping/order/order.component';
 import { ShoppingCartComponent } from './shopping/shopping-cart/shopping-cart.component';
@@ -135,6 +136,10 @@ const routes: Routes = [
   {
     path: 'finish-shopping',
     component: FinishShoppingComponent
+  },
+  {
+    path: 'facture',
+    component: FactureComponent
   },
   {
     path: '**',
