@@ -47,9 +47,8 @@
             </div>
         </div>
         <div class="comments">
-            <div class="bold">Komentari:</div>
-            <button class="review-button" *ngIf="isAuthenticated" (click)="opetAddReviewDialog( $event)">Dodaj
-                komentar</button>
+            <div class="bold">Komentari:  <button class="star-button" *ngIf="isAuthenticated" (click)="opetAddReviewDialog( $event)"><mat-icon>add</mat-icon></button>
+            </div>
             <br>
             <div class="comment">
                 <div class="comment-row">

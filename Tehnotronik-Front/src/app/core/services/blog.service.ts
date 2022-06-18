@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { EditBlog } from '../models/edit-blog.model';
 import { EditProduct } from '../models/edit-product.model';
 import { NewBlog } from '../models/new-blog.model';
 import { NewReview } from '../models/new-review.model';
@@ -24,8 +25,8 @@ export class BlogService {
   createBlog(blog: NewBlog): Observable<any> {
     return this.http.post(`${environment.api_url}create-blog`, blog, { headers: this.headers, responseType: 'json' });
   }
-  editBlog(product: EditProduct): Observable<any> {
-    return this.http.post(`${environment.api_url}update-blog`, product, { headers: this.headers, responseType: 'json' });
+  editBlog(blog: EditBlog): Observable<any> {
+    return this.http.post(`${environment.api_url}update-blog`, blog, { headers: this.headers, responseType: 'json' });
   }
   deleteBlog(productId: string): Observable<any> {
     return this.http.delete(`${environment.api_url}delete-product`, {

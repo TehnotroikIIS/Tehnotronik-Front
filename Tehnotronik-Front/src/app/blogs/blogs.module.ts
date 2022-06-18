@@ -20,12 +20,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AddBlogComponent } from './add-blog/add-blog.component';
 import { AllBlogsComponent } from './all-blogs/all-blogs.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
+import { EditBlogComponent } from './edit-blog/edit-blog.component';
 
 @NgModule({
   declarations: [
     AddBlogComponent,
     AllBlogsComponent,
-    BlogDetailsComponent
+    BlogDetailsComponent,
+    EditBlogComponent
   ],
   imports: [
     CommonModule,
