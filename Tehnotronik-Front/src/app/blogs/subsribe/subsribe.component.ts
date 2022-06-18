@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'src/app/core/models/category.model';
+import { CategoryService } from 'src/app/core/services/category.service';
+import { JwtService } from 'src/app/core/services/jwt.service';
 
 @Component({
   selector: 'app-subsribe',
@@ -6,10 +9,40 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./subsribe.component.scss']
 })
 export class SubsribeComponent implements OnInit {
-
-  constructor() { }
+  userId: any;
+  favoriteCategories: any[] = [];
+  categories: any[] = [];
+  allcategories:any=[];
+  constructor(
+    private categoryService: CategoryService,
+    private jwtService: JwtService
+  ) { }
 
   ngOnInit(): void {
+    this.userId = this.jwtService.getUserId();
+    this.getAllCategories();
+   // this.getFavoriteCategories();
   }
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+
+  getFavoriteCategories() {
+    this.categoryService.getFavoriteByUser(this.userId).subscribe(data => {
+      this.favoriteCategories = data;
+      this.allcategories.forEach((element:any) => {
+        this.favoriteCategories.forEach((element1: any) => {
+          if(element1==element.id){
+            this.categories.push(element);
+          }
+        });
+      });
+    },error=>{
+      alert('Greska')
+    })
+  }
+
+  getAllCategories(){
+    this.categoryService.getAllBlogCategories().subscribe(data=>{
+this.allcategories=data;
+this.getFavoriteCategories();
+    })
+  }
 }

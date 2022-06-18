@@ -21,20 +21,11 @@
 .categories{
     width: 70%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap:20px;
 }
 
-.left{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-}
-.right{
-    flex-direction: column;
-    display: flex;
-    width: 50%;
-}
+
 
 .mat-selection-list{
     width: 100%;

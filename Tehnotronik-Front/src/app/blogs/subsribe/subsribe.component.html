@@ -5,23 +5,16 @@
   <app-blogs-sidebar></app-blogs-sidebar>
   <div class="content">
    <div class="categories">
-    <div class="left">
+   
         <h2>Pretplaćene kategorije</h2>
         <mat-selection-list #shoes>
-            <mat-list-option *ngFor="let shoe of typesOfShoes">
-              {{shoe}}
+            <mat-list-option *ngFor="let item of categories">
+              {{item.name}}
             </mat-list-option>
           </mat-selection-list>
     </div>
-    <div class="right">
-        <h2>Nepretplaćene kategorije</h2>
-        <mat-selection-list #shoes>
-            <mat-list-option *ngFor="let shoe of typesOfShoes">
-              {{shoe}}
-            </mat-list-option>
-          </mat-selection-list>
-    </div>
-   </div>
+    
+
 
       
 
