@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { StorageViewComponent } from './storage-view/storage-view.component';
+import {MatTableModule} from '@angular/material/table';
 
 
 
@@ -48,7 +49,8 @@ import { StorageViewComponent } from './storage-view/storage-view.component';
     MatTabsModule,
     MatGridListModule,
     MatCardModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatTableModule
   ]
 })
 export class StorageModule { }
