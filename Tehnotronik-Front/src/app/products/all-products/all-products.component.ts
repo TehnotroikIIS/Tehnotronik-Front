@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { ProductService } from 'src/app/core/services/product.service';
+import { ShoppingService } from 'src/app/core/services/shopping.service';
 
 @Component({
   selector: 'app-all-products',
@@ -27,6 +28,7 @@ export class AllProductsComponent implements OnInit {
   @ViewChild('showProduct') addDialog!: any;
   constructor(
     private productService: ProductService,
+    private shoppingService: ShoppingService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private router: Router,
@@ -260,11 +262,19 @@ export class AllProductsComponent implements OnInit {
   }
 
   add(): any {
-    alert(this.showProductForm.value.quantity)
+    this.selectedProduct.quantity=this.showProductForm.value.quantity;
+    this.shoppingService.addToCart(this.selectedProduct).subscribe(data=>{
+      alert('Proizvod je dodat u korpu');
+      window.location.reload()
+    },error=>{
+      alert('Nije moguće dodati ovaj proizvod')
+    })
+
+    /*alert(this.showProductForm.value.quantity)
     let category = {
       quantity: this.showProductForm.value.quantity
     }
-    /*this.categoryService.createCategory(category).subscribe(data=>{
+    this.categoryService.createCategory(category).subscribe(data=>{
       alert('Proizvod je dodat u korpu za kupovinu')
       window.location.reload()
     },error=>{

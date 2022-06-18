@@ -43,7 +43,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     BrowserModule,
     RouterModule,
     BrowserAnimationsModule,
-    MatInputModule,
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -57,7 +56,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatFormFieldModule,
     MatToolbarModule,
     MatTabsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatInputModule,
   ]
 })
 export class ShoppingModule { }
