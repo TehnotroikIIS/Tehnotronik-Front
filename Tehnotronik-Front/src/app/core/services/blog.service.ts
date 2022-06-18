@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BlogComment } from '../models/blog-comment.model';
+import { BlogLink } from '../models/blog-link.model';
 import { BlogRate } from '../models/blog-rate.model';
 import { EditBlog } from '../models/edit-blog.model';
 import { EditProduct } from '../models/edit-product.model';
@@ -137,5 +138,11 @@ export class BlogService {
       }, headers: this.headers, responseType: 'json'
     });
   }
+
+  //link product
+  linkProduct(link: BlogLink): Observable<any> {
+    return this.http.post(`${environment.api_url}connect-with-product`, link, { headers: this.headers, responseType: 'json' });
+  }
+
 
 }

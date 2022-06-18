@@ -25,6 +25,7 @@ import { PopularBlogsComponent } from './popular-blogs/popular-blogs.component';
 import { FavoriteBlogsComponent } from './favorite-blogs/favorite-blogs.component';
 import { SubsribeComponent } from './subsribe/subsribe.component';
 import {MatListModule} from '@angular/material/list';
+import { LinkBlogComponent } from './link-blog/link-blog.component';
 @NgModule({
   declarations: [
     AddBlogComponent,
@@ -33,7 +34,8 @@ import {MatListModule} from '@angular/material/list';
     EditBlogComponent,
     PopularBlogsComponent,
     FavoriteBlogsComponent,
-    SubsribeComponent
+    SubsribeComponent,
+    LinkBlogComponent
   ],
   imports: [
     CommonModule,

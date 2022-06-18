@@ -1,0 +1,25 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+
+<div class="container">
+  <app-blogs-sidebar></app-blogs-sidebar>
+  <div class="content">
+   <div class="categories">
+   
+        <h2>Dostupni proizvodi:</h2>
+        <mat-selection-list #shoes [multiple]="false">
+            <mat-list-option *ngFor="let item of allProducts" [value]="item">
+              {{item.name}} , {{item.manufacturer}} , {{item.price}}din
+            </mat-list-option>
+          </mat-selection-list>
+          <button class="primary-button" (click)="link(shoes.selectedOptions.selected)">Uveži sa blogom</button>
+    </div>
+  
+    
+
+
+      
+
+  
+  </div>
+</div>
