@@ -66,7 +66,7 @@ export class AllBlogsComponent implements OnInit {
   sort = new FormControl();
   industry = new FormControl();
   age = new FormControl();
-  sortList: string[] = ['Od najniže cene', 'Od najviše cene'];
+  sortList: string[] = ['Datum rastuće', 'Datum opadajuće', 'Broj lajkova', 'Broj komentara', 'Ocena'];
   dateList: string[] = ['Danas', 'Ovog meseca','Ove godine'];
   noExperienceList: any[] = []
 
@@ -157,54 +157,37 @@ export class AllBlogsComponent implements OnInit {
       });
   }
 
-  async priceFilter() {
-    if (this.priceValue != '') {
-      let scope = this.getPriceScope();
-      this.productService.getBetweenPrices(scope.min, scope.max).subscribe(data => {
-        this.filterProducts1.splice(0, this.filterProducts1.length);
-        data.forEach((element: any) => {
-          this.sales.forEach(element1 => {
-            if (element.id == element1.productId) {
-              let newPrice = element.price * (1 - element1.discount / 100);
-              newPrice = Math.round((newPrice + Number.EPSILON) * 100) / 100
-              element.newPrice = newPrice;
-              element.discount = element1.discount;
-
-            }
-          });
-        });
-        data.forEach((element: any, index: any) => {
-          this.filterProducts.forEach((element1: any, index1: any) => {
-            if (element1.name == element.name) {
-              this.filterProducts1.push(element);
-            }
-          });
-        });
-      })
-
-    } else {
-      this.filterProducts1 = this.filterProducts;
-    }
-    await this.delay(500);
-    this.sortFilter();
-  }
+  
 
   sortFilter() {
     if (this.sortValue != '') {
-      let newProducts = [];
-      if (this.sortValue == 'Od najniže cene') {
-        newProducts = this.filterProducts1.sort(
-          (objA, objB) => objA.price - objB.price,
+      let newBlogs = [];
+      if (this.sortValue == 'Datum rastuće') {
+        this.allBlogs = this.allBlogs.sort(
+          (objA, objB) => new Date(objA.dateOfPublishing).getTime() - new Date(objB.dateOfPublishing).getTime(),
         );
-        this.filterProducts = newProducts;
       }
-      else {
-        newProducts = this.filterProducts1.sort(
-          (objA, objB) => objB.price - objA.price,
+      else if(this.sortValue == 'Datum opadajuće') {
+        this.allBlogs = this.allBlogs.sort(
+          (objA, objB) => new Date(objB.dateOfPublishing).getTime() - new Date(objA.dateOfPublishing).getTime(),
         );
-        this.filterProducts1 = newProducts;
       }
-
+      else if(this.sortValue == 'Broj lajkova') {
+        this.allBlogs = this.allBlogs.sort(
+          (objA, objB) => objB.likes.length - objA.likes.length,
+        );
+      }
+      else if(this.sortValue == 'Broj komentara') {
+        this.allBlogs = this.allBlogs.sort(
+          (objA, objB) => objB.comments.length - objA.comments.length,
+        );
+      }
+      else if(this.sortValue == 'Ocena') {
+        this.allBlogs = this.allBlogs.sort(
+          (objA, objB) => objB.rate - objA.rate,
+        );
+      }
+      
     }
   }
 
@@ -242,6 +225,7 @@ export class AllBlogsComponent implements OnInit {
     }
     this.allBlogs=newList;
    }
+   this.sortFilter();
 
   }
 
