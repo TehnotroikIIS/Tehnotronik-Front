@@ -1,0 +1,47 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+
+<div class="container">
+  <app-blogs-sidebar></app-blogs-sidebar>
+  <div class="content">
+   
+    <div class="products">
+
+      <div class="tab-content">
+        <div class="post" *ngFor="let blog of allBlogs; let i=index" (click)="goToBlogDetails(blog)">
+          <div class="head">
+            <div class="info">
+              <div class="mat-h2">{{blog.name}}</div>
+              <div class="stars">
+                <mat-icon *ngFor="let number of blog.rates">star</mat-icon>
+              </div>
+            </div>
+            <div class="mat-h4">
+              {{blog.dateOfPublishing  | date:'mediumDate'}}
+            </div>
+          </div>
+          <div class="mat-body-1">
+            {{blog.text.substring( 0, 200 )}}...
+          </div>
+          <div class="reactions">
+            <button class="like-button" *ngIf="isLiked(i)==true" (click)="removeLike(blog,i,$event)">
+              <mat-icon>thumb_up</mat-icon>{{blog.likes.length}}
+            </button>
+            <button class="reaction-button" *ngIf="!isLiked(i)"  (click)="addLike(blog,i,$event)">
+              <mat-icon>thumb_up</mat-icon>{{blog.likes.length}}
+            </button>
+            <button class="dislike-button" *ngIf="isDisliked(i)==true" (click)="removeDislike(blog,i,$event)">
+              <mat-icon>thumb_down</mat-icon>{{blog.dislikes.length}}
+            </button>
+            <button  class="reaction-button" *ngIf="!isDisliked(i)" (click)="addDislike(blog,i,$event)">
+              <mat-icon>thumb_down</mat-icon>{{blog.dislikes.length}}
+            </button>
+          
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

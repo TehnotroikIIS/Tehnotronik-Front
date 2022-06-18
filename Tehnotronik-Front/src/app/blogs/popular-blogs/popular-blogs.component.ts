@@ -8,11 +8,11 @@ import { BlogService } from 'src/app/core/services/blog.service';
 import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
-  selector: 'app-all-blogs',
-  templateUrl: './all-blogs.component.html',
-  styleUrls: ['./all-blogs.component.scss']
+  selector: 'app-popular-blogs',
+  templateUrl: './popular-blogs.component.html',
+  styleUrls: ['./popular-blogs.component.scss']
 })
-export class AllBlogsComponent implements OnInit {
+export class PopularBlogsComponent implements OnInit {
   allProducts: any[] = [];
   blogs: any = [];
   allBlogs:any[]=[]
@@ -31,7 +31,6 @@ export class AllBlogsComponent implements OnInit {
   user:any;
   selectedCategory:any;
   isAuthenticated: boolean = false;
-  @ViewChild('showProduct') addDialog!: any;
   constructor(
     private productService: ProductService,
     private formBuilder: FormBuilder,
@@ -75,26 +74,21 @@ export class AllBlogsComponent implements OnInit {
   async getAllBlogs() {
     this.blogService.getAllBlogs().subscribe(data => {
       this.allBlogs = data;
-      this.allBlogs.forEach(element => {
+      this.allBlogs.forEach(async element => {
         let grade = Math.round(element.rate)
         let rates=[];
         for (let i = 0; i < grade; i++) {
           rates.push(i)
         }
         element.rates=rates;
+        let numReactions=element.likes.length+element.dislikes.length+element.comments.length;
+        element.numReactions=numReactions;
+        await this.delay(200);
+        this.sortFilter();
       });
       console.log(this.allBlogs)
     }, error => {
       alert('Greska!')
-    })
-  }
-
-  async getBlogsByCategory(category: any) {
-    this.selectedCategory=category;
-    this.blogService.getBlogsByCategory(category.id).subscribe(data => {
-      this.allBlogs = data
-    }, error => {
-      alert('Greska')
     })
   }
 
@@ -174,95 +168,15 @@ export class AllBlogsComponent implements OnInit {
 
   
 
-  sortFilter() {
-    if (this.sortValue != '') {
-      let newBlogs = [];
-      if (this.sortValue == 'Datum rastuće') {
-        this.allBlogs = this.allBlogs.sort(
-          (objA, objB) => new Date(objA.dateOfPublishing).getTime() - new Date(objB.dateOfPublishing).getTime(),
-        );
-      }
-      else if(this.sortValue == 'Datum opadajuće') {
-        this.allBlogs = this.allBlogs.sort(
-          (objA, objB) => new Date(objB.dateOfPublishing).getTime() - new Date(objA.dateOfPublishing).getTime(),
-        );
-      }
-      else if(this.sortValue == 'Broj lajkova') {
-        this.allBlogs = this.allBlogs.sort(
-          (objA, objB) => objB.likes.length - objA.likes.length,
-        );
-      }
-      else if(this.sortValue == 'Broj komentara') {
-        this.allBlogs = this.allBlogs.sort(
-          (objA, objB) => objB.comments.length - objA.comments.length,
-        );
-      }
-      else if(this.sortValue == 'Ocena') {
-        this.allBlogs = this.allBlogs.sort(
-          (objA, objB) => objB.rate - objA.rate,
-        );
-      }
-      
-    }
+  sortFilter() { 
+     this.allBlogs = this.allBlogs.sort(
+          (objA, objB) => objB.numReactions - objA.numReactions,
+        );  
+    this.allBlogs=this.allBlogs.slice(0,10);
+     this.allBlogs = this.allBlogs.sort(
+        (objA, objB) => objB.rate - objA.rate,
+      );  
   }
-
-
-  async filter() {
-    if(this.selectedCategory!=null){
-      this.getBlogsByCategory(this.selectedCategory);
-    }
-    else{
-      this.getAllBlogs()
-    }
-  
-    await this.delay(200);
-
-    let newList: any[]=[];
-   if(this.dateValue!=''){
-    if(this.dateValue=='Danas'){
-      let today=new Date()
-      this.allBlogs.forEach(element => {
-        let date=new Date(element.dateOfPublishing)
-        if(date.getFullYear()===today.getFullYear() && date.getMonth()==today.getMonth() && date.getDay()==today.getDay()){
-          newList.push(element) 
-        }
-      });
-    }else if(this.dateValue=='Ovog meseca'){
-      let today=new Date()
-      this.allBlogs.forEach(element => {
-        let date=new Date(element.dateOfPublishing)
-        if(date.getFullYear()===today.getFullYear() && date.getMonth()==today.getMonth()){ 
-          newList.push(element) 
-        }
-      });
-    }else{
-      let today=new Date()
-      this.allBlogs.forEach(element => {
-        let date=new Date(element.dateOfPublishing)
-        if(date.getFullYear()===today.getFullYear()){ 
-          newList.push(element) 
-        }
-      });
-    }
-    this.allBlogs=newList;
-   }
-   await this.delay(300);
-   this.sortFilter();
-
-  }
-
-  resetFilters() {
-    if(this.selectedCategory!=null){
-      this.getBlogsByCategory(this.selectedCategory);
-    }
-    else{
-      this.getAllBlogs()
-    }
-    this.sortValue = '';
-    this.dateValue = '';
-  }
-
- 
 
   onResize(event: any) {
     if (event.target.innerWidth <= 786) {

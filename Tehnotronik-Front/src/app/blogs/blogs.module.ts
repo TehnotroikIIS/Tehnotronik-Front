@@ -21,13 +21,15 @@ import { AddBlogComponent } from './add-blog/add-blog.component';
 import { AllBlogsComponent } from './all-blogs/all-blogs.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { EditBlogComponent } from './edit-blog/edit-blog.component';
+import { PopularBlogsComponent } from './popular-blogs/popular-blogs.component';
 
 @NgModule({
   declarations: [
     AddBlogComponent,
     AllBlogsComponent,
     BlogDetailsComponent,
-    EditBlogComponent
+    EditBlogComponent,
+    PopularBlogsComponent
   ],
   imports: [
     CommonModule,
