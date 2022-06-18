@@ -1,3 +1,4 @@
+import { TmplAstBoundAttribute } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,7 +21,7 @@ export class AllBlogsComponent implements OnInit {
   breakpoint: number = 1;
   gutterSize: string = '40px';
   priceValue: any = '';
-  availableValue: any = '';
+  dateValue: any = '';
   sortValue: any = '';
   filterProducts: any[] = [];
   filterProducts1: any[] = [];
@@ -66,8 +67,7 @@ export class AllBlogsComponent implements OnInit {
   industry = new FormControl();
   age = new FormControl();
   sortList: string[] = ['Od najniže cene', 'Od najviše cene'];
-  availableList: string[] = ['Svi', 'Dostupni'];
-  priceList: string[] = ['<500', '500-3000', '3000-10000', '>10000']
+  dateList: string[] = ['Danas', 'Ovog meseca','Ove godine'];
   noExperienceList: any[] = []
 
   async getAllBlogs() {
@@ -87,31 +87,7 @@ export class AllBlogsComponent implements OnInit {
     })
   }
 
-  async avabilityFilter() {
-    if (this.availableValue == 'Dostupni') {
-      this.productService.getAvailableProducts().subscribe(data => {
-        this.filterProducts = data;
-        this.filterProducts.forEach(element => {
-          this.sales.forEach(element1 => {
-            if (element.id == element1.productId) {
-              let newPrice = element.price * (1 - element1.discount / 100);
-              newPrice = Math.round((newPrice + Number.EPSILON) * 100) / 100
-              element.newPrice = newPrice;
-              element.discount = element1.discount;
-
-            }
-          });
-        });
-        console.log(this.filterProducts);
-
-      }, error => {
-        alert('Greska')
-      })
-    }
-    await this.delay(500);
-    this.priceFilter();
-  }
-
+ 
   isLiked(index: any): boolean {
     if(this.allBlogs[index].likes==null)
       return false;
@@ -234,10 +210,38 @@ export class AllBlogsComponent implements OnInit {
 
 
   async filter() {
-    this.getAllBlogs();
-    this.filterProducts = this.filterProducts1;
-    await this.delay(500);
-    this.avabilityFilter();
+    this.getAllBlogs()
+    await this.delay(200);
+
+    let newList: any[]=[];
+   if(this.dateValue!=''){
+    if(this.dateValue=='Danas'){
+      let today=new Date()
+      this.allBlogs.forEach(element => {
+        let date=new Date(element.dateOfPublishing)
+        if(date.getFullYear()===today.getFullYear() && date.getMonth()==today.getMonth() && date.getDay()==today.getDay()){
+          newList.push(element) 
+        }
+      });
+    }else if(this.dateValue=='Ovog meseca'){
+      let today=new Date()
+      this.allBlogs.forEach(element => {
+        let date=new Date(element.dateOfPublishing)
+        if(date.getFullYear()===today.getFullYear() && date.getMonth()==today.getMonth()){ 
+          newList.push(element) 
+        }
+      });
+    }else{
+      let today=new Date()
+      this.allBlogs.forEach(element => {
+        let date=new Date(element.dateOfPublishing)
+        if(date.getFullYear()===today.getFullYear()){ 
+          newList.push(element) 
+        }
+      });
+    }
+    this.allBlogs=newList;
+   }
 
   }
 
@@ -261,8 +265,7 @@ export class AllBlogsComponent implements OnInit {
   resetFilters() {
     this.getAllBlogs()
     this.sortValue = '';
-    this.priceValue = '';
-    this.availableValue = '';
+    this.dateValue = '';
   }
 
   sarchByName() {
