@@ -15,6 +15,7 @@ import { ShoppingService } from 'src/app/core/services/shopping.service';
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
+  userId: any;
   allProducts: any[] = [];
   selectedProduct: any;
   filterProducts:any[]=[];
@@ -29,7 +30,7 @@ export class ShoppingCartComponent implements OnInit {
   }
   shoppingCart: ShoppingCart = {
     userId: '',
-    shoppingCartItem: []
+    shoppingCartItems: []
   }
   shoppingCartRemove: ShoppingCartRemove = {
     shoppingCartItemId: '',
@@ -52,6 +53,7 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit(): void {
     this.productsInCart = [];
     this.getAllProducts();
+    this.getProductInfo();
   }
 
   delay(ms: number) {
@@ -77,20 +79,34 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   remove(product: any){
-    this.selectedProduct=product;
+    this.shoppingCart.userId=this.userId;
+    this.shoppingCart.shoppingCartItems=this.productsInCart;
+    this.shoppingService.removeFromCart(this.shoppingCart).subscribe(data=>{
+    },error=>{
+      return;
+    }
+    )
+    window.location.reload();
+    /*this.selectedProduct=product;
     this.shoppingCart.userId=this.jwtService.getUserId();
-    this.shoppingCart.shoppingCartItem=this.productsInCart;
+    this.shoppingCart.shoppingCartItems=this.productsInCart;
     //this.shoppingCartRemove.shoppingCartId=this.shoppingService.getCartById();
     this.shoppingService.removeFromCart(this.shoppingCart).subscribe(data=>{
       alert('Proizvod je uklonjen iz korpe');
       this.router.navigate(['/all-products'])
     },error=>{
       alert('Greska!')
-    })
-  }
+    })*/
+  };
+
+  getProductInfo(){
+    this.selectedProduct = JSON.parse(localStorage.getItem('selectedProduct') || '');
+    this.showProductForm.get('quantity')?.setValue(this.selectedProduct.quantity);   
+   }
 
   confirm(): any{
     this.shoppingCartItem.quantity=this.showProductForm.value.quantity;
+    // ***** DODATI SERVIS *****
     alert(this.showProductForm.value.quantity)
     let category={
       quantity:this.showProductForm.value.quantity
