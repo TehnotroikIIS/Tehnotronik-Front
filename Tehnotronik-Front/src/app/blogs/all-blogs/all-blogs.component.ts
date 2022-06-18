@@ -29,6 +29,7 @@ export class AllBlogsComponent implements OnInit {
   showProductForm: FormGroup;
   sales: any[] = [];
   user:any;
+  selectedCategory:any;
   isAuthenticated: boolean = false;
   @ViewChild('showProduct') addDialog!: any;
   constructor(
@@ -48,6 +49,7 @@ export class AllBlogsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectedCategory=null;
     this.user = JSON.parse(localStorage.getItem('userDetails') || '');
     console.log(this.user)
     this.breakpoint = window.innerWidth <= 768 ? 1 : 3;
@@ -73,6 +75,14 @@ export class AllBlogsComponent implements OnInit {
   async getAllBlogs() {
     this.blogService.getAllBlogs().subscribe(data => {
       this.allBlogs = data;
+      this.allBlogs.forEach(element => {
+        let grade = Math.round(element.rate)
+        let rates=[];
+        for (let i = 0; i < grade; i++) {
+          rates.push(i)
+        }
+        element.rates=rates;
+      });
       console.log(this.allBlogs)
     }, error => {
       alert('Greska!')
@@ -80,6 +90,7 @@ export class AllBlogsComponent implements OnInit {
   }
 
   async getBlogsByCategory(category: any) {
+    this.selectedCategory=category;
     this.blogService.getBlogsByCategory(category.id).subscribe(data => {
       this.allBlogs = data
     }, error => {
@@ -193,7 +204,13 @@ export class AllBlogsComponent implements OnInit {
 
 
   async filter() {
-    this.getAllBlogs()
+    if(this.selectedCategory!=null){
+      this.getBlogsByCategory(this.selectedCategory);
+    }
+    else{
+      this.getAllBlogs()
+    }
+  
     await this.delay(200);
 
     let newList: any[]=[];
@@ -225,6 +242,7 @@ export class AllBlogsComponent implements OnInit {
     }
     this.allBlogs=newList;
    }
+   await this.delay(300);
    this.sortFilter();
 
   }
@@ -247,7 +265,12 @@ export class AllBlogsComponent implements OnInit {
   }
 
   resetFilters() {
-    this.getAllBlogs()
+    if(this.selectedCategory!=null){
+      this.getBlogsByCategory(this.selectedCategory);
+    }
+    else{
+      this.getAllBlogs()
+    }
     this.sortValue = '';
     this.dateValue = '';
   }
