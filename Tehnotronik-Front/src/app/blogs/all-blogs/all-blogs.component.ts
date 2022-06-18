@@ -1,3 +1,4 @@
+import { TmplAstBoundAttribute } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,7 +21,7 @@ export class AllBlogsComponent implements OnInit {
   breakpoint: number = 1;
   gutterSize: string = '40px';
   priceValue: any = '';
-  availableValue: any = '';
+  dateValue: any = '';
   sortValue: any = '';
   filterProducts: any[] = [];
   filterProducts1: any[] = [];
@@ -28,6 +29,7 @@ export class AllBlogsComponent implements OnInit {
   showProductForm: FormGroup;
   sales: any[] = [];
   user:any;
+  selectedCategory:any;
   isAuthenticated: boolean = false;
   @ViewChild('showProduct') addDialog!: any;
   constructor(
@@ -47,6 +49,7 @@ export class AllBlogsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectedCategory=null;
     this.user = JSON.parse(localStorage.getItem('userDetails') || '');
     console.log(this.user)
     this.breakpoint = window.innerWidth <= 768 ? 1 : 3;
@@ -65,14 +68,21 @@ export class AllBlogsComponent implements OnInit {
   sort = new FormControl();
   industry = new FormControl();
   age = new FormControl();
-  sortList: string[] = ['Od najniže cene', 'Od najviše cene'];
-  availableList: string[] = ['Svi', 'Dostupni'];
-  priceList: string[] = ['<500', '500-3000', '3000-10000', '>10000']
+  sortList: string[] = ['Datum rastuće', 'Datum opadajuće', 'Broj lajkova', 'Broj komentara', 'Ocena'];
+  dateList: string[] = ['Danas', 'Ovog meseca','Ove godine'];
   noExperienceList: any[] = []
 
   async getAllBlogs() {
     this.blogService.getAllBlogs().subscribe(data => {
       this.allBlogs = data;
+      this.allBlogs.forEach(element => {
+        let grade = Math.round(element.rate)
+        let rates=[];
+        for (let i = 0; i < grade; i++) {
+          rates.push(i)
+        }
+        element.rates=rates;
+      });
       console.log(this.allBlogs)
     }, error => {
       alert('Greska!')
@@ -80,6 +90,7 @@ export class AllBlogsComponent implements OnInit {
   }
 
   async getBlogsByCategory(category: any) {
+    this.selectedCategory=category;
     this.blogService.getBlogsByCategory(category.id).subscribe(data => {
       this.allBlogs = data
     }, error => {
@@ -87,31 +98,7 @@ export class AllBlogsComponent implements OnInit {
     })
   }
 
-  async avabilityFilter() {
-    if (this.availableValue == 'Dostupni') {
-      this.productService.getAvailableProducts().subscribe(data => {
-        this.filterProducts = data;
-        this.filterProducts.forEach(element => {
-          this.sales.forEach(element1 => {
-            if (element.id == element1.productId) {
-              let newPrice = element.price * (1 - element1.discount / 100);
-              newPrice = Math.round((newPrice + Number.EPSILON) * 100) / 100
-              element.newPrice = newPrice;
-              element.discount = element1.discount;
-
-            }
-          });
-        });
-        console.log(this.filterProducts);
-
-      }, error => {
-        alert('Greska')
-      })
-    }
-    await this.delay(500);
-    this.priceFilter();
-  }
-
+ 
   isLiked(index: any): boolean {
     if(this.allBlogs[index].likes==null)
       return false;
@@ -181,63 +168,82 @@ export class AllBlogsComponent implements OnInit {
       });
   }
 
-  async priceFilter() {
-    if (this.priceValue != '') {
-      let scope = this.getPriceScope();
-      this.productService.getBetweenPrices(scope.min, scope.max).subscribe(data => {
-        this.filterProducts1.splice(0, this.filterProducts1.length);
-        data.forEach((element: any) => {
-          this.sales.forEach(element1 => {
-            if (element.id == element1.productId) {
-              let newPrice = element.price * (1 - element1.discount / 100);
-              newPrice = Math.round((newPrice + Number.EPSILON) * 100) / 100
-              element.newPrice = newPrice;
-              element.discount = element1.discount;
-
-            }
-          });
-        });
-        data.forEach((element: any, index: any) => {
-          this.filterProducts.forEach((element1: any, index1: any) => {
-            if (element1.name == element.name) {
-              this.filterProducts1.push(element);
-            }
-          });
-        });
-      })
-
-    } else {
-      this.filterProducts1 = this.filterProducts;
-    }
-    await this.delay(500);
-    this.sortFilter();
-  }
+  
 
   sortFilter() {
     if (this.sortValue != '') {
-      let newProducts = [];
-      if (this.sortValue == 'Od najniže cene') {
-        newProducts = this.filterProducts1.sort(
-          (objA, objB) => objA.price - objB.price,
+      let newBlogs = [];
+      if (this.sortValue == 'Datum rastuće') {
+        this.allBlogs = this.allBlogs.sort(
+          (objA, objB) => new Date(objA.dateOfPublishing).getTime() - new Date(objB.dateOfPublishing).getTime(),
         );
-        this.filterProducts = newProducts;
       }
-      else {
-        newProducts = this.filterProducts1.sort(
-          (objA, objB) => objB.price - objA.price,
+      else if(this.sortValue == 'Datum opadajuće') {
+        this.allBlogs = this.allBlogs.sort(
+          (objA, objB) => new Date(objB.dateOfPublishing).getTime() - new Date(objA.dateOfPublishing).getTime(),
         );
-        this.filterProducts1 = newProducts;
       }
-
+      else if(this.sortValue == 'Broj lajkova') {
+        this.allBlogs = this.allBlogs.sort(
+          (objA, objB) => objB.likes.length - objA.likes.length,
+        );
+      }
+      else if(this.sortValue == 'Broj komentara') {
+        this.allBlogs = this.allBlogs.sort(
+          (objA, objB) => objB.comments.length - objA.comments.length,
+        );
+      }
+      else if(this.sortValue == 'Ocena') {
+        this.allBlogs = this.allBlogs.sort(
+          (objA, objB) => objB.rate - objA.rate,
+        );
+      }
+      
     }
   }
 
 
   async filter() {
-    this.getAllBlogs();
-    this.filterProducts = this.filterProducts1;
-    await this.delay(500);
-    this.avabilityFilter();
+    if(this.selectedCategory!=null){
+      this.getBlogsByCategory(this.selectedCategory);
+    }
+    else{
+      this.getAllBlogs()
+    }
+  
+    await this.delay(200);
+
+    let newList: any[]=[];
+   if(this.dateValue!=''){
+    if(this.dateValue=='Danas'){
+      let today=new Date()
+      this.allBlogs.forEach(element => {
+        let date=new Date(element.dateOfPublishing)
+        if(date.getFullYear()===today.getFullYear() && date.getMonth()==today.getMonth() && date.getDay()==today.getDay()){
+          newList.push(element) 
+        }
+      });
+    }else if(this.dateValue=='Ovog meseca'){
+      let today=new Date()
+      this.allBlogs.forEach(element => {
+        let date=new Date(element.dateOfPublishing)
+        if(date.getFullYear()===today.getFullYear() && date.getMonth()==today.getMonth()){ 
+          newList.push(element) 
+        }
+      });
+    }else{
+      let today=new Date()
+      this.allBlogs.forEach(element => {
+        let date=new Date(element.dateOfPublishing)
+        if(date.getFullYear()===today.getFullYear()){ 
+          newList.push(element) 
+        }
+      });
+    }
+    this.allBlogs=newList;
+   }
+   await this.delay(300);
+   this.sortFilter();
 
   }
 
@@ -259,10 +265,14 @@ export class AllBlogsComponent implements OnInit {
   }
 
   resetFilters() {
-    this.getAllBlogs()
+    if(this.selectedCategory!=null){
+      this.getBlogsByCategory(this.selectedCategory);
+    }
+    else{
+      this.getAllBlogs()
+    }
     this.sortValue = '';
-    this.priceValue = '';
-    this.availableValue = '';
+    this.dateValue = '';
   }
 
   sarchByName() {
