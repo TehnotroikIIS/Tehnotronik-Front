@@ -3,6 +3,7 @@ import { AbstractControl, Form, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BlogComment } from 'src/app/core/models/blog-comment.model';
+import { BlogLink } from 'src/app/core/models/blog-link.model';
 import { BlogRate } from 'src/app/core/models/blog-rate.model';
 import { NewReview } from 'src/app/core/models/new-review.model';
 import { Sale } from 'src/app/core/models/sale.model';
@@ -166,6 +167,11 @@ sales:any[]=[]
     },error=>{
       alert('Greska!')
     })
+  }
+
+  linkProduct(){
+    localStorage.setItem('selectedLinkBlog', JSON.stringify(this.selectedBlog));
+   this.router.navigate(['/link-blog']);
   }
 
  

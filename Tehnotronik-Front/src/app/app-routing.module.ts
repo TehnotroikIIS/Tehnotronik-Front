@@ -11,6 +11,7 @@ import { AllBlogsComponent } from './blogs/all-blogs/all-blogs.component';
 import { BlogDetailsComponent } from './blogs/blog-details/blog-details.component';
 import { EditBlogComponent } from './blogs/edit-blog/edit-blog.component';
 import { FavoriteBlogsComponent } from './blogs/favorite-blogs/favorite-blogs.component';
+import { LinkBlogComponent } from './blogs/link-blog/link-blog.component';
 import { PopularBlogsComponent } from './blogs/popular-blogs/popular-blogs.component';
 import { SubsribeComponent } from './blogs/subsribe/subsribe.component';
 import { AboutUsComponent } from './home/about-us/about-us.component';
@@ -117,6 +118,11 @@ const routes: Routes = [
   {
     path: 'edit-blog',
     component: EditBlogComponent,
+    canActivate: [NoAuthGuard],
+  },
+  {
+    path: 'link-blog',
+    component: LinkBlogComponent,
     canActivate: [NoAuthGuard],
   },
   {
