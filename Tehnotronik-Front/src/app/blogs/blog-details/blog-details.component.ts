@@ -2,12 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, Form, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { BlogComment } from 'src/app/core/models/blog-comment.model';
+import { BlogRate } from 'src/app/core/models/blog-rate.model';
 import { NewReview } from 'src/app/core/models/new-review.model';
 import { Sale } from 'src/app/core/models/sale.model';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { BlogService } from 'src/app/core/services/blog.service';
 import { JwtService } from 'src/app/core/services/jwt.service';
-import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
   selector: 'app-blog-details',
@@ -15,18 +16,25 @@ import { ProductService } from 'src/app/core/services/product.service';
   styleUrls: ['./blog-details.component.scss']
 })
 export class BlogDetailsComponent implements OnInit {
-  @ViewChild('addReview') addDialog!: any;
-  @ViewChild('addAction') addAction!: any;
+  @ViewChild('addRate') addDialogRate!: any;
+  @ViewChild('addComment') addDialogComment!: any;
   rates: any[] = []
-  addReviewForm: FormGroup;
+  addCommentForm: FormGroup;
+  addRateForm: FormGroup;
   selectedBlog: any;
+  allComments:any[]=[];
   isEmployed:boolean=false;
   isAuthenticated: boolean = false;
-  newReview: NewReview = {
-    productId: '',
-    userId: '',
+  blogRate: BlogRate = {
+    blogId: '',
+    rate: 0,
+  
+  }
+  blogComment: BlogComment= {
+    blogId: '',
     text: '',
-    rate: 0
+    userId:''
+  
   }
   startTime:Date=new Date();
   endTime:Date=new Date();
@@ -48,15 +56,17 @@ sales:any[]=[]
     private authenticationService: AuthenticationService,
     private router:Router
   ) {
-    this.addReviewForm = this.formBuilder.group({
-      comment: [''],
+    this.addCommentForm = this.formBuilder.group({
+      text: [''],
+    });
+    this.addRateForm = this.formBuilder.group({
       rate: [''],
     });
    
   }
 
   ngOnInit(): void {
-    this.getSelectedProduct();
+    this.getSelectedBlog();
     this.isAuthenticated = this.authenticationService.isAuthenticated();
     if(this.isAuthenticated){
       this.isEmployed=this.authenticationService.isEmployed();
@@ -64,60 +74,90 @@ sales:any[]=[]
    
 
   }
-  get review(): { [key: string]: AbstractControl; } { return this.addReviewForm.controls; }
+  get comment(): { [key: string]: AbstractControl; } { return this.addCommentForm.controls; }
+  get rate(): { [key: string]: AbstractControl; } { return this.addRateForm.controls; }
 
-  getSelectedProduct() {
-    this.selectedBlog = JSON.parse(localStorage.getItem('selectedBlog') || '');
-    console.log(this.selectedBlog);
+  getSelectedBlog() {
+    //this.selectedBlog = JSON.parse(localStorage.getItem('selectedBlog') || '');
+    let id=JSON.parse(localStorage.getItem('selectedBlog') || '').id;
+    this.blogService.getBlogById(id).subscribe(data=>{
+      this.selectedBlog=data;
+      this.getComments();
+      console.log(this.selectedBlog);
     let grade = Math.round(this.selectedBlog.rate)
     for (let i = 0; i < grade; i++) {
       this.rates.push(i)
     }
+    },error=>{
+      alert('Greska')
+    })
+   
+  }
+  
+
+  getComments(){
+    this.selectedBlog.comments.forEach((value: any, i: any) => {
+      this.authenticationService.getUser(value.userId).subscribe(data => {
+        value.userFirstName = data.name;
+        value.userLastName = data.lastname;
+      })
+      this.allComments.push(value)
+    });
+    
   }
 
-  opetAddReviewDialog(event: any) {
+  openAddCommentDialog(event: any) {
     event?.stopPropagation();
-    const myTempDialog = this.dialog.open(this.addDialog);
+    const myTempDialog = this.dialog.open(this.addDialogComment);
     myTempDialog.afterClosed().subscribe((res) => {
       console.log({ res });
     });
   }
   
-  openAddActionDialog(event: any) {
+  openAddRateDialog(event: any) {
     event?.stopPropagation();
-    const myTempDialog = this.dialog.open(this.addAction);
+    const myTempDialog = this.dialog.open(this.addDialogRate);
     myTempDialog.afterClosed().subscribe((res) => {
       console.log({ res });
     });
   }
 
-  add() {
-    if (this.addReviewForm.value.rate < 1 || this.addReviewForm.value.rate > 5) {
-      alert('Ocjena mora biti izmedju 1 i 5');
+  addr() {
+    if (this.addRateForm.value.rate < 1 || this.addRateForm.value.rate > 5) {
+      alert('Ocena mora biti izmedju 1 i 5');
     }
     else {
-      this.newReview.productId = this.selectedBlog.id;
-      this.newReview.userId = this.jwtService.getUserId();
-      this.newReview.text = this.addReviewForm.value.comment;
-      this.newReview.rate = this.addReviewForm.value.rate;
-      console.log(this.newReview);
-     /* this.productService.addReview(this.newReview).subscribe(data => {
-        alert('Uspesno dodata recenzija')
+      this.blogRate.blogId = this.selectedBlog.id;
+      this.blogRate.rate = this.addRateForm.value.rate;
+     
+      console.log(this.blogRate);
+      this.blogService.addRate(this.blogRate).subscribe(data => {
+        alert('Uspesno dodata ocena')
+        window.location.reload();
       }, error => {
         alert('Greska! Probajte ponovo')
-      })*/
+      })
 
     }
     this.dialog.closeAll();
   }
 
- /* getReviews() {
-    this.productService.getProducReviews(this.selectedBlog.id).subscribe(data => {
-      this.reviews = data;
-    }, error => {
-      alert('Greska')
-    })
-  }*/
+  addc(){
+      this.blogComment.blogId = this.selectedBlog.id;
+      this.blogComment.userId = this.jwtService.getUserId();
+      this.blogComment.text = this.addCommentForm.value.text;
+     
+      console.log(this.blogRate);
+      this.blogService.addComment(this.blogComment).subscribe(data => {
+        alert('Uspesno dodat komentar');
+        window.location.reload();
+      }, error => {
+        alert('Greska! Probajte ponovo')
+      })
+
+    this.dialog.closeAll();
+  }
+
 
   deleteBlog(){
     this.blogService.deleteBlog(this.selectedBlog.id).subscribe(data=>{
