@@ -1,0 +1,90 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+
+<div class="container">
+    <app-blogs-sidebar></app-blogs-sidebar>
+
+    <div class="content">
+        <div class="main-info">
+            <div class="left">
+                <div class="buttons" *ngIf="isEmployed">
+                    <button class="edit-button" [routerLink]="['/edit-blog']">
+                        <mat-icon>edit</mat-icon>Izmeni
+                    </button>
+                    <button class="edit-button" (click)="deleteBlog()">
+                        <mat-icon> delete</mat-icon>Izbriši
+                    </button>
+                </div>
+                <div class="info">
+                    <div class="name">{{selectedBlog.name}}</div>
+                    <div>{{selectedBlog.dateOfPublishing | date:'mediumDate'}}</div>
+                </div>
+
+
+            </div>
+            <div class="right">
+                <div class="stars">
+                 
+                    <mat-icon *ngFor="let number of rates">star</mat-icon>
+                    <button class="star-button"><mat-icon>add</mat-icon></button>
+                </div>
+                <div class="reactions">
+                    <button class="reaction-button" >
+                        {{selectedBlog.likes.length}} <mat-icon>thumb_up</mat-icon>
+                      </button>
+                      <button class="reaction-button">
+                        {{selectedBlog.dislikes.length}}<mat-icon>thumb_down</mat-icon>
+                      </button>
+                </div>
+
+               
+            </div>
+        </div>
+        <div class="specification">
+            
+            <div >
+                {{selectedBlog.text}}
+            </div>
+        </div>
+        <div class="comments">
+            <div class="bold">Komentari:  <button class="star-button" *ngIf="isAuthenticated" (click)="opetAddReviewDialog( $event)"><mat-icon>add</mat-icon></button>
+            </div>
+            <br>
+            <div class="comment">
+                <div class="comment-row">
+                    <div class="bold">Sara Savanovic</div>
+                </div>
+                <div class="comment-row">
+                    <div>Sarwerwerw sefdrf fdfd dfdf dfdfd dsdf sdfsdfs</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Modalni dijalozii -->
+
+<ng-template #addReview let-mydata class="dialog">
+    <div mat-dialog-content class="dialog-content">
+        <form [formGroup]="addReviewForm" class="dialog-form">
+            <div class="row1">
+                <div>Komentar</div>
+                <mat-form-field appearance="outline">
+                    <textarea formControlName="comment" matInput></textarea>
+                </mat-form-field>
+            </div>
+            <div class="row1">
+                <div>Ocjena</div>
+                <mat-form-field appearance="outline">
+                    <input type="number" min="1" max="5" formControlName="rate" matInput>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="dialog-actions">
+        <button mat-raised-button color="primary" class="yes-button" (click)="add()">Dodaj</button>
+        <button mat-raised-button mat-dialog-close raised class="cancel-button"> Zatvori</button>
+    </div>
+</ng-template>

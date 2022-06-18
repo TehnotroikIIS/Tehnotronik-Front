@@ -1,0 +1,32 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+<div class="container">
+    <div class="right-content">
+        <div class="register-title">Izmena bloga</div>
+        <form [formGroup]="editForm" style="text-align: center;">
+            <div class="row">
+                <div class="label">Naziv:</div>
+                <mat-form-field appearance="outline">
+                    <input formControlName="name" matInput>
+                   
+                </mat-form-field>
+            </div>
+         
+          
+        
+            <div class="row">
+                <div class="label">Sadržaj:</div>
+                <mat-form-field appearance="outline">
+                    <textarea formControlName="text" matInput></textarea>
+                   </mat-form-field>
+            </div>
+          
+
+        </form>
+        <button class="primary-button" (click)="editBlog()">Sačuvaj</button>
+    </div>
+
+    
+</div>
+
+

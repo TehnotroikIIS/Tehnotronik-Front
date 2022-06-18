@@ -32,7 +32,7 @@
     <div class="products">
 
       <div class="tab-content">
-        <div class="post" *ngFor="let blog of allBlogs; let i=index">
+        <div class="post" *ngFor="let blog of allBlogs; let i=index" (click)="goToBlogDetails(blog)">
           <div class="head">
             <div class="info">
               <div class="mat-h2">{{blog.name}}</div>
@@ -48,16 +48,16 @@
             {{blog.text.substring( 0, 200 )}}...
           </div>
           <div class="reactions">
-            <button class="like-button" *ngIf="isLiked(i)==true" (click)="removeLike(blog,i)">
+            <button class="like-button" *ngIf="isLiked(i)==true" (click)="removeLike(blog,i,$event)">
               <mat-icon>thumb_up</mat-icon>{{blog.likes.length}}
             </button>
-            <button class="reaction-button" *ngIf="!isLiked(i)"  (click)="addLike(blog,i)">
+            <button class="reaction-button" *ngIf="!isLiked(i)"  (click)="addLike(blog,i,$event)">
               <mat-icon>thumb_up</mat-icon>{{blog.likes.length}}
             </button>
-            <button class="dislike-button" *ngIf="isDisliked(i)==true" (click)="removeDislike(blog,i)">
+            <button class="dislike-button" *ngIf="isDisliked(i)==true" (click)="removeDislike(blog,i,$event)">
               <mat-icon>thumb_down</mat-icon>{{blog.dislikes.length}}
             </button>
-            <button  class="reaction-button" *ngIf="!isDisliked(i)" (click)="addDislike(blog,i)">
+            <button  class="reaction-button" *ngIf="!isDisliked(i)" (click)="addDislike(blog,i,$event)">
               <mat-icon>thumb_down</mat-icon>{{blog.dislikes.length}}
             </button>
           

@@ -7,6 +7,8 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
 import { AddBlogComponent } from './blogs/add-blog/add-blog.component';
 import { AllBlogsComponent } from './blogs/all-blogs/all-blogs.component';
+import { BlogDetailsComponent } from './blogs/blog-details/blog-details.component';
+import { EditBlogComponent } from './blogs/edit-blog/edit-blog.component';
 import { AboutUsComponent } from './home/about-us/about-us.component';
 import { ContactComponent } from './home/contact/contact.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
@@ -86,6 +88,15 @@ const routes: Routes = [
   {
     path: 'all-blogs',
     component: AllBlogsComponent
+  },
+  {
+    path: 'blog-details',
+    component: BlogDetailsComponent
+  },
+  {
+    path: 'edit-blog',
+    component: EditBlogComponent,
+    canActivate: [NoAuthGuard],
   },
   {
     path: 'add-blog',
