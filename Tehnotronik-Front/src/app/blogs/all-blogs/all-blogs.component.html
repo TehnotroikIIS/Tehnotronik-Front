@@ -48,7 +48,7 @@
               </div>
             </div>
             <div class="mat-h4">
-              22 Jan, 2015
+              {{blog.dateOfPublishing  | date:'mediumDate'}}
             </div>
           </div>
           <div class="mat-body-1">
@@ -67,9 +67,7 @@
             <button  class="reaction-button" *ngIf="!isDisliked(i)" (click)="addDislike(blog,i)">
               <mat-icon>thumb_down</mat-icon>{{blog.dislikes.length}}
             </button>
-            <button  >
-              <mat-icon> comment</mat-icon>{{blog.comments.length}}
-            </button>
+          
           </div>
         </div>
 

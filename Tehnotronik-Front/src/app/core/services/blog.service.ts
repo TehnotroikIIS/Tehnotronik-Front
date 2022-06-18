@@ -41,7 +41,7 @@ export class BlogService {
 
 
   getBlogsByCategory(categoryId: string): Observable<any> {
-    return this.http.get(`${environment.api_url}get-by-category-id`, {
+    return this.http.get(`${environment.api_url}blogs-by-category`, {
       params: {
         categoryId: categoryId
       }, headers: this.headers, responseType: 'json'
