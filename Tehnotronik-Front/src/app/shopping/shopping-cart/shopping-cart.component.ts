@@ -2,7 +2,9 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ShoppingCart } from 'src/app/core/models/shopping-cart';
 import { ShoppingCartItem } from 'src/app/core/models/shopping-cart-item';
+import { ShoppingCartRemove } from 'src/app/core/models/shopping-cart-remove';
 import { JwtService } from 'src/app/core/services/jwt.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import { ShoppingService } from 'src/app/core/services/shopping.service';
@@ -24,6 +26,14 @@ export class ShoppingCartComponent implements OnInit {
     productId: '',
     price: 0,
     quantity: 0
+  }
+  shoppingCart: ShoppingCart = {
+    userId: '',
+    shoppingCartItem: []
+  }
+  shoppingCartRemove: ShoppingCartRemove = {
+    shoppingCartItemId: '',
+    shoppingCartId: ''
   }
   @ViewChild('showProduct') addDialog!: any;
   constructor(
@@ -66,7 +76,18 @@ export class ShoppingCartComponent implements OnInit {
     });
   }
 
-  remove(event: any){}
+  remove(product: any){
+    this.selectedProduct=product;
+    this.shoppingCart.userId=this.jwtService.getUserId();
+    this.shoppingCart.shoppingCartItem=this.productsInCart;
+    //this.shoppingCartRemove.shoppingCartId=this.shoppingService.getCartById();
+    this.shoppingService.removeFromCart(this.shoppingCart).subscribe(data=>{
+      alert('Proizvod je uklonjen iz korpe');
+      this.router.navigate(['/all-products'])
+    },error=>{
+      alert('Greska!')
+    })
+  }
 
   confirm(): any{
     this.shoppingCartItem.quantity=this.showProductForm.value.quantity;

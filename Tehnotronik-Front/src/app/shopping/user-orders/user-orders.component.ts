@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtService } from 'src/app/core/services/jwt.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
 
@@ -8,15 +9,18 @@ import { OrdersService } from 'src/app/core/services/orders.service';
   styleUrls: ['./user-orders.component.scss']
 })
 export class UserOrdersComponent implements OnInit {
-orders: any[]=[];
-allOrders: any[]=[];
+  selectedOrder: any;
+  orders: any[]=[];
+  allOrders: any[]=[];
   constructor(
   private ordersService: OrdersService,
-  private jwtService: JwtService) { }
+  private jwtService: JwtService,
+  private router: Router) { }
 
   ngOnInit(): void {
     this.orders=[];
     this.getAllOrders();
+    this.getSelectedOrder();
   }
 
   delay(ms: number) {
@@ -33,6 +37,14 @@ allOrders: any[]=[];
     await this.delay(500);
   }
 
-  viewOrder(){}
+  //viewOrder(order: any){
+  viewOrder(){
+    //localStorage.setItem('selectedProduct', JSON.stringify(order));
+    this.router.navigate(['/order'])
+  }
+  getSelectedOrder() {
+    this.selectedOrder = JSON.parse(localStorage.getItem('selectedOrder') || '');
+    console.log(this.selectedOrder);
+  }
 
 }
