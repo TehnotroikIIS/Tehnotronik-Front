@@ -23,7 +23,8 @@ import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { EditBlogComponent } from './edit-blog/edit-blog.component';
 import { PopularBlogsComponent } from './popular-blogs/popular-blogs.component';
 import { FavoriteBlogsComponent } from './favorite-blogs/favorite-blogs.component';
-
+import { SubsribeComponent } from './subsribe/subsribe.component';
+import {MatListModule} from '@angular/material/list';
 @NgModule({
   declarations: [
     AddBlogComponent,
@@ -31,7 +32,8 @@ import { FavoriteBlogsComponent } from './favorite-blogs/favorite-blogs.componen
     BlogDetailsComponent,
     EditBlogComponent,
     PopularBlogsComponent,
-    FavoriteBlogsComponent
+    FavoriteBlogsComponent,
+    SubsribeComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { FavoriteBlogsComponent } from './favorite-blogs/favorite-blogs.componen
     MatTabsModule,
     MatGridListModule,
     MatCardModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatListModule
   ]
 })
 export class BlogsModule { }

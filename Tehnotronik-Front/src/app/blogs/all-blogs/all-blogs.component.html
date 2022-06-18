@@ -26,6 +26,11 @@
           <mat-icon>close</mat-icon>
         </button>
       </div>
+      <div class="right">
+        <button class="primary-button" *ngIf="selectedCategory!=null" (click)="subsribe()">
+          <mat-icon>stars</mat-icon>Pretplati se
+        </button>
+      </div>
       
 
     </div>
@@ -53,7 +58,7 @@
           </div>
           <div class="reactions">
             <button class="favorite-button" *ngIf="isFavorite(blog)==true" (click)="removeFavorite(blog,i,$event)">
-              <mat-icon>favorite</mat-icon>
+          <mat-icon>favorite</mat-icon>
             </button>
             <button  class="reaction-button" *ngIf="!isFavorite(blog)" (click)="addFavorite(blog,i,$event)">
               <mat-icon>favorite</mat-icon>

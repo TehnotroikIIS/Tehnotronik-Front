@@ -1,0 +1,25 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+
+<div class="container">
+  <app-blogs-sidebar></app-blogs-sidebar>
+  <div class="content">
+   <div class="categories">
+   
+        <h2>Pretplaćene kategorije</h2>
+        <mat-selection-list #shoes>
+            <mat-list-option *ngFor="let item of categories" [value]="item">
+              {{item.name}}
+            </mat-list-option>
+          </mat-selection-list>
+          <button class="primary-button" (click)="remove(shoes.selectedOptions.selected)">Ukloni iz pretplacenih</button>
+    </div>
+  
+    
+
+
+      
+
+  
+  </div>
+</div>
