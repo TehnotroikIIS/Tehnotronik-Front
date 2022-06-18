@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { FavoriteBlog } from 'src/app/core/models/favorite-blog.model';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { BlogService } from 'src/app/core/services/blog.service';
 import { ProductService } from 'src/app/core/services/product.service';
@@ -56,6 +57,7 @@ export class AllBlogsComponent implements OnInit {
     this.gutterSize = window.innerWidth <= 768 ? '20px' : '40px';
     this.isAuthenticated = this.authenticationService.isAuthenticated();
     this.getAllBlogs();
+    this.getFavoriteBlogs();
    // this.getSelectedBlog();
   }
   get searchF(): { [key: string]: AbstractControl } {
@@ -70,8 +72,12 @@ export class AllBlogsComponent implements OnInit {
   age = new FormControl();
   sortList: string[] = ['Datum rastuće', 'Datum opadajuće', 'Broj lajkova', 'Broj komentara', 'Ocena'];
   dateList: string[] = ['Danas', 'Ovog meseca','Ove godine'];
-  noExperienceList: any[] = []
-
+  noExperienceList: any[] = [];
+  favorite:FavoriteBlog={
+    userId:'',
+    blogId:'',
+  }
+favoriteBlogs:any[]=[];
   async getAllBlogs() {
     this.blogService.getAllBlogs().subscribe(data => {
       this.allBlogs = data;
@@ -95,6 +101,14 @@ export class AllBlogsComponent implements OnInit {
       this.allBlogs = data
     }, error => {
       alert('Greska')
+    })
+  }
+
+  getFavoriteBlogs(){
+    this.blogService.getFavoriteByUser(this.user.id).subscribe(data=>{
+      this.favoriteBlogs=data;
+    },error=>{
+      alert('Greska!')
     })
   }
 
@@ -172,21 +186,36 @@ export class AllBlogsComponent implements OnInit {
       });
   }
 
-  isFavorite(index: any): boolean {
-    if(this.allBlogs[index].likes==null)
-      return false;
-    if (this.allBlogs[index].likes.indexOf(this.user.id) !== -1) {
-      return true
+  isFavorite(blog: any): boolean {
+    let value=false;
+   this.favoriteBlogs.forEach(element => {
+    if(element.id==blog.id){
+      value=true;
     }
-    return false
+   });
+  return value;
   }
 
   addFavorite(blog: any, index: any,event:any){
     event?.stopPropagation();
+    this.favorite.userId=this.user.id;
+    this.favorite.blogId=blog.id;
+    this.blogService.addToFavorites(this.favorite).subscribe(data=>{
+      window.location.reload();
+    },error=>{
+      alert('Greska')
+    })
   }
 
   removeFavorite(blog: any, index: any,event:any){
     event?.stopPropagation();
+    this.favorite.userId=this.user.id;
+    this.favorite.blogId=blog.id;
+    this.blogService.removeFromFavorites(this.favorite).subscribe(data=>{
+      window.location.reload();
+    },error=>{
+      alert('Greska')
+    })
   }
 
   

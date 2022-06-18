@@ -52,11 +52,11 @@
             {{blog.text.substring( 0, 200 )}}...
           </div>
           <div class="reactions">
-            <button class="favorite-button" *ngIf="isFavorite(i)==true" (click)="removeFavorite(blog,i,$event)">
+            <button class="favorite-button" *ngIf="isFavorite(blog)==true" (click)="removeFavorite(blog,i,$event)">
               <mat-icon>favorite</mat-icon>
             </button>
-            <button  class="reaction-button" *ngIf="!isFavorite(i)" (click)="addFavorite(blog,i,$event)">
-              <mat-icon>favorite_border</mat-icon>
+            <button  class="reaction-button" *ngIf="!isFavorite(blog)" (click)="addFavorite(blog,i,$event)">
+              <mat-icon>favorite</mat-icon>
             </button>
             <button class="like-button" *ngIf="isLiked(i)==true" (click)="removeLike(blog,i,$event)">
               <mat-icon>thumb_up</mat-icon>{{blog.likes.length}}
