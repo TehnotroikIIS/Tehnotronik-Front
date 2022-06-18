@@ -25,6 +25,13 @@ export class AuthenticationService {
       }, headers: this.headers, responseType: 'json'
     });
   }
+  getUser(id: string): Observable<any> {
+    return this.http.get(`${environment.api_url}get-user-id`, {
+      params: {
+        id:id
+      }, headers: this.headers, responseType: 'json'
+    });
+  }
 
   register(user: RegisterUser): Observable<any> {
     return this.http.post(`${environment.api_url}register`,user, {headers:this.headers, responseType: 'json' });

@@ -52,7 +52,7 @@ export class BlogService {
   }
 
   getBlogById(id: string): Observable<any> {
-    return this.http.get(`${environment.api_url}get-by-id`, {
+    return this.http.get(`${environment.api_url}get-blog`, {
       params: {
         id: id
       }, headers: this.headers, responseType: 'json'

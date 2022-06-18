@@ -9,7 +9,6 @@ import { Sale } from 'src/app/core/models/sale.model';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { BlogService } from 'src/app/core/services/blog.service';
 import { JwtService } from 'src/app/core/services/jwt.service';
-import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
   selector: 'app-blog-details',
@@ -23,6 +22,7 @@ export class BlogDetailsComponent implements OnInit {
   addCommentForm: FormGroup;
   addRateForm: FormGroup;
   selectedBlog: any;
+  allComments:any[]=[];
   isEmployed:boolean=false;
   isAuthenticated: boolean = false;
   blogRate: BlogRate = {
@@ -78,12 +78,32 @@ sales:any[]=[]
   get rate(): { [key: string]: AbstractControl; } { return this.addRateForm.controls; }
 
   getSelectedBlog() {
-    this.selectedBlog = JSON.parse(localStorage.getItem('selectedBlog') || '');
-    console.log(this.selectedBlog);
+    //this.selectedBlog = JSON.parse(localStorage.getItem('selectedBlog') || '');
+    let id=JSON.parse(localStorage.getItem('selectedBlog') || '').id;
+    this.blogService.getBlogById(id).subscribe(data=>{
+      this.selectedBlog=data;
+      this.getComments();
+      console.log(this.selectedBlog);
     let grade = Math.round(this.selectedBlog.rate)
     for (let i = 0; i < grade; i++) {
       this.rates.push(i)
     }
+    },error=>{
+      alert('Greska')
+    })
+   
+  }
+  
+
+  getComments(){
+    this.selectedBlog.comments.forEach((value: any, i: any) => {
+      this.authenticationService.getUser(value.userId).subscribe(data => {
+        value.userFirstName = data.name;
+        value.userLastName = data.lastname;
+      })
+      this.allComments.push(value)
+    });
+    
   }
 
   openAddCommentDialog(event: any) {

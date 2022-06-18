@@ -58,7 +58,7 @@ export class ProductService {
   }
 
   getProductById(id: string): Observable<any> {
-    return this.http.get(`${environment.api_url}get-by-id`, {
+    return this.http.get(`${environment.api_url}get-product-id`, {
       params: {
         id: id
       }, headers: this.headers, responseType: 'json'
