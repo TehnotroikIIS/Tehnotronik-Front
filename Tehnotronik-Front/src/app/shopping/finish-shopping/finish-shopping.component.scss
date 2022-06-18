@@ -1,0 +1,81 @@
+@use '../../../base-style'as base;
+.container{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    background-color: base.$background-color;
+    background-image: url(../../../assets/web5.jpg);
+    min-height: 100vh;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.left{
+    width: 30%;
+    padding:190px;
+    margin-top:10px;
+  
+}
+
+.right{
+    margin-top:100px;
+    width: 45%;
+}
+.right-content{
+    margin-top:50px;
+    width: 70%;
+    padding:60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    line-height: 1.8em;
+    color:base.$medium-grey-letters;
+    text-align: justify;
+}
+.content{
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    align-items: center;
+    gap:60px;
+    text-align: justify;
+}
+.title{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.text{
+    font-size: 16px;
+    color:base.$dark-grey;
+    line-height: 1.8em;
+}
+
+.primary-button{
+    width:200px;
+    @extend %primary-button
+}
+.stars {
+    color: rgb(240, 215, 53)
+}
+
+  form {
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    justify-content: center;
+}
+.mat-form-field{
+    margin:0;
+    width: 70%;
+}
+.mat-form-field .cat{
+    margin:0;
+    width: 50%;
+}

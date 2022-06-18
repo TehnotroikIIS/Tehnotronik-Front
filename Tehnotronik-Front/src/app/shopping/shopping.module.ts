@@ -22,6 +22,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { OrderComponent } from './order/order.component';
+import { FinishShoppingComponent } from './finish-shopping/finish-shopping.component';
 
 
 
@@ -30,7 +31,8 @@ import { OrderComponent } from './order/order.component';
     ShoppingCartComponent,
     UserDetailsComponent,
     UserOrdersComponent,
-    OrderComponent
+    OrderComponent,
+    FinishShoppingComponent
   ],
   imports: [
     CommonModule,
