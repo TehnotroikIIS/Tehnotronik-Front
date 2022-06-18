@@ -22,6 +22,7 @@ import { AllBlogsComponent } from './all-blogs/all-blogs.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { EditBlogComponent } from './edit-blog/edit-blog.component';
 import { PopularBlogsComponent } from './popular-blogs/popular-blogs.component';
+import { FavoriteBlogsComponent } from './favorite-blogs/favorite-blogs.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PopularBlogsComponent } from './popular-blogs/popular-blogs.component';
     AllBlogsComponent,
     BlogDetailsComponent,
     EditBlogComponent,
-    PopularBlogsComponent
+    PopularBlogsComponent,
+    FavoriteBlogsComponent
   ],
   imports: [
     CommonModule,

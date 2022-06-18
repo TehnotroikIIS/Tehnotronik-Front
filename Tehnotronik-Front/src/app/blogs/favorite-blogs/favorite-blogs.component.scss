@@ -330,7 +330,7 @@
   gap: 5px;
 }
 
-.reaction-button:hover,.like-button:hover,.dislike-button:hover,.comment-button:hover,.favorite-button:hover{
+.favorite-button:hover{
   box-shadow: base.$box-shadow;
   cursor: pointer;
 }

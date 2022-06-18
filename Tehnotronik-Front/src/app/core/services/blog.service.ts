@@ -6,6 +6,7 @@ import { BlogComment } from '../models/blog-comment.model';
 import { BlogRate } from '../models/blog-rate.model';
 import { EditBlog } from '../models/edit-blog.model';
 import { EditProduct } from '../models/edit-product.model';
+import { FavoriteBlog } from '../models/favorite-blog.model';
 import { NewBlog } from '../models/new-blog.model';
 import { NewReview } from '../models/new-review.model';
 import { Product } from '../models/product.model';
@@ -121,9 +122,20 @@ export class BlogService {
     return this.http.post(`${environment.api_url}remove-dislike`, reaction,{headers: this.headers, responseType: 'json' });
   }
 
+  //favorites
+  addToFavorites(favorite: FavoriteBlog): Observable<any> {
+    return this.http.post(`${environment.api_url}add-to-favorites`, favorite, { headers: this.headers, responseType: 'json' });
+  }
+  removeFromFavorites(favorite: FavoriteBlog): Observable<any> {
+    return this.http.post(`${environment.api_url}remove-from-favorites`, favorite, { headers: this.headers, responseType: 'json' });
+  }
 
-
-
-
+  getFavoriteByUser(userId: string): Observable<any> {
+    return this.http.get(`${environment.api_url}get-favorite-blogs`, {
+      params: {
+        userId: userId
+      }, headers: this.headers, responseType: 'json'
+    });
+  }
 
 }

@@ -35,7 +35,11 @@
         <div class="post" *ngFor="let blog of allBlogs; let i=index" (click)="goToBlogDetails(blog)">
           <div class="head">
             <div class="info">
-              <div class="mat-h2">{{blog.name}}</div>
+              <div class="favorite">
+                <div class="mat-h2">{{blog.name}}</div>
+               
+              </div>
+             
               <div class="stars">
                 <mat-icon *ngFor="let number of blog.rates">star</mat-icon>
               </div>
@@ -48,6 +52,12 @@
             {{blog.text.substring( 0, 200 )}}...
           </div>
           <div class="reactions">
+            <button class="favorite-button" *ngIf="isFavorite(blog)==true" (click)="removeFavorite(blog,i,$event)">
+              <mat-icon>favorite</mat-icon>
+            </button>
+            <button  class="reaction-button" *ngIf="!isFavorite(blog)" (click)="addFavorite(blog,i,$event)">
+              <mat-icon>favorite</mat-icon>
+            </button>
             <button class="like-button" *ngIf="isLiked(i)==true" (click)="removeLike(blog,i,$event)">
               <mat-icon>thumb_up</mat-icon>{{blog.likes.length}}
             </button>
