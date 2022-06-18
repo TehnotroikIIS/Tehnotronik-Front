@@ -319,7 +319,7 @@
   gap: 10px;
 }
 
-.reaction-button,.like-button,.dislike-button,.comment-button {
+.reaction-button,.like-button,.dislike-button,.comment-button,.favorite-button {
   background-color: white;
   padding: 5px 10px;
   border-radius: 10px;
@@ -329,8 +329,14 @@
   align-items: center;
   gap: 5px;
 }
+.favorite{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap:10px;
+}
 
-.reaction-button:hover,.like-button:hover,.dislike-button:hover,.comment-button:hover{
+.reaction-button:hover,.like-button:hover,.dislike-button:hover,.comment-button:hover,.favorite-button :hover{
   box-shadow: base.$box-shadow;
   cursor: pointer;
 }
@@ -345,6 +351,12 @@
   border: 2px solid base.$danger;
   color: white;
 }
+.favorite-button {
+  background-color: rgb(255, 102, 145);
+  border: 2px solid rgb(255, 102, 145);
+  color: white;
+}
+
 
 .comment-button {
   background-color: base.$medium-grey-letters;

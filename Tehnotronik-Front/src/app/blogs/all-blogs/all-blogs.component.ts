@@ -172,6 +172,23 @@ export class AllBlogsComponent implements OnInit {
       });
   }
 
+  isFavorite(index: any): boolean {
+    if(this.allBlogs[index].likes==null)
+      return false;
+    if (this.allBlogs[index].likes.indexOf(this.user.id) !== -1) {
+      return true
+    }
+    return false
+  }
+
+  addFavorite(blog: any, index: any,event:any){
+    event?.stopPropagation();
+  }
+
+  removeFavorite(blog: any, index: any,event:any){
+    event?.stopPropagation();
+  }
+
   
 
   sortFilter() {
