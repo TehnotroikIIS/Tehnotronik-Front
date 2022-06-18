@@ -1,0 +1,29 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+<div class="container">
+    <div class="left">
+        <div class="content">
+            <div class="title">USPEŠNO STE IZVRŠILI KUPOVINU</div>
+            <button class="primary-button" (click)="printFacture()">Pregled PDF fakture</button>
+            <button class="primary-button" (click)="viewOrder()">Vidi stanje paketa</button>
+        </div>
+    </div>
+    <div class="right">
+        <div class="right-content">
+            <div class="title">Da li želite da ocenite naše usluge na osnovu Vaše prethodne kupovine?</div>
+            <br><br>
+            <div class="stars">
+                <mat-icon>star</mat-icon>
+                <mat-icon>star</mat-icon>
+                <mat-icon>star</mat-icon>
+                <mat-icon>star</mat-icon>
+                <mat-icon>star</mat-icon>
+            </div>
+            <br><br>
+            <div class="title">Da li želite da ostavite svoj komentar?</div>
+            <mat-form-field appearance="outline">
+                <textarea matInput></textarea>
+            </mat-form-field>
+            <button class="primary-button" (click)="addComment()">Prosledi komentar</button>
+    </div>
+    </div>
+</div>

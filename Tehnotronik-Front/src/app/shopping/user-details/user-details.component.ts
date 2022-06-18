@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { JwtService } from 'src/app/core/services/jwt.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class UserDetailsComponent implements OnInit {
   profileForm: FormGroup;
   user: any;
   selectedValue: any='';
-  constructor(private jwtService: JwtService, private formBuilder: FormBuilder) { 
+  constructor(private jwtService: JwtService, private formBuilder: FormBuilder, private router: Router) { 
     this.profileForm = this.formBuilder.group({
       name: [''],
       lastname: [''],
@@ -42,6 +43,8 @@ export class UserDetailsComponent implements OnInit {
     this.profileForm.get('city')?.setValue(this.user.city);
     this.profileForm.get('state')?.setValue(this.user.state);
   }
-  confirm(){}
+  confirm(){
+    this.router.navigate(['/finish-shopping'])
+  }
 
 }
