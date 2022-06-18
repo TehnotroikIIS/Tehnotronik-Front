@@ -116,6 +116,15 @@
   box-shadow: base.$box-shadow;
 }
 
+.primary-button{
+  @extend %primary-button;
+  display: flex;
+  align-items: center;
+  gap:5px;
+  padding:10px 10px;
+  width: 1005;
+}
+
 .rest-card img {
   -webkit-transition-duration: 0.4s;
   /* Safari */

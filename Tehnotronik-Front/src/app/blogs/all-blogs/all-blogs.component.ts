@@ -30,7 +30,7 @@ export class AllBlogsComponent implements OnInit {
   showProductForm: FormGroup;
   sales: any[] = [];
   user:any;
-  selectedCategory:any;
+  selectedCategory:any=null;
   isAuthenticated: boolean = false;
   @ViewChild('showProduct') addDialog!: any;
   constructor(
