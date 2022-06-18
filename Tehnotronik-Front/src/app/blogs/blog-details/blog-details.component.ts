@@ -10,6 +10,7 @@ import { Sale } from 'src/app/core/models/sale.model';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { BlogService } from 'src/app/core/services/blog.service';
 import { JwtService } from 'src/app/core/services/jwt.service';
+import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
   selector: 'app-blog-details',
@@ -25,6 +26,7 @@ export class BlogDetailsComponent implements OnInit {
   selectedBlog: any;
   allComments:any[]=[];
   isEmployed:boolean=false;
+  linkedProduct:any;
   isAuthenticated: boolean = false;
   blogRate: BlogRate = {
     blogId: '',
@@ -55,7 +57,8 @@ sales:any[]=[]
     private jwtService: JwtService,
     private blogService: BlogService,
     private authenticationService: AuthenticationService,
-    private router:Router
+    private router:Router,
+    private productService:ProductService
   ) {
     this.addCommentForm = this.formBuilder.group({
       text: [''],
@@ -84,6 +87,9 @@ sales:any[]=[]
     this.blogService.getBlogById(id).subscribe(data=>{
       this.selectedBlog=data;
       this.getComments();
+      if(this.selectedBlog.productId!=null){
+        this.getLinkProduct();
+      }
       console.log(this.selectedBlog);
     let grade = Math.round(this.selectedBlog.rate)
     for (let i = 0; i < grade; i++) {
@@ -157,6 +163,19 @@ sales:any[]=[]
       })
 
     this.dialog.closeAll();
+  }
+
+  getLinkProduct(){
+    this.productService.getProductById(this.selectedBlog.productId).subscribe(data=>{
+this.linkedProduct=data;
+    },error=>{
+      alert('Greska')
+    })
+  }
+  
+  goToProductDetails(product: any) {
+    localStorage.setItem('selectedProduct', JSON.stringify(product));
+    this.router.navigate(['/product-details'])
   }
 
 

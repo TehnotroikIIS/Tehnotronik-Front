@@ -62,7 +62,28 @@
                 </div>
 
             </div>
-
+        </div>
+        <div class="comments1" *ngIf="linkedProduct!=null">
+            <div class="bold">Uvezani proizvodi: 
+            </div>
+            <br>
+            <mat-card class="rest-card" (click)="goToProductDetails(linkedProduct)">
+               
+                <img mat-card-image  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9oj262QwzNs3bfHzwet9eOiEfyDNUp3XL_w&usqp=CAU" />
+          
+            <mat-card-content class="card-content"> 
+                   
+                <div class="name-div">{{linkedProduct.name | uppercase}}</div>
+                <div class="row">
+                    <div class="price"  *ngIf="linkedProduct.newPrice==undefined">{{linkedProduct.price}} din</div>
+                    <div class="icons">
+                        <mat-icon class="available" *ngIf="linkedProduct.isAvailable">lens</mat-icon>
+                        <mat-icon class="not-available"  *ngIf="!linkedProduct.isAvailable">lens</mat-icon>
+                    </div>
+                </div>
+               
+            </mat-card-content>
+        </mat-card>
         </div>
     </div>
 </div>
