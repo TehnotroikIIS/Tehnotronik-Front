@@ -133,6 +133,7 @@ sales:any[]=[]
       console.log(this.blogRate);
       this.blogService.addRate(this.blogRate).subscribe(data => {
         alert('Uspesno dodata ocena')
+        window.location.reload();
       }, error => {
         alert('Greska! Probajte ponovo')
       })
@@ -148,7 +149,8 @@ sales:any[]=[]
      
       console.log(this.blogRate);
       this.blogService.addComment(this.blogComment).subscribe(data => {
-        alert('Uspesno dodat komentar')
+        alert('Uspesno dodat komentar');
+        window.location.reload();
       }, error => {
         alert('Greska! Probajte ponovo')
       })
@@ -156,13 +158,6 @@ sales:any[]=[]
     this.dialog.closeAll();
   }
 
- /* getReviews() {
-    this.productService.getProducReviews(this.selectedBlog.id).subscribe(data => {
-      this.reviews = data;
-    }, error => {
-      alert('Greska')
-    })
-  }*/
 
   deleteBlog(){
     this.blogService.deleteBlog(this.selectedBlog.id).subscribe(data=>{

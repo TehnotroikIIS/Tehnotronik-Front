@@ -25,7 +25,7 @@
             <div class="right">
                 <div class="stars">
                  
-                    <mat-icon *ngFor="let number of rates">star</mat-icon>
+                   <div>({{selectedBlog.numberOfRates}}) </div><mat-icon *ngFor="let number of rates">star</mat-icon>
                     <button class="star-button" (click)="openAddRateDialog( $event)"><mat-icon>add</mat-icon></button>
                 </div>
                 <div class="reactions">
