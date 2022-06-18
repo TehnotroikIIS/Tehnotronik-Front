@@ -29,6 +29,7 @@ import { OrderComponent } from './shopping/order/order.component';
 import { ShoppingCartComponent } from './shopping/shopping-cart/shopping-cart.component';
 import { UserDetailsComponent } from './shopping/user-details/user-details.component';
 import { UserOrdersComponent } from './shopping/user-orders/user-orders.component';
+import { StorageViewComponent } from './storage/storage-view/storage-view.component';
 
 const routes: Routes = [
   {
@@ -143,9 +144,15 @@ const routes: Routes = [
     path: 'finish-shopping',
     component: FinishShoppingComponent
   },
+  
   {
     path: 'facture',
     component: FactureComponent
+  },
+  {
+    path: 'storage-view',
+    component: StorageViewComponent,
+    canActivate: [NoAuthGuard],
   },
   {
     path: '**',

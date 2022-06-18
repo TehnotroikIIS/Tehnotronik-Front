@@ -104,6 +104,20 @@ export class ProductService {
     return this.http.post(`${environment.api_url}create-sale`, sale, { headers: this.headers, responseType: 'json' });
   }
 
+  //location
+  getProducLocation(productId: string): Observable<any> {
+    return this.http.get(`${environment.api_url}get-product-location`, {
+      params: {
+        productId: productId
+      }, headers: this.headers, responseType: 'json'
+    });
+  }
+
+  getAllStorageProducts(): Observable<any> {
+    return this.http.get(`${environment.api_url}get-all-storage-products`, { headers: this.headers, responseType: 'json' });
+  }
+
+
 
 
 
