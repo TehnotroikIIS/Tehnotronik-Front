@@ -2,7 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/core/models/product.model';
+import { ShoppingCartItem } from 'src/app/core/models/shopping-cart-item';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { JwtService } from 'src/app/core/services/jwt.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import { ShoppingService } from 'src/app/core/services/shopping.service';
 
@@ -25,6 +28,12 @@ export class AllProductsComponent implements OnInit {
   showProductForm: FormGroup;
   sales:any[]=[];
   isAuthenticated: boolean = false;
+  shoppingCartItem: ShoppingCartItem = {
+    userId: '',
+    productId: '',
+    price: 0,
+    quantity: 0
+  }
   @ViewChild('showProduct') addDialog!: any;
   constructor(
     private productService: ProductService,
@@ -32,6 +41,7 @@ export class AllProductsComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private router: Router,
+    private jwtService: JwtService,
     private authenticationService: AuthenticationService
   ) {
     this.searchForm = this.formBuilder.group({
@@ -253,7 +263,8 @@ export class AllProductsComponent implements OnInit {
     }*/
   }
 
-  addToCart(event: any) {
+  addToCart(event: any, product: any) {
+    this.selectedProduct=product;
     event?.stopPropagation();
     const myTempDialog = this.dialog.open(this.addDialog);
     myTempDialog.afterClosed().subscribe((res) => {
@@ -262,8 +273,16 @@ export class AllProductsComponent implements OnInit {
   }
 
   add(): any {
-    this.selectedProduct.quantity=this.showProductForm.value.quantity;
-    this.shoppingService.addToCart(this.selectedProduct).subscribe(data=>{
+    this.shoppingCartItem.userId=this.jwtService.getUserId();
+    this.shoppingCartItem.productId=this.selectedProduct.id;
+    if(this.selectedProduct.newPrice!=undefined)
+    {
+      this.shoppingCartItem.price=this.selectedProduct.price;
+    } else {
+      this.shoppingCartItem.price=this.selectedProduct.newPrice;
+    }
+    this.shoppingCartItem.quantity=this.showProductForm.value.quantity;
+    this.shoppingService.addToCart(this.shoppingCartItem).subscribe(data=>{
       alert('Proizvod je dodat u korpu');
       window.location.reload()
     },error=>{

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { JwtService } from 'src/app/core/services/jwt.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import { ShoppingService } from 'src/app/core/services/shopping.service';
 
@@ -25,6 +26,7 @@ export class ShoppingCartComponent implements OnInit {
     private productService: ProductService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
+    private jwtService: JwtService,
     private router:Router) 
     { 
       this.showProductForm = this.formBuilder.group({
@@ -42,17 +44,17 @@ export class ShoppingCartComponent implements OnInit {
 }
   
   async getAllProducts() {
-    this.shoppingService.getCartById(this.id).subscribe(data => {
-      this.productsInCart= data;
-      console.log(this.allProducts)
+    this.shoppingService.getCartByUserId(this.jwtService.getUserId()).subscribe(data =>{
+      this.productsInCart = data.shoppingCartItems;
+      console.log(this.productsInCart)
     }, error => {
       alert('Ni jedan proizvod nije dodat u korpu!')
     })
     await this.delay(500);
-    this.getSales();
+    //this.getSales();
   }
 
-  getSales(){
+  /*getSales(){
     this.productService.getAllSales().subscribe(data=>{
       this.sales=data;
       this.productsInCart.forEach(element => {
@@ -67,7 +69,7 @@ export class ShoppingCartComponent implements OnInit {
         });
       });
     })
-  }
+  }*/
 
   editQuantity(event: any){
     event?.stopPropagation();
