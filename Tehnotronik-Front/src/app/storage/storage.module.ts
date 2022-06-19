@@ -19,13 +19,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { StorageViewComponent } from './storage-view/storage-view.component';
 import {MatTableModule} from '@angular/material/table';
+import { IndicatorsComponent } from './indicators/indicators.component';
 
 
 
 
 @NgModule({
   declarations: [
-    StorageViewComponent
+    StorageViewComponent,
+    IndicatorsComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,64 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+
+<div class="container">
+    <div class="sidebar">
+        <div class="menu">
+            <button class="menu-button" [routerLink]="['/storage-view']" >Uvid u magacin
+               </button>
+            <button  class="menu-button"[routerLink]="['/edit-blog']">Porudžbenice
+               </button>
+            <button class="menu-button" [routerLink]="['/edit-blog']">Skladištenje</button>
+            <button class="menu-button" [routerLink]="['/edit-blog']">Lociranje</button>
+            <button class="menu-button" [routerLink]="['/edit-blog']">Buduće potrebe</button>
+            <button class="menu-button" [routerLink]="['/edit-blog']">Izveštaji</button>
+            <button class="menu-button" [routerLink]="['/edit-blog']">Slanje robe</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="main-info">
+            <div class="left">
+                <div class="label">Broj aktivnih porudžbenica:</div>{{orders.length}}
+               
+              
+             
+
+            </div>
+            <div class="right">
+              
+               
+            </div>
+        </div>
+        <div class="specification">
+            <div class="label">Prioritizovani proizvodi za prodaju:</div>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+               
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef>Ima proizvoda</th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+               
+                <ng-container matColumnDef="location">
+                    <th mat-header-cell *matHeaderCellDef> Lokacija </th>
+                    <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+                  </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="quantity">
+                  <th mat-header-cell *matHeaderCellDef> Kolicina</th>
+                  <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              
+        </div>
+   
+  
+    </div>
+</div>
+
+<!--Modalni dijalozii -->
