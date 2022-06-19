@@ -24,6 +24,7 @@ import { OrdersViewComponent } from './orders-view/orders-view.component';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { LocationComponent } from './location/location.component';
 import { ReccommendedComponent } from './reccommended/reccommended.component';
+import { ReportComponent } from './report/report.component';
 
 
 
@@ -35,7 +36,8 @@ import { ReccommendedComponent } from './reccommended/reccommended.component';
     OrdersViewComponent,
     AddOrderComponent,
     LocationComponent,
-    ReccommendedComponent
+    ReccommendedComponent,
+    ReportComponent
   ],
   imports: [
     CommonModule,

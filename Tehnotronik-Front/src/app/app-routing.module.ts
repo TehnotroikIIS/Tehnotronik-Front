@@ -34,6 +34,7 @@ import { IndicatorsComponent } from './storage/indicators/indicators.component';
 import { LocationComponent } from './storage/location/location.component';
 import { OrdersViewComponent } from './storage/orders-view/orders-view.component';
 import { ReccommendedComponent } from './storage/reccommended/reccommended.component';
+import { ReportComponent } from './storage/report/report.component';
 import { StorageViewComponent } from './storage/storage-view/storage-view.component';
 
 const routes: Routes = [
@@ -182,6 +183,11 @@ const routes: Routes = [
   {
     path: 'recommended',
     component: ReccommendedComponent,
+    canActivate: [NoAuthGuard],
+  },
+  {
+    path: 'report',
+    component: ReportComponent,
     canActivate: [NoAuthGuard],
   },
   {

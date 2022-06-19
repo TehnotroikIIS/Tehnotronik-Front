@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="content">
+        <h1>Stanje u magacinu</h1>
+
+        <div class="row">
+            <div class="column" *ngFor="let item of names">{{item}}</div>
+        </div>
+        <div class="row">
+            <div class="column"*ngFor="let loc of locations">{{loc}}</div>
+        </div>
+        <div class="row">
+            <div class="column" *ngFor="let item of quantities">{{item}}</div>
+        </div>
+       
+    </div> 
+  
+    <button (click)="printFacture()">print</button>
+</div>
