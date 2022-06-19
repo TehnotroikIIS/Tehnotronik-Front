@@ -13,6 +13,8 @@ allproducts:any[]=[];
 showProducts:any[]=[];
 dataSource :any=[];
 orders:any[]=[];
+date:Date=new Date()
+month=this.date.getMonth()+2;
   constructor(
     private productService:ProductService
   ) { }
