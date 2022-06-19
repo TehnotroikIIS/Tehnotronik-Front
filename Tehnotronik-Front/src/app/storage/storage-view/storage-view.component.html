@@ -10,9 +10,9 @@
                </button>
             <button class="menu-button"  routerLinkActive="active" [routerLink]="['/edit-blog']">Skladištenje</button>
             <button class="menu-button"  routerLinkActive="active" [routerLink]="['/location']">Lociranje</button>
-            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/edit-blog']">Buduće potrebe</button>
-            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/edit-blog']">Izveštaji</button>
+            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/recommended']">Buduće potrebe</button>
             <button class="menu-button"  routerLinkActive="active" [routerLink]="['/edit-blog']">Slanje robe</button>
+             <button class="primary-button"  (click)="printFacture()">Generiši izveštaj</button>
         </div>
     </div>
 
@@ -44,8 +44,8 @@
                
             </div>
         </div>
-        <div class="specification">
-            
+        <div class="specification"  #pdfTable>
+            <h2>Stanje u magacinu  {{selectedView}} : {{selectedCategory?.name}} {{selectedLocation}}</h2>
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
                

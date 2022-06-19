@@ -3,7 +3,9 @@
 
 <div class="container">
     <app-categories-sidebar (newItemEvent)="getProductsByCategory($event)"></app-categories-sidebar>
+  
     <div class="content">
+        <button class="primary-button" (click)="printFacture()">Izgeneriši izveštaj</button>
        <!--<div class="filters">
             <div class="left">
                 <mat-form-field appearance="outline">
@@ -62,6 +64,27 @@
             </mat-card>
           
         </div>
+        <div class="porducts" #pdfTable  >
+            <h2>Prikaz proizvoda na akciji</h2>
+            <mat-card  *ngFor="let item of actionProducts">
+                <div  class="editqr" *ngIf="item.newPrice!=undefined">
+                    -{{item.discount}}%
+                  </div> 
+                     
+                <mat-card-content> 
+                   
+                    <div class="name-div">{{item.name | uppercase}}</div>
+                    <div class="row">
+                        <div class="price"  *ngIf="item.newPrice==undefined">{{item.price}} din</div>
+                        <div class="price-cross"  *ngIf="item.newPrice!=undefined">{{item.price}} din</div>
+                        <div class="action"  *ngIf="item.newPrice!=undefined">{{item.newPrice}} din</div>
+                      
+                    </div>
+                   
+                </mat-card-content>
+            </mat-card>
+        </div>
+  
     </div>
 </div>
 

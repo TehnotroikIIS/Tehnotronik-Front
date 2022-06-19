@@ -52,7 +52,6 @@ order:StorageOrder={
   }
 
   getPrice(){
-    alert(this.addForm.value.quantity)
     this.addForm.get('price')?.setValue(this.addForm.value.quantity*this.product.price);
   }
 

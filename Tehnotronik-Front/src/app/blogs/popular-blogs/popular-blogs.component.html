@@ -4,10 +4,13 @@
 <div class="container">
   <app-blogs-sidebar></app-blogs-sidebar>
   <div class="content">
-   
+    <button class="like-button" (click)="printFacture()">
+      Generiši izvještaj
+      </button>
     <div class="products">
 
-      <div class="tab-content">
+      <div class="tab-content" #pdfTable>
+        <h2>Najpopularniji blogovi</h2>
         <div class="post" *ngFor="let blog of allBlogs; let i=index" (click)="goToBlogDetails(blog)">
           <div class="head">
             <div class="info">

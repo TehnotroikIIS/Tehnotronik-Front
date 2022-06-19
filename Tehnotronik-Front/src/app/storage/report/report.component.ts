@@ -1,28 +1,37 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import * as jspdf from 'jspdf';
+import jsPDF from 'jspdf';
 
 @Component({
-  selector: 'app-facture',
-  templateUrl: './facture.component.html',
-  styleUrls: ['./facture.component.scss']
+  selector: 'app-report',
+  templateUrl: './report.component.html',
+  styleUrls: ['./report.component.scss']
 })
-export class FactureComponent implements OnInit {
+export class ReportComponent implements OnInit {
+  products=[];
+  names:any[]=[];
+  locations=[];
+  quantities=[];
   element: any;
   renderer: any;
   @ViewChild('pdfTable', {static: true}) pdfTable!: ElementRef;
   constructor() { }
 
   ngOnInit(): void {
+    this.names = JSON.parse(localStorage.getItem('names') || '');
+    this.locations = JSON.parse(localStorage.getItem('locations') || '');
+    console.log(this.locations)
+    this.quantities = JSON.parse(localStorage.getItem('quantities') || '');
+    
+   
+    
+   
+
   }
-  
-  async printFacture(){
+  printFacture(){
     /*html2canvas(document.body).then(function(canvas) {
       document.body.appendChild(canvas);
     });*/
-    //this.report=true;
-   
     html2canvas(this.pdfTable.nativeElement, { scale: 3 }).then((canvas) => {
       const imageGeneratedFromTemplate = canvas.toDataURL('image/png');
       const fileWidth = 200;
@@ -31,8 +40,7 @@ export class FactureComponent implements OnInit {
       PDF.addImage(imageGeneratedFromTemplate, 'PNG', 0, 5, fileWidth, generatedImageHeight,);
       PDF.html(this.pdfTable.nativeElement.innerHTML)
       PDF.save('angular-invoice-pdf-demo.pdf');
-      window.location.reload();
     });
-    
   }
+
 }

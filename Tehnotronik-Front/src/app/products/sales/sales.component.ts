@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { ProductService } from 'src/app/core/services/product.service';
 
@@ -13,6 +15,10 @@ import { ProductService } from 'src/app/core/services/product.service';
 export class SalesComponent implements OnInit {
   allProducts: any[] = [];
   searchForm: any;
+  
+  element: any;
+  renderer: any;
+  @ViewChild('pdfTable', {static: true}) pdfTable!: ElementRef;
   breakpoint: number = 1;
   gutterSize: string = '40px';
   priceValue: any = '';
@@ -22,6 +28,7 @@ export class SalesComponent implements OnInit {
   filterProducts: any[] = [];
   filterProducts1: any[] = [];
   selectedProduct: any;
+  report=true;
   showProductForm: FormGroup;
   isAuthenticated: boolean = false;
   actionProducts:any[]=[];
@@ -87,6 +94,24 @@ getSales(){
       });
     });
   })
+}
+  async printFacture(){
+  /*html2canvas(document.body).then(function(canvas) {
+    document.body.appendChild(canvas);
+  });*/
+  //this.report=true;
+ 
+  html2canvas(this.pdfTable.nativeElement, { scale: 3 }).then((canvas) => {
+    const imageGeneratedFromTemplate = canvas.toDataURL('image/png');
+    const fileWidth = 200;
+    const generatedImageHeight = (canvas.height * fileWidth) / canvas.width;
+    let PDF = new jsPDF('p', 'mm', 'a4',);
+    PDF.addImage(imageGeneratedFromTemplate, 'PNG', 0, 5, fileWidth, generatedImageHeight,);
+    PDF.html(this.pdfTable.nativeElement.innerHTML)
+    PDF.save('angular-invoice-pdf-demo.pdf');
+    window.location.reload();
+  });
+  
 }
 
   async getAllProducts() {
