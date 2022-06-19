@@ -27,7 +27,7 @@
         </button>
       </div>
       <div class="right">
-        <button class="primary-button" *ngIf="selectedCategory!=null" (click)="subsribe()">
+        <button class="primary-button" *ngIf="selectedCategory!=null &&  isAuthenticated" (click)="subsribe()">
           <mat-icon>stars</mat-icon>Pretplati se
         </button>
       </div>
@@ -35,8 +35,9 @@
 
     </div>
     <div class="products">
-
+     
       <div class="tab-content">
+      
         <div class="post" *ngFor="let blog of allBlogs; let i=index" (click)="goToBlogDetails(blog)">
           <div class="head">
             <div class="info">
@@ -56,7 +57,7 @@
           <div class="mat-body-1">
             {{blog.text.substring( 0, 200 )}}...
           </div>
-          <div class="reactions">
+          <div class="reactions" *ngIf="isAuthenticated">
             <button class="favorite-button" *ngIf="isFavorite(blog)==true" (click)="removeFavorite(blog,i,$event)">
           <mat-icon>favorite</mat-icon>
             </button>
@@ -80,7 +81,15 @@
         </div>
 
       </div>
+      <div class="recs">
+        <div>Preporuceni blogovi</div>
+        <div class="rec" *ngFor="let item of recs" (click)="goToBlogDetails(item)">
+          <div>{{item.name}}</div>
+        </div>
+       
+      </div>
 
     </div>
+   
   </div>
 </div>

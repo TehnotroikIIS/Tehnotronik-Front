@@ -58,15 +58,15 @@
             <div class="bold">Recenzije:</div>
             <button class="review-button" *ngIf="isAuthenticated" (click)="opetAddReviewDialog( $event)">Dodaj recenziju</button>
             <br>
-            <div class="comment">
+            <div class="comment" *ngFor="let item of reviews">
                 <div class="comment-row">
-                    <div class="bold">Sara Savanovic</div>
+                    <div class="bold">{{item.userName}} {{item.userLast}}</div>
                     <div class="stars">
-                        <mat-icon *ngFor="let number of rates">star</mat-icon>
+                        <mat-icon *ngFor="let number of item.rates">star</mat-icon>
                     </div>
                 </div>
                 <div class="comment-row">
-                    <div>Sarwerwerw sefdrf fdfd dfdf dfdfd dsdf sdfsdfs</div>
+                    <div>{{item.text}}</div>
                 </div>
 
             </div>

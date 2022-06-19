@@ -65,6 +65,7 @@ sales:any[]=[]
     if(this.isAuthenticated){
       this.isEmployed=this.authenticationService.isEmployed();
     }
+    this.getReviews();
    
 
   }
@@ -88,6 +89,7 @@ sales:any[]=[]
             newPrice= Math.round((newPrice + Number.EPSILON) * 100) / 100
             this.selectedProduct.newPrice=newPrice;
             this.selectedProduct.discount=element1.discount;
+            
           }
         });
     
@@ -121,7 +123,8 @@ sales:any[]=[]
       this.newReview.rate = this.addReviewForm.value.rate;
       console.log(this.newReview);
       this.productService.addReview(this.newReview).subscribe(data => {
-        alert('Uspesno dodata recenzija')
+        alert('Uspesno dodata recenzija');
+        window.location.reload();
       }, error => {
         alert('Greska! Probajte ponovo')
       })
@@ -133,6 +136,19 @@ sales:any[]=[]
   getReviews() {
     this.productService.getProducReviews(this.selectedProduct.id).subscribe(data => {
       this.reviews = data;
+      this.reviews.forEach(element => {
+        this.authenticationService.getUser(element.userId).subscribe(data=>{
+          element.userName=data.name;
+          element.userLast=data.lastname;
+          let grade = Math.round(element.rate)
+          let rates=[];
+          for (let i = 0; i < grade; i++) {
+            rates.push(i)
+          }
+          element.rates=rates;
+        })
+      });
+      console.log(this.reviews)
     }, error => {
       alert('Greska')
     })
@@ -146,6 +162,7 @@ sales:any[]=[]
     console.log(this.newSale)
     this.productService.addSale(this.newSale).subscribe(data=>{
       alert('Uspesno dodata akcija');
+      window.location.reload();
       this.addActionForm.reset();
     },error=>{
         alert('Greska!')
