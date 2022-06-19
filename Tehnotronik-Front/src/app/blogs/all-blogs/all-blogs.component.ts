@@ -18,9 +18,9 @@ import { ProductService } from 'src/app/core/services/product.service';
 export class AllBlogsComponent implements OnInit {
   allProducts: any[] = [];
   blogs: any = [];
-  allBlogs:any[]=[]
+  allBlogs: any[] = []
   searchForm: any;
-  rates=[1,2,3,4,4]
+  rates = [1, 2, 3, 4, 4]
   breakpoint: number = 1;
   gutterSize: string = '40px';
   priceValue: any = '';
@@ -31,12 +31,13 @@ export class AllBlogsComponent implements OnInit {
   selectedBlog: any;
   showProductForm: FormGroup;
   sales: any[] = [];
-  user:any;
-  selectedCategory:any=null;
+  user: any;
+  recs: any[] = []
+  selectedCategory: any = null;
   isAuthenticated: boolean = false;
-  subscribeCategory:FavoriteCategory={
-    userId:'',
-    categoryId:''
+  subscribeCategory: FavoriteCategory = {
+    userId: '',
+    categoryId: ''
   }
   @ViewChild('showProduct') addDialog!: any;
   constructor(
@@ -56,22 +57,22 @@ export class AllBlogsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedCategory=null;
+    this.selectedCategory = null;
     this.isAuthenticated = this.authenticationService.isAuthenticated();
-    if(this.isAuthenticated==true){
+    if (this.isAuthenticated == true) {
       this.user = JSON.parse(localStorage.getItem('userDetails') || '');
     }
-   
+
     console.log(this.user)
     this.breakpoint = window.innerWidth <= 768 ? 1 : 3;
     this.gutterSize = window.innerWidth <= 768 ? '20px' : '40px';
     this.isAuthenticated = this.authenticationService.isAuthenticated();
     this.getAllBlogs();
-    if(this.isAuthenticated==true){
+    if (this.isAuthenticated == true) {
       this.getFavoriteBlogs();
     }
-  
-   // this.getSelectedBlog();
+    this.reccomended();
+    // this.getSelectedBlog();
   }
   get searchF(): { [key: string]: AbstractControl } {
     return this.searchForm.controls;
@@ -84,24 +85,24 @@ export class AllBlogsComponent implements OnInit {
   industry = new FormControl();
   age = new FormControl();
   sortList: string[] = ['Datum rastuće', 'Datum opadajuće', 'Broj lajkova', 'Broj komentara', 'Ocena'];
-  dateList: string[] = ['Danas', 'Ovog meseca','Ove godine'];
+  dateList: string[] = ['Danas', 'Ovog meseca', 'Ove godine'];
   noExperienceList: any[] = [];
-  favorite:FavoriteBlog={
-    userId:'',
-    blogId:'',
+  favorite: FavoriteBlog = {
+    userId: '',
+    blogId: '',
   }
-favoriteBlogs:any[]=[];
+  favoriteBlogs: any[] = [];
 
   async getAllBlogs() {
     this.blogService.getAllBlogs().subscribe(data => {
       this.allBlogs = data;
       this.allBlogs.forEach(element => {
         let grade = Math.round(element.rate)
-        let rates=[];
+        let rates = [];
         for (let i = 0; i < grade; i++) {
           rates.push(i)
         }
-        element.rates=rates;
+        element.rates = rates;
       });
       console.log(this.allBlogs)
     }, error => {
@@ -110,7 +111,7 @@ favoriteBlogs:any[]=[];
   }
 
   async getBlogsByCategory(category: any) {
-    this.selectedCategory=category;
+    this.selectedCategory = category;
     this.blogService.getBlogsByCategory(category.id).subscribe(data => {
       this.allBlogs = data
     }, error => {
@@ -118,32 +119,32 @@ favoriteBlogs:any[]=[];
     })
   }
 
-  getFavoriteBlogs(){
-    this.blogService.getFavoriteByUser(this.user.id).subscribe(data=>{
-      this.favoriteBlogs=data;
-    },error=>{
+  getFavoriteBlogs() {
+    this.blogService.getFavoriteByUser(this.user.id).subscribe(data => {
+      this.favoriteBlogs = data;
+    }, error => {
       alert('Greska!')
     })
   }
 
- 
+
   isLiked(index: any): boolean {
-    if(this.isAuthenticated==true){
-      if(this.allBlogs[index].likes==null)
+    if (this.isAuthenticated == true) {
+      if (this.allBlogs[index].likes == null)
+        return false;
+      if (this.allBlogs[index].likes.indexOf(this.user.id) !== -1) {
+        return true
+      }
+      return false
+    } else {
       return false;
-    if (this.allBlogs[index].likes.indexOf(this.user.id) !== -1) {
-      return true
     }
-    return false
-    }else{
-      return false;
-    }
-   
+
   }
-  addLike(post: any, index: any,event:any) {
+  addLike(post: any, index: any, event: any) {
     event?.stopPropagation();
     if (this.allBlogs[index].dislikes.indexOf(this.user.id) !== -1) {
-      this.removeDislike(post, index,event);
+      this.removeDislike(post, index, event);
     }
     this.allBlogs[index].likes.push(this.user.id);
     this.blogService.addLikeBlog(this.user.id, post.id).subscribe((data: any) => {
@@ -156,7 +157,7 @@ favoriteBlogs:any[]=[];
 
   }
 
-  removeLike(post: any, index: any,event:any) {
+  removeLike(post: any, index: any, event: any) {
     event?.stopPropagation();
     this.allBlogs[index].likes.forEach((value: { id: any; }, i: any) => {
       if (value == this.user.id) {
@@ -170,10 +171,10 @@ favoriteBlogs:any[]=[];
         console.log(error.error.message);
       });
   }
-  addDislike(post: any, index: any,event:any) {
+  addDislike(post: any, index: any, event: any) {
     event?.stopPropagation();
     if (this.allBlogs[index].likes.indexOf(this.user.id) !== -1) {
-      this.removeLike(post, index,event);
+      this.removeLike(post, index, event);
     }
     this.allBlogs[index].dislikes.push(this.user.id);
     this.blogService.addDislikeBlog(this.user.id, post.id).subscribe((data: any) => {
@@ -185,17 +186,17 @@ favoriteBlogs:any[]=[];
 
   }
   isDisliked(index: any): boolean {
-    if(this.isAuthenticated==true){
+    if (this.isAuthenticated == true) {
       if (this.allBlogs[index].dislikes.indexOf(this.user.id) !== -1) {
         return true
       }
       return false
-    }else{
+    } else {
       return false;
     }
-   
+
   }
-  removeDislike(post: any, index: any,event:any) {
+  removeDislike(post: any, index: any, event: any) {
     event?.stopPropagation();
     this.allBlogs[index].dislikes.forEach((value: { id: any; }, i: any) => {
       if (value == this.user.id) {
@@ -211,44 +212,44 @@ favoriteBlogs:any[]=[];
   }
 
   isFavorite(blog: any): boolean {
-    if(this.isAuthenticated==true){
-      let value=false;
+    if (this.isAuthenticated == true) {
+      let value = false;
       this.favoriteBlogs.forEach(element => {
-       if(element.id==blog.id){
-         value=true;
-       }
+        if (element.id == blog.id) {
+          value = true;
+        }
       });
-     return value;
+      return value;
     }
-    else{
+    else {
       return false;
     }
-   
+
   }
 
-  addFavorite(blog: any, index: any,event:any){
+  addFavorite(blog: any, index: any, event: any) {
     event?.stopPropagation();
-    this.favorite.userId=this.user.id;
-    this.favorite.blogId=blog.id;
-    this.blogService.addToFavorites(this.favorite).subscribe(data=>{
+    this.favorite.userId = this.user.id;
+    this.favorite.blogId = blog.id;
+    this.blogService.addToFavorites(this.favorite).subscribe(data => {
       window.location.reload();
-    },error=>{
+    }, error => {
       alert('Greska')
     })
   }
 
-  removeFavorite(blog: any, index: any,event:any){
+  removeFavorite(blog: any, index: any, event: any) {
     event?.stopPropagation();
-    this.favorite.userId=this.user.id;
-    this.favorite.blogId=blog.id;
-    this.blogService.removeFromFavorites(this.favorite).subscribe(data=>{
+    this.favorite.userId = this.user.id;
+    this.favorite.blogId = blog.id;
+    this.blogService.removeFromFavorites(this.favorite).subscribe(data => {
       window.location.reload();
-    },error=>{
+    }, error => {
       alert('Greska')
     })
   }
 
-  
+
 
   sortFilter() {
     if (this.sortValue != '') {
@@ -258,87 +259,87 @@ favoriteBlogs:any[]=[];
           (objA, objB) => new Date(objA.dateOfPublishing).getTime() - new Date(objB.dateOfPublishing).getTime(),
         );
       }
-      else if(this.sortValue == 'Datum opadajuće') {
+      else if (this.sortValue == 'Datum opadajuće') {
         this.allBlogs = this.allBlogs.sort(
           (objA, objB) => new Date(objB.dateOfPublishing).getTime() - new Date(objA.dateOfPublishing).getTime(),
         );
       }
-      else if(this.sortValue == 'Broj lajkova') {
+      else if (this.sortValue == 'Broj lajkova') {
         this.allBlogs = this.allBlogs.sort(
           (objA, objB) => objB.likes.length - objA.likes.length,
         );
       }
-      else if(this.sortValue == 'Broj komentara') {
+      else if (this.sortValue == 'Broj komentara') {
         this.allBlogs = this.allBlogs.sort(
           (objA, objB) => objB.comments.length - objA.comments.length,
         );
       }
-      else if(this.sortValue == 'Ocena') {
+      else if (this.sortValue == 'Ocena') {
         this.allBlogs = this.allBlogs.sort(
           (objA, objB) => objB.rate - objA.rate,
         );
       }
-      
+
     }
   }
 
 
   async filter() {
-    if(this.selectedCategory!=null){
+    if (this.selectedCategory != null) {
       this.getBlogsByCategory(this.selectedCategory);
     }
-    else{
+    else {
       this.getAllBlogs()
     }
-  
+
     await this.delay(200);
 
-    let newList: any[]=[];
-   if(this.dateValue!=''){
-    if(this.dateValue=='Danas'){
-      let today=new Date()
-      this.allBlogs.forEach(element => {
-        let date=new Date(element.dateOfPublishing)
-        if(date.getFullYear()===today.getFullYear() && date.getMonth()==today.getMonth() && date.getDay()==today.getDay()){
-          newList.push(element) 
-        }
-      });
-    }else if(this.dateValue=='Ovog meseca'){
-      let today=new Date()
-      this.allBlogs.forEach(element => {
-        let date=new Date(element.dateOfPublishing)
-        if(date.getFullYear()===today.getFullYear() && date.getMonth()==today.getMonth()){ 
-          newList.push(element) 
-        }
-      });
-    }else{
-      let today=new Date()
-      this.allBlogs.forEach(element => {
-        let date=new Date(element.dateOfPublishing)
-        if(date.getFullYear()===today.getFullYear()){ 
-          newList.push(element) 
-        }
-      });
+    let newList: any[] = [];
+    if (this.dateValue != '') {
+      if (this.dateValue == 'Danas') {
+        let today = new Date()
+        this.allBlogs.forEach(element => {
+          let date = new Date(element.dateOfPublishing)
+          if (date.getFullYear() === today.getFullYear() && date.getMonth() == today.getMonth() && date.getDay() == today.getDay()) {
+            newList.push(element)
+          }
+        });
+      } else if (this.dateValue == 'Ovog meseca') {
+        let today = new Date()
+        this.allBlogs.forEach(element => {
+          let date = new Date(element.dateOfPublishing)
+          if (date.getFullYear() === today.getFullYear() && date.getMonth() == today.getMonth()) {
+            newList.push(element)
+          }
+        });
+      } else {
+        let today = new Date()
+        this.allBlogs.forEach(element => {
+          let date = new Date(element.dateOfPublishing)
+          if (date.getFullYear() === today.getFullYear()) {
+            newList.push(element)
+          }
+        });
+      }
+      this.allBlogs = newList;
     }
-    this.allBlogs=newList;
-   }
-   await this.delay(300);
-   this.sortFilter();
+    await this.delay(300);
+    this.sortFilter();
 
   }
 
   resetFilters() {
-    if(this.selectedCategory!=null){
+    if (this.selectedCategory != null) {
       this.getBlogsByCategory(this.selectedCategory);
     }
-    else{
+    else {
       this.getAllBlogs()
     }
     this.sortValue = '';
     this.dateValue = '';
   }
 
- 
+
 
   onResize(event: any) {
     if (event.target.innerWidth <= 786) {
@@ -371,16 +372,49 @@ favoriteBlogs:any[]=[];
     })
   }
 
-  subsribe(){
-    this.subscribeCategory.userId=this.user.id;
-    this.subscribeCategory.categoryId=this.selectedCategory.id;
-    this.categoryService.addToFavorites(this.subscribeCategory).subscribe(data=>{
-      alert('Uspesno ste pretplaceni na kategoriju '+this.selectedCategory.name)
-    },error=>{
+  subsribe() {
+    this.subscribeCategory.userId = this.user.id;
+    this.subscribeCategory.categoryId = this.selectedCategory.id;
+    this.categoryService.addToFavorites(this.subscribeCategory).subscribe(data => {
+      alert('Uspesno ste pretplaceni na kategoriju ' + this.selectedCategory.name)
+    }, error => {
       alert('Greska')
     })
   }
 
-  
- 
+  async reccomended() {
+    let categories = [];
+    let blogs=[];
+    let nonReacted: any[]=[];
+    this.categoryService.getFavoriteByUser(this.user.id).subscribe(data => {
+    
+      categories = data;
+      categories.forEach((element: any) => {
+       
+       this.blogService.getBlogsByCategory(element).subscribe(data=>{
+          blogs=data;
+          blogs.forEach((element1: any) => {
+            if (element1.likes.indexOf(this.user.id) === -1){
+              if (element1.dislikes.indexOf(this.user.id) === -1){
+                nonReacted.push(element1);
+                this.recs.push(element1)
+              }
+            }
+          });
+          
+       })
+       
+      });
+   
+    })
+    await this.delay(500);
+    this.recs = this.recs.sort(
+      (objA, objB) => objB.rate - objA.rate,
+    );
+    this.recs=this.recs.slice(0,2);
+   
+  }
+
+
+
 }

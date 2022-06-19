@@ -115,6 +115,20 @@
   cursor: pointer;
   box-shadow: base.$box-shadow;
 }
+.rec{
+  border:3px solid base.$primary-color;
+  padding: 10px;
+  border-radius: base.$border-radius;
+  margin-bottom: 10px;
+}
+.rec:hover{
+  border:3px solid base.$primary-color;
+  padding: 10px;
+  border-radius: base.$border-radius;
+  margin-bottom: 10px;
+  box-shadow: base.$box-shadow;
+cursor: pointer;}
+
 
 .primary-button{
   @extend %primary-button;
@@ -262,11 +276,15 @@
   font-weight: 500;
   margin-bottom: 20px;
 }
+.recs{
+  width: 20%;
+ 
+}
 
 
 .tab-content {
   height: 100%;
-  width: 80%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   gap: 30px;
