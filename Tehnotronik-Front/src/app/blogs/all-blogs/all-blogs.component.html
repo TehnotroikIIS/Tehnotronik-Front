@@ -27,7 +27,7 @@
         </button>
       </div>
       <div class="right">
-        <button class="primary-button" *ngIf="selectedCategory!=null" (click)="subsribe()">
+        <button class="primary-button" *ngIf="selectedCategory!=null &&  isAuthenticated" (click)="subsribe()">
           <mat-icon>stars</mat-icon>Pretplati se
         </button>
       </div>
@@ -56,7 +56,7 @@
           <div class="mat-body-1">
             {{blog.text.substring( 0, 200 )}}...
           </div>
-          <div class="reactions">
+          <div class="reactions" *ngIf="isAuthenticated">
             <button class="favorite-button" *ngIf="isFavorite(blog)==true" (click)="removeFavorite(blog,i,$event)">
           <mat-icon>favorite</mat-icon>
             </button>

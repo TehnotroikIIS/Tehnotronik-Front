@@ -57,13 +57,20 @@ export class AllBlogsComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedCategory=null;
-    this.user = JSON.parse(localStorage.getItem('userDetails') || '');
+    this.isAuthenticated = this.authenticationService.isAuthenticated();
+    if(this.isAuthenticated==true){
+      this.user = JSON.parse(localStorage.getItem('userDetails') || '');
+    }
+   
     console.log(this.user)
     this.breakpoint = window.innerWidth <= 768 ? 1 : 3;
     this.gutterSize = window.innerWidth <= 768 ? '20px' : '40px';
     this.isAuthenticated = this.authenticationService.isAuthenticated();
     this.getAllBlogs();
-    this.getFavoriteBlogs();
+    if(this.isAuthenticated==true){
+      this.getFavoriteBlogs();
+    }
+  
    // this.getSelectedBlog();
   }
   get searchF(): { [key: string]: AbstractControl } {
@@ -84,6 +91,7 @@ export class AllBlogsComponent implements OnInit {
     blogId:'',
   }
 favoriteBlogs:any[]=[];
+
   async getAllBlogs() {
     this.blogService.getAllBlogs().subscribe(data => {
       this.allBlogs = data;
@@ -120,12 +128,17 @@ favoriteBlogs:any[]=[];
 
  
   isLiked(index: any): boolean {
-    if(this.allBlogs[index].likes==null)
+    if(this.isAuthenticated==true){
+      if(this.allBlogs[index].likes==null)
       return false;
     if (this.allBlogs[index].likes.indexOf(this.user.id) !== -1) {
       return true
     }
     return false
+    }else{
+      return false;
+    }
+   
   }
   addLike(post: any, index: any,event:any) {
     event?.stopPropagation();
@@ -172,10 +185,15 @@ favoriteBlogs:any[]=[];
 
   }
   isDisliked(index: any): boolean {
-    if (this.allBlogs[index].dislikes.indexOf(this.user.id) !== -1) {
-      return true
+    if(this.isAuthenticated==true){
+      if (this.allBlogs[index].dislikes.indexOf(this.user.id) !== -1) {
+        return true
+      }
+      return false
+    }else{
+      return false;
     }
-    return false
+   
   }
   removeDislike(post: any, index: any,event:any) {
     event?.stopPropagation();
@@ -193,13 +211,19 @@ favoriteBlogs:any[]=[];
   }
 
   isFavorite(blog: any): boolean {
-    let value=false;
-   this.favoriteBlogs.forEach(element => {
-    if(element.id==blog.id){
-      value=true;
+    if(this.isAuthenticated==true){
+      let value=false;
+      this.favoriteBlogs.forEach(element => {
+       if(element.id==blog.id){
+         value=true;
+       }
+      });
+     return value;
     }
-   });
-  return value;
+    else{
+      return false;
+    }
+   
   }
 
   addFavorite(blog: any, index: any,event:any){
