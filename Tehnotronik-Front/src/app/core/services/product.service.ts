@@ -6,6 +6,7 @@ import { EditProduct } from '../models/edit-product.model';
 import { NewReview } from '../models/new-review.model';
 import { Product } from '../models/product.model';
 import { Sale } from '../models/sale.model';
+import { StorageOrder } from '../models/storage-order.model';
 import { JwtService } from './jwt.service';
 
 @Injectable({
@@ -121,6 +122,9 @@ export class ProductService {
   }
   getAllStorageOrders(): Observable<any> {
     return this.http.get(`${environment.api_url}get-all-storage-orders`, { headers: this.headers, responseType: 'json' });
+  }
+  addorder(order: StorageOrder): Observable<any> {
+    return this.http.post(`${environment.api_url}create-storage-order`, order, { headers: this.headers, responseType: 'json' });
   }
 
 

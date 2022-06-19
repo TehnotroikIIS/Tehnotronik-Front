@@ -20,6 +20,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { StorageViewComponent } from './storage-view/storage-view.component';
 import {MatTableModule} from '@angular/material/table';
 import { IndicatorsComponent } from './indicators/indicators.component';
+import { OrdersViewComponent } from './orders-view/orders-view.component';
+import { AddOrderComponent } from './add-order/add-order.component';
+import { LocationComponent } from './location/location.component';
 
 
 
@@ -27,7 +30,10 @@ import { IndicatorsComponent } from './indicators/indicators.component';
 @NgModule({
   declarations: [
     StorageViewComponent,
-    IndicatorsComponent
+    IndicatorsComponent,
+    OrdersViewComponent,
+    AddOrderComponent,
+    LocationComponent
   ],
   imports: [
     CommonModule,

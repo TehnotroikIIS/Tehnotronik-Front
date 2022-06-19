@@ -1,0 +1,60 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+
+<div class="container">
+    <div class="sidebar">
+        <div class="menu">
+            <button class="menu-button" routerLinkActive="active" [routerLink]="['/storage-view']" >Uvid u magacin
+               </button>
+            <button  class="menu-button"  routerLinkActive="active"[routerLink]="['/order-views']">Porudžbenice
+               </button>
+            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/edit-blog']">Skladištenje</button>
+            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/location']">Lociranje</button>
+            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/edit-blog']">Buduće potrebe</button>
+            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/edit-blog']">Izveštaji</button>
+            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/edit-blog']">Slanje robe</button>
+        </div>
+    </div>
+
+    <div class="content">
+    
+        <div class="specification">
+            <div class="right-content">
+                <div class="register-title">Dodavanje nove porudžbenice</div>
+                <form [formGroup]="addForm" style="text-align: center;">
+                    <div class="row">
+                        <div class="label">Naziv:</div>
+                        <mat-form-field appearance="outline">
+                            <input formControlName="product" matInput>
+                           
+                        </mat-form-field>
+                    </div>
+                  <div class="row">
+                        <div class="label">Kolicina:</div>
+                        <mat-form-field appearance="outline">
+                            <input  type="number" min="0" formControlName="quantity" matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <button class="primary-button" (click)="getPrice()">Izračunaj cenu</button>
+                            </div>
+                   
+                    <div class="row">
+                        <div class="label">Cena:</div>
+                        <mat-form-field appearance="outline">
+                            <input type="number" min="0" formControlName="price" matInput>
+                            </mat-form-field>
+                        </div>
+                   
+        
+                </form>
+                <button class="primary-button" (click)="create()">Dodaj</button>
+            </div>
+              
+        </div>
+   
+  
+    </div>
+</div>
+
+<!--Modalni dijalozii -->

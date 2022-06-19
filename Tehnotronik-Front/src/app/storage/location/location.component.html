@@ -1,0 +1,72 @@
+<app-navbar-unregistered></app-navbar-unregistered>
+
+
+<div class="container">
+    <div class="sidebar">
+        <div class="menu">
+            <button class="menu-button" routerLinkActive="active" [routerLink]="['/storage-view']">Uvid u magacin
+            </button>
+            <button class="menu-button" routerLinkActive="active" [routerLink]="['/order-views']">Porudžbenice
+            </button>
+            <button class="menu-button" routerLinkActive="active" [routerLink]="['/edit-blog']">Skladištenje</button>
+            <button class="menu-button" routerLinkActive="active" [routerLink]="['/location']">Lociranje</button>
+            <button class="menu-button" routerLinkActive="active" [routerLink]="['/edit-blog']">Buduće potrebe</button>
+            <button class="menu-button" routerLinkActive="active" [routerLink]="['/edit-blog']">Izveštaji</button>
+            <button class="menu-button" routerLinkActive="active" [routerLink]="['/edit-blog']">Slanje robe</button>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="specification">
+            <div class="right-content">
+                <div class="register-title">Lociranje</div>
+                <form [formGroup]="addForm" style="text-align: center;">
+                    <div class="row">
+                        <div class="label">Pretraga:</div>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Search" formControlName="name">
+                            <mat-icon matSuffix (click)="sarchByName()">search</mat-icon>
+                        </mat-form-field>
+                    </div>
+                </form>
+                <mat-form-field appearance="outline">
+                    <mat-label>Proizvodi</mat-label>
+                    <mat-select [(value)]="sortValue">
+                        <mat-option *ngFor="let sort of products" [value]="sort">{{sort.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button class="primary-button" (click)="view()">Lociraj</button>
+                <div class="magacin">
+                    <div class="magacin-row">
+                        <div class="column">A1
+                            <mat-icon *ngIf="location=='A1'">circle</mat-icon>
+                        </div>
+                        <div class="column">A2
+                            <mat-icon *ngIf="location=='A2'">circle</mat-icon>
+                        </div>
+                        <div class="column">A3
+                            <mat-icon *ngIf="location=='A3'">circle</mat-icon>
+                        </div>
+                    </div>
+                    <div class="magacin-row">
+                        <div class="column">B1
+                            <mat-icon *ngIf="location=='b1'">circle</mat-icon>
+                        </div>
+                        <div class="column">B2
+                            <mat-icon *ngIf="location=='B2'">circle</mat-icon>
+                        </div>
+                        <div class="column">B3
+                            <mat-icon *ngIf="location=='B3'">circle</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+</div>
