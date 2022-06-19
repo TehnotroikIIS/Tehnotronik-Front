@@ -23,6 +23,7 @@ import { IndicatorsComponent } from './indicators/indicators.component';
 import { OrdersViewComponent } from './orders-view/orders-view.component';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { LocationComponent } from './location/location.component';
+import { ReccommendedComponent } from './reccommended/reccommended.component';
 
 
 
@@ -33,7 +34,8 @@ import { LocationComponent } from './location/location.component';
     IndicatorsComponent,
     OrdersViewComponent,
     AddOrderComponent,
-    LocationComponent
+    LocationComponent,
+    ReccommendedComponent
   ],
   imports: [
     CommonModule,
