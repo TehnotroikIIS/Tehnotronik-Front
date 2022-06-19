@@ -4,15 +4,15 @@
 <div class="container">
     <div class="sidebar">
         <div class="menu">
-            <button class="menu-button" [routerLink]="['/storage-view']" >Uvid u magacin
+            <button class="menu-button" routerLinkActive="active" [routerLink]="['/storage-view']" >Uvid u magacin
                </button>
-               <button  class="menu-button"[routerLink]="['/order-views']">Porudžbenice
-            </button>
-            <button class="menu-button" [routerLink]="['/edit-blog']">Skladištenje</button>
-            <button class="menu-button" [routerLink]="['/edit-blog']">Lociranje</button>
-            <button class="menu-button" [routerLink]="['/edit-blog']">Buduće potrebe</button>
-            <button class="menu-button" [routerLink]="['/edit-blog']">Izveštaji</button>
-            <button class="menu-button" [routerLink]="['/edit-blog']">Slanje robe</button>
+            <button  class="menu-button"  routerLinkActive="active"[routerLink]="['/order-views']">Porudžbenice
+               </button>
+            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/edit-blog']">Skladištenje</button>
+            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/location']">Lociranje</button>
+            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/edit-blog']">Buduće potrebe</button>
+            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/edit-blog']">Izveštaji</button>
+            <button class="menu-button"  routerLinkActive="active" [routerLink]="['/edit-blog']">Slanje robe</button>
         </div>
         <button class="primary-button" [routerLink]="['/edit-blog']">Kreiraj porudžbenicu</button>
     </div>

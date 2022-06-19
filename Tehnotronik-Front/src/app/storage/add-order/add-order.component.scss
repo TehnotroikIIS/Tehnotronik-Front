@@ -61,8 +61,8 @@ table {
     color:white;
 }
 .menu-button.active{
-  font-weight: 600;
-}
+    background-color: base.$primary-color-dark;
+  }
 .menu-button.active .mat-icon{
     visibility: visible;
 }

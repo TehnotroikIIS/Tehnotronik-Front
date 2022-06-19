@@ -31,6 +31,7 @@ import { UserDetailsComponent } from './shopping/user-details/user-details.compo
 import { UserOrdersComponent } from './shopping/user-orders/user-orders.component';
 import { AddOrderComponent } from './storage/add-order/add-order.component';
 import { IndicatorsComponent } from './storage/indicators/indicators.component';
+import { LocationComponent } from './storage/location/location.component';
 import { OrdersViewComponent } from './storage/orders-view/orders-view.component';
 import { StorageViewComponent } from './storage/storage-view/storage-view.component';
 
@@ -170,6 +171,11 @@ const routes: Routes = [
   {
     path: 'add-order',
     component: AddOrderComponent,
+    canActivate: [NoAuthGuard],
+  },
+  {
+    path: 'location',
+    component: LocationComponent,
     canActivate: [NoAuthGuard],
   },
   {
