@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/core/models/product.model';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { ProductService } from 'src/app/core/services/product.service';
@@ -30,7 +31,7 @@ const ELEMENT_DATA: any[] = [
   styleUrls: ['./storage-view.component.scss']
 })
 export class StorageViewComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'category','location', 'quantity'];
+  displayedColumns: string[] = ['name', 'category','location', 'quantity','edit','order'];
  locations=['A1','A2','A3','B1','B2','B3']
   allCategories: any[] = [];
   selectedView='';
@@ -44,7 +45,8 @@ export class StorageViewComponent implements OnInit {
   views=['Po kategorijama','Po prostorijama']
   constructor(
     private productService: ProductService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router:Router
 
   ) { }
 
@@ -108,6 +110,13 @@ export class StorageViewComponent implements OnInit {
       });
       this.dataSource = this.showProducts;
     })
+  }
+
+  addOrder(element:any){
+  
+    localStorage.setItem('selectedOrder', JSON.stringify(element));
+    this.router.navigate(['/add-order']);
+
   }
 
   getProductsByLocation(){

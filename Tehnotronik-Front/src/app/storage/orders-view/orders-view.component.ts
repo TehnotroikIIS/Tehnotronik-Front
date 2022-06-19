@@ -9,8 +9,8 @@ import { ProductService } from 'src/app/core/services/product.service';
 export class OrdersViewComponent implements OnInit {
   displayedColumns: string[] = ['product', 'quantity', 'price','deliveryTime'];
   orders:any[]=[];
-  selectedView:any;
-  views=['Datum dospeća','Cena rastuče','Cena opadajuće']
+  selectedView='';
+  views=['Datum dospeća','Cena rastuće','Cena opadajuće']
   dataSource :any=[];
   constructor(
     private productService:ProductService
@@ -24,6 +24,28 @@ export class OrdersViewComponent implements OnInit {
       this.orders=data;
       this.dataSource=this.orders
     })
+  }
+
+  sort(){
+    if(this.selectedView!=''){
+      if(this.selectedView=='Datum dospeća'){
+        this.orders = this.orders.sort(
+          (objA, objB) => new Date(objA.deliveryDate).getTime() - new Date(objB.deliveryDate).getTime(),
+        );
+      }
+      else if(this.selectedView=='Cena rastuće'){
+        this.orders = this.orders.sort(
+          (objA, objB) => objA.price - objB.price,
+        );
+      }
+      else if(this.selectedView=='Cena opadajuće'){
+        this.orders = this.orders.sort(
+          (objA, objB) => objB.price - objA.price,
+        );
+      }
+      this.dataSource=this.orders
+    }
+
   }
 
 }

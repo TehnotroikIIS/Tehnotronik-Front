@@ -6,8 +6,8 @@
         <div class="menu">
             <button class="menu-button" [routerLink]="['/storage-view']" >Uvid u magacin
                </button>
-            <button  class="menu-button"[routerLink]="['/edit-blog']">Porudžbenice
-               </button>
+               <button  class="menu-button"[routerLink]="['/order-views']">Porudžbenice
+            </button>
             <button class="menu-button" [routerLink]="['/edit-blog']">Skladištenje</button>
             <button class="menu-button" [routerLink]="['/edit-blog']">Lociranje</button>
             <button class="menu-button" [routerLink]="['/edit-blog']">Buduće potrebe</button>
@@ -21,8 +21,9 @@
        
         <div class="specification">
             <mat-form-field class="cat" appearance="outline">
+                <mat-label>Sortiranje</mat-label>
                 <mat-select [(value)]="selectedView" >
-                    <mat-option *ngFor="let view of views" [value]="view">{{view}}</mat-option>
+                    <mat-option *ngFor="let view of views" [value]="view" (click)="sort()">{{view}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <div class="label">Uvid u porudžbenice:</div>

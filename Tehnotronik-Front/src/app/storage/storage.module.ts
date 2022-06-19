@@ -21,6 +21,7 @@ import { StorageViewComponent } from './storage-view/storage-view.component';
 import {MatTableModule} from '@angular/material/table';
 import { IndicatorsComponent } from './indicators/indicators.component';
 import { OrdersViewComponent } from './orders-view/orders-view.component';
+import { AddOrderComponent } from './add-order/add-order.component';
 
 
 
@@ -29,7 +30,8 @@ import { OrdersViewComponent } from './orders-view/orders-view.component';
   declarations: [
     StorageViewComponent,
     IndicatorsComponent,
-    OrdersViewComponent
+    OrdersViewComponent,
+    AddOrderComponent
   ],
   imports: [
     CommonModule,

@@ -6,8 +6,8 @@
         <div class="menu">
             <button class="menu-button" [routerLink]="['/storage-view']" >Uvid u magacin
                </button>
-            <button  class="menu-button"[routerLink]="['/edit-blog']">Porudžbenice
-               </button>
+               <button  class="menu-button"[routerLink]="['/order-views']">Porudžbenice
+            </button>
             <button class="menu-button" [routerLink]="['/edit-blog']">Skladištenje</button>
             <button class="menu-button" [routerLink]="['/edit-blog']">Lociranje</button>
             <button class="menu-button" [routerLink]="['/edit-blog']">Buduće potrebe</button>
@@ -67,6 +67,14 @@
                   <th mat-header-cell *matHeaderCellDef> Kolicina</th>
                   <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
                 </ng-container>
+                <ng-container matColumnDef="edit">
+                    <th mat-header-cell *matHeaderCellDef> Uredi</th>
+                    <td mat-cell *matCellDef="let element"><button class="primary-button"><mat-icon>edit</mat-icon></button></td>
+                  </ng-container>
+                  <ng-container matColumnDef="order">
+                    <th mat-header-cell *matHeaderCellDef> Porudžbenica</th>
+                    <td mat-cell *matCellDef="let element"><button class="primary-button" (click)="addOrder(element)"><mat-icon>note_add</mat-icon></button></td>
+                  </ng-container>
               
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
